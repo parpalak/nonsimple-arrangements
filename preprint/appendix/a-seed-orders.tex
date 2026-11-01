@@ -1,0 +1,456 @@
+\section{Intersection orders in the starting arrangement}\label{app:seed}
+
+We determine the coordinates and the order of the intersection points of the starting arrangement, the bounding box of these points, and the number of faces. We also treat the first doubling step ($n=6$) separately, because it partly differs from the general step.
+
+\subsection{Parameters}
+
+The lines $R,Y_0,L_1,\ldots,L_6$ are given by the equations \eqref{eq:base-lines}, and the parameters
+$\varepsilon$, $\eta$, $\delta$ by \eqref{eq:params}. Since $n_t\ge6$, we have
+\begin{equation}\label{eq:A-num}
+\varepsilon\le\frac1{24},
+\qquad
+\eta\ge3\sqrt3\cdot6^6>2\cdot10^5,
+\qquad
+\delta\ge2\cdot6^6>9\cdot10^4.
+\end{equation}
+
+\begin{lemma}\label{lem:uv}
+The slopes $u$ and $v$ \eqref{eq:star-slopes} of the lines $L_5$ and $L_6$ satisfy
+\begin{equation}\label{eq:uv}
+u<0<v,
+\qquad
+\frac95<|u|<2,
+\qquad
+3<v<4 .
+\end{equation}
+Thus the slopes of $L_1,L_4,L_5,L_6$ do not exceed 4 in absolute value, and the
+minimum absolute value of a slope among $L_1,\ldots,L_6$ is $m_{\min}(\mathcal A_0)=2/5$.
+\end{lemma}
+
+\begin{proof}
+We estimate the term $\varepsilon\sqrt3\,(2\eta+1)$ in the denominator of $u$:
+\[
+\varepsilon\sqrt3\,(2\eta+1)>2\varepsilon\sqrt3\,\eta
+=\frac{\sqrt3}{4n_t}\cdot6\sqrt3\,n_t^6
+=\frac92\,n_t^5\ \ge\ \frac92\cdot6^5\ >\ 3 ,
+\]
+so the denominator in \eqref{eq:star-slopes} is positive and greater than $2\eta$. Hence $u<0$ and
+\[
+|u|=\frac{4\eta}{2\eta-3+\varepsilon\sqrt3(2\eta+1)}<\frac{4\eta}{2\eta}=2 .
+\]
+On the other hand, the same denominator equals $2\eta(1+\varepsilon\sqrt3)-(3-\varepsilon\sqrt3)$,
+and $3-\varepsilon\sqrt3>0$ by \eqref{eq:A-num}. So the denominator is less than $2\eta(1+\varepsilon\sqrt3)$, which gives
+\[
+|u|>\frac{4\eta}{2\eta(1+\varepsilon\sqrt3)}
+=\frac2{1+\varepsilon\sqrt3}
+\ \ge\ \frac2{1+\sqrt3/24}
+\ >\ \frac95 .
+\]
+For $v$:
+\[
+v=\frac{4\sqrt3}{\sqrt3+9\varepsilon}<\frac{4\sqrt3}{\sqrt3}=4,
+\qquad
+v\ \ge\ \frac{4\sqrt3}{\sqrt3+9/24}
+=\frac{4\sqrt3}{\sqrt3+3/8}
+\ >\ 3 .
+\]
+The absolute values of the slopes of $L_1,\ldots,L_6$ are $1/2$, $\eta$, $\eta$, $2/5$, $|u|$, $v$, and the smallest of them is $2/5$.
+\end{proof}
+
+\subsection{Coordinates of the intersection points}
+
+The lines of the starting arrangement are pairwise nonparallel, and none of them is vertical. Therefore the order of the intersection points along a line is the order of their $x$-coordinates. Below we list the $x$-coordinates of all intersection points, including the triple points
+\[
+P=L_1\cap L_4\cap L_6,
+\qquad
+Q=L_1\cap L_3\cap L_5.
+\]
+The orders \eqref{eq:seed-orders} in the next subsection are obtained from them by sorting.
+
+Two lines $y=m(x-a)$ and $y=m'(x-a')$ intersect at the point with coordinates
+\begin{equation}\label{eq:pair-point}
+x=\frac{ma-m'a'}{m-m'} ,
+\qquad
+y=\frac{mm'(a-a')}{m-m'} .
+\end{equation}
+
+We compute the coordinates of the triple points. By \eqref{eq:pair-point}, the lines $L_1$ and $L_4$ intersect at the point
+\[
+P=\left(-\frac{\sqrt3}9,\ -\frac{4\sqrt3}9\right),
+\]
+and the line $L_6:y=v(x-\varepsilon)$ passes through $P$ if and only if
+\[
+v=\frac{y(P)}{x(P)-\varepsilon}=\frac{-4\sqrt3/9}{-\sqrt3/9-\varepsilon}=\frac{4\sqrt3}{\sqrt3+9\varepsilon} ,
+\]
+as \eqref{eq:star-slopes} requires.
+The lines $L_1$ and $L_3$ intersect at the point
+\begin{equation}\label{eq:Q-coords}
+Q=\left(\frac{\eta/\sqrt3-\sqrt3/2}{\eta+1/2},\
+-\frac{2\eta}{\sqrt3\,(\eta+1/2)}\right),
+\end{equation}
+and the line $L_5:y=u(x+\varepsilon)$ passes through $Q$ if and only if
+\[
+\begin{aligned}
+u&=\frac{y(Q)}{x(Q)+\varepsilon}
+=\frac{-2\eta/\sqrt3}{\eta/\sqrt3-\sqrt3/2+\varepsilon(\eta+1/2)}\\
+&=\frac{-2\eta}{\eta-3/2+\varepsilon\sqrt3(\eta+1/2)}
+=-\frac{4\eta}{2\eta-3+\varepsilon\sqrt3(2\eta+1)} ,
+\end{aligned}
+\]
+that is, again under condition \eqref{eq:star-slopes}.
+Thus $P$ and $Q$ are triple points. There are no other multiple points, since on each line the $x$-coordinates of all other intersection points are distinct (\cref{lem:seed-orders}).
+
+\emph{(i) Intersection points of $Y_0,L_1,L_4,L_5,L_6$.} Apart from $Q$, which we assign to group (iii), these five lines meet at $P$ and at the following points:
+\[
+\begin{gathered}
+Y_0\cap L_1,\ Y_0\cap L_5,\ Y_0\cap L_6,\ Y_0\cap L_4:\quad
+x=-\sqrt3,\ -\varepsilon,\ \varepsilon,\ \sqrt3,\\
+L_4\cap L_5:\ x=\frac{2\sqrt3/5+u\varepsilon}{2/5-u},
+\qquad
+L_5\cap L_6:\ x=\frac{\varepsilon\,(u+v)}{v-u} .
+\end{gathered}
+\]
+By \eqref{eq:uv}, the numerator for $L_4\cap L_5$ lies between $\tfrac{2\sqrt3}5-2\varepsilon$ and $\tfrac{2\sqrt3}5$, and the denominator between $\tfrac25+\tfrac95$ and $\tfrac25+2$, so
+\[
+x(L_4\cap L_5)>\frac{2\sqrt3/5-1/12}{12/5}>\frac14,
+\qquad
+x(L_4\cap L_5)<\frac{2\sqrt3/5}{11/5}=\frac{2\sqrt3}{11}<\frac13 .
+\]
+For $L_5\cap L_6$, \eqref{eq:uv} gives $v-u=v+|u|>0$, $u+v=v-|u|>3-2>0$, and
+$(v-u)-(u+v)=-2u>0$, so
+\[
+0<x(L_5\cap L_6)<\varepsilon .
+\]
+
+\emph{(ii) Points on $L_2$.} The line $L_2:y=-\eta(x+1/\sqrt3)$ is almost vertical: by \eqref{eq:A-num}, the absolute value of its slope exceeds $2\cdot10^5$.
+By \eqref{eq:pair-point}, it intersects a line $D:y=m(x-a)$ at the point with $x$-coordinate
+\[
+x(L_2\cap D)=-\frac1{\sqrt3}+\frac{g_D}{m+\eta},
+\qquad\text{where}\qquad
+g_D=m\left(a+\frac1{\sqrt3}\right).
+\]
+The denominators $m+\eta$ of different lines are almost equal, since $|m|\ll\eta$. Therefore the order of the points on $L_2$ is determined primarily by the numerators $g_D$:
+\[
+g_{L_5}=u\left(\frac1{\sqrt3}-\varepsilon\right),
+\quad
+g_{Y_0}=0,
+\quad
+g_{L_1}=\frac1{\sqrt3},
+\quad
+g_{L_4}=\frac8{5\sqrt3},
+\quad
+g_{L_6}=v\left(\frac1{\sqrt3}+\varepsilon\right),
+\]
+and by \eqref{eq:uv} and \eqref{eq:A-num}
+\[
+-\frac2{\sqrt3}<g_{L_5}<-\frac95\left(\frac1{\sqrt3}-\frac1{24}\right)<-\frac{24}{25},
+\qquad
+\sqrt3<g_{L_6}<4\left(\frac1{\sqrt3}+\frac1{24}\right)<\frac52 .
+\]
+Sorting these values gives
+\[
+g_{L_5}<-\frac{24}{25}<g_{Y_0}=0<g_{L_1}=\frac1{\sqrt3}
+<g_{L_4}=\frac8{5\sqrt3}<\sqrt3<g_{L_6}.
+\]
+Replacing the denominators $m+\eta$ by $\eta$ does not change this order.
+Indeed, $|g_D|<5/2$ for all these lines and $|m|\le4$, so $m+\eta\ge\eta-4>10^5$ by \eqref{eq:A-num} and
+\[
+\left|\frac{g_D}{m+\eta}-\frac{g_D}{\eta}\right|
+=\frac{|g_D|\,|m|}{\eta\,|m+\eta|}
+\le\frac{(5/2)\cdot4}{\eta\,(\eta-4)}
+<\frac{10^{-4}}\eta .
+\]
+The difference between consecutive values of $g_D$ is bounded below by $g_{L_4}-g_{L_1}=(8/5-1)/\sqrt3=\sqrt3/5>1/3$, so consecutive values of $g_D/\eta$ differ by at least $1/3\eta$.
+Each of them shifts by less than $10^{-4}/\eta$.
+Therefore the order of the points on $L_2$ is the same: $L_5,Y_0,L_1,L_4,L_6$. The points themselves lie in the strip
+\[
+\left|x+\frac1{\sqrt3}\right|\le\frac{5/2}{\eta-4}<\frac1{10^{4}}.
+\]
+
+\emph{(iii) Points on $L_3$.} The line $L_3:y=\eta(x-1/\sqrt3)$ is also almost vertical, and similarly
+\[
+x(L_3\cap D)=\frac1{\sqrt3}+\frac{h_D}{\eta-m},
+\qquad\text{where}\qquad
+h_D=m\left(\frac1{\sqrt3}-a\right).
+\]
+As in (ii), the left-to-right order on $L_3$ is therefore determined primarily by the numerators $h_D$:
+\[
+h_{L_1}=-\frac2{\sqrt3},
+\quad\!
+h_{L_5}=u\Bigl(\varepsilon+\frac1{\sqrt3}\Bigr),
+\quad\!
+h_{L_4}=-\frac4{5\sqrt3},
+\quad\!
+h_{Y_0}=0,
+\quad\!
+h_{L_6}=v\Bigl(\frac1{\sqrt3}-\varepsilon\Bigr).
+\]
+Here the lines $L_1$ and $L_5$ give the same point $Q$ (this is what the choice of $u$ achieves), although the values $h_{L_1}$ and $h_{L_5}$ themselves differ.
+The denominators $\eta+1/2$ and $\eta-u$ compensate for the difference.
+Therefore only four values remain to be compared:
+\[
+h_{L_1}=-\frac2{\sqrt3}<h_{L_4}=-\frac4{5\sqrt3}<h_{Y_0}=0<\frac32<h_{L_6},
+\]
+where $h_{L_6}>3\left(\tfrac1{\sqrt3}-\tfrac1{24}\right)>\tfrac32$ and $h_{L_6}<4/\sqrt3<5/2$.
+Consecutive values differ by at least $-h_{L_4}=\tfrac4{5\sqrt3}>\tfrac13$, and all of them are less than $5/2$ in absolute value.
+The same estimate of the denominators as in (ii) gives the order of the points on $L_3$: first $Q$, then $L_4$, $Y_0$, $L_6$.
+All these points lie in the strip $|x-1/\sqrt3|<10^{-4}$.
+
+\emph{(iv) The point $V=L_2\cap L_3$.}
+By \eqref{eq:pair-point},
+\[
+V=\left(0,\ -\frac\eta{\sqrt3}\right)=\left(0,\ -3n_t^6\right).
+\]
+
+\emph{(v) Points on $R$.} Since $\eta/\sqrt3=3\delta/2$ by \eqref{eq:params}, formula \eqref{eq:pair-point} gives
+\[
+\begin{aligned}
+x(R\cap L_1)&=\frac{2\delta-\sqrt3}3, & x(R\cap L_2)&=-\frac{\delta}{2(1+\eta)}, & x(R\cap L_3)&=\frac{\delta}{2(\eta-1)},\\
+x(R\cap L_4)&=\frac{5\delta-2\sqrt3}3, & x(R\cap L_5)&=\frac{\delta-|u|\varepsilon}{1+|u|}, & x(R\cap L_6)&=-\frac{\delta-v\varepsilon}{v-1},\\
+x(R\cap Y_0)&=\delta.
+\end{aligned}
+\]
+This yields the order of the $x$-coordinates on $R$:
+\[
+x(R\cap L_6)<x(R\cap L_2)<x(R\cap L_3)<x(R\cap L_5)
+<x(R\cap L_1)<x(R\cap Y_0)<x(R\cap L_4).
+\]
+The chain is verified by the following inequalities, which use the estimates \eqref{eq:uv} and \eqref{eq:A-num}:
+\[
+x(R\cap L_6)=-\frac{\delta-v\varepsilon}{v-1}<-\frac{\delta-1/6}3<-\frac\delta4<-\frac{\sqrt3}9
+\qquad\left(v\varepsilon<\frac16,\ v-1<3\right),
+\]
+\[
+-\frac{\sqrt3}9=-\frac\delta{3\sqrt3\,\delta}<-\frac\delta{2(1+\eta)}=x(R\cap L_2)<0
+\qquad\left(2(1+\eta)>2\eta=3\sqrt3\,\delta\right),
+\]
+\[
+0<x(R\cap L_3)=\frac\delta{2(\eta-1)}<\frac\delta{5\delta}=\frac15<\frac\delta4
+\qquad\left(2(\eta-1)=3\sqrt3\,\delta-2>5\delta\right),
+\]
+\[
+\frac\delta4<\frac{\delta-1/12}3<x(R\cap L_5)=\frac{\delta-|u|\varepsilon}{1+|u|}
+<\frac\delta{1+9/5}=\frac{5\delta}{14}
+\qquad\left(|u|\varepsilon<\frac1{12}\right),
+\]
+\[
+\begin{gathered}
+\frac{5\delta}{14}<x(R\cap L_1)=\frac{2\delta-\sqrt3}3<\delta=x(R\cap Y_0)
+<\frac{5\delta-2\sqrt3}3=x(R\cap L_4)\\
+\left(13\delta>14\sqrt3,\ \delta>\sqrt3\right).
+\end{gathered}
+\]
+Thus the points $R\cap L_2$ and $R\cap L_3$ have $x$-coordinates in $(-\sqrt3/9,\ 1/5)$, and all other points on $R$ have $|x|>\delta/4$.
+
+The line $R$ has positive slope, so the $y$-coordinates of the points on it are ordered in the same way as the $x$-coordinates, and
+\begin{equation}\label{eq:y-neg}
+y(R\cap D)\le y(R\cap L_1)=-\frac{\delta+\sqrt3}3<-\frac\delta3
+\quad\text{for}\quad
+D\in\{L_1,L_2,L_3,L_5,L_6\} .
+\end{equation}
+
+\subsection{Intersection orders}
+
+The order of the intersection points along a line is the \emph{local sequence} of the line~\cite{gp84}.
+For a simple arrangement, the local sequences of all its lines form its $O$-matrix~\cite[Section~5.1]{pu26b}. Table \eqref{eq:seed-orders} below is an analog of this matrix for an arrangement with triple points.
+
+\begin{lemma}\label{lem:seed-orders}
+The left-to-right order of the intersection points on each line is as follows (the entry $L_i/L_j$ denotes a triple point shared with the lines $L_i$ and $L_j$):
+\begin{equation}\label{eq:seed-orders}
+\begin{array}{c|ccccccc}
+R   & L_6 & L_2 & L_3 & L_5 & L_1 & Y_0 & L_4 \\
+Y_0 & L_1 & L_2 & L_5 & L_6 & L_3 & L_4 & R \\
+L_1 & Y_0 & L_2 & L_4/L_6 & L_3/L_5 & R \\
+L_2 & L_5 & Y_0 & L_1 & L_4 & L_6 & R & L_3 \\
+L_3 & L_2 & R & L_1/L_5 & L_4 & Y_0 & L_6 \\
+L_4 & L_2 & L_1/L_6 & L_5 & L_3 & Y_0 & R \\
+L_5 & L_2 & Y_0 & L_6 & L_4 & L_1/L_3 & R \\
+L_6 & R & L_2 & L_1/L_4 & L_5 & Y_0 & L_3
+\end{array}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Each row is obtained by sorting the $x$-coordinates from the previous subsection.
+Groups (ii) and (iii) give the rows $L_2$ and $L_3$ without the points $R\cap L_2$, $R\cap L_3$, and $V$.
+The points on $R$ other than $R\cap L_2$ and $R\cap L_3$ have $|x|>\delta/4$, while all points of groups (i)--(iv) have $|x|\le\sqrt3<\delta/4$. Therefore these points on $R$ stand at the ends of their rows.
+The remaining comparisons are as follows.
+
+\begin{itemize}
+\item Row $Y_0$ is given by the order of the zeros of the right-hand sides of \eqref{eq:base-lines}, taking into account $\varepsilon<\tfrac1{\sqrt3}$.
+\item Rows $L_5$ and $L_6$: $x(L_5\cap L_6)<\varepsilon<\tfrac14<x(L_4\cap L_5)$.
+\item Rows $L_1$, $L_4$, $L_6$: the point $P$ lies between group (ii) and zero, since $-\tfrac1{\sqrt3}+10^{-4}<x(P)=-\tfrac{\sqrt3}9<0$.
+\item Rows $L_2$ and $L_3$: $-\tfrac{\sqrt3}9<x(R\cap L_2)<0<x(R\cap L_3)<\tfrac15$, so both points lie to the right of group (ii) and to the left of group (iii), and the point $V$ with $x=0$ separates them.
+\item Rows $L_4$ and $L_5$: $x(L_4\cap L_5)<\tfrac13<\tfrac1{\sqrt3}-10^{-4}$.\qedhere
+\end{itemize}
+\end{proof}
+
+\begin{corollary}\label{cor:rightmost-L4}
+The rightmost intersection point of $\mathcal A_0$ on the line $L_4$ is $L_4\cap Y_0$. It is also the rightmost one on $Y_0$.
+\end{corollary}
+
+\begin{proof}
+Rows $L_4$ and $Y_0$ of table \eqref{eq:seed-orders} with $R$ removed.
+\end{proof}
+
+\begin{corollary}\label{cor:rightmost-L2}
+Among the intersection points of $\mathcal A_0$ on the line $L_2$, the point $V=L_2\cap L_3$ is the rightmost, and its left neighbor is $L_2\cap L_6$.
+Among those on $L_3$, the point $V$ is the leftmost, and its right neighbor is the triple point $Q$.
+\end{corollary}
+
+\begin{proof}
+Rows $L_2$ and $L_3$ of table \eqref{eq:seed-orders} with $R$ removed.
+\end{proof}
+
+\subsection{Bounding box of the intersection points}
+
+\begin{lemma}\label{lem:seed-box}
+All intersection points of $\mathcal A_0$ except $V=L_2\cap L_3$ lie in the rectangle
+\[
+|x|\le\sqrt3,
+\qquad
+|y|\le8\sqrt3<14 ,
+\]
+and the point $V$ itself has coordinates $(0,-3n_t^6)$. Moreover, $y(L_2\cap L_6)<-1$ and $y(Q)<-1$.
+\end{lemma}
+
+\begin{proof}
+The largest $x$-coordinate is $\sqrt3$ (the point $Y_0\cap L_4$), and the smallest is $-\sqrt3$ (the point $Y_0\cap L_1$): groups (ii) and (iii) are within $10^{-4}$ of $\mp1/\sqrt3$, and the other $x$-coordinates of group (i) do not exceed $\sqrt3$ in absolute value.
+Each point other than $V$ lies on at least one of the lines $Y_0,L_1,L_4,L_5,L_6$, for which $|m|\le4$ by \cref{lem:uv} and $|a|\le\sqrt3$. Therefore
+\[
+|y|=|m|\,|x-a|\le4\left(\sqrt3+\sqrt3\right)=8\sqrt3 .
+\]
+The point $V=(0,-3n_t^6)$ itself is given in (iv).
+Finally, by (ii), $x(L_2\cap L_6)<-\tfrac1{\sqrt3}+10^{-4}<-\tfrac12$, so
+\[
+y(L_2\cap L_6)=v\bigl(x(L_2\cap L_6)-\varepsilon\bigr)<3\cdot\left(-\frac12\right)=-\frac32 ,
+\]
+and for the triple point $Q$, by \eqref{eq:Q-coords},
+\[
+y(Q)=-\frac{2\eta}{\sqrt3\,(\eta+1/2)}
+=-\frac2{\sqrt3}+\frac1{\sqrt3\,(\eta+1/2)}
+<-\frac2{\sqrt3}+10^{-5}<-1 ,
+\]
+since $\eta>2\cdot10^5$ by \eqref{eq:A-num}.
+\end{proof}
+
+\begin{lemma}\label{lem:r-triangles-below}
+Each of the four $R$-triangles $RL_1L_5$, $RL_2L_3$, $RL_2L_6$, $RL_3L_5$ lies entirely in the half-plane $y\le-1$, whereas $RY_0L_4$ contains the point $(\delta,0)$.
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:y-neg}, all intersection points on $R$ except $R\cap Y_0=(\delta,0)$ and $R\cap L_4$ have $y$-coordinates less than $-\delta/3<-1$.
+The third vertices of these four triangles are $Q$, $V$,
+$L_2\cap L_6$, and again $Q$, respectively, and their $y$-coordinates are also less than $-1$ by \cref{lem:seed-box}.
+Hence all three vertices of each of these triangles lie in the half-plane $y\le-1$, and so does the
+whole triangle.
+
+The triangle $RY_0L_4$ has the point $R\cap Y_0=(\delta,0)$ as a vertex.
+\end{proof}
+
+\subsection{Counting faces}\label{app:seed-faces}
+
+\begin{lemma}\label{lem:seed-faces}
+Three lines of the arrangement bound a triangular face if and
+only if, on each of them, the two corresponding intersection points
+are distinct and consecutive.
+\end{lemma}
+
+\begin{proof}
+Denote the three lines by $D_1,D_2,D_3$.
+Necessity: the side of the face on $D_1$ is the segment with endpoints $D_1\cap D_2$ and $D_1\cap D_3$, with no intersection points in its interior.
+Sufficiency: a line $E\neq D_1,D_2,D_3$ entering the interior of the triangle crosses its boundary at two points, and these cannot both be vertices, since otherwise $E$ would coincide with one of the $D_i$.
+Hence $E$ crosses the interior of a side, say the one on $D_1$, that is, between $D_1\cap D_2$ and $D_1\cap D_3$, which contradicts their being consecutive.
+\end{proof}
+
+\begin{proof}[Proof of \cref{lem:seed}]
+By \cref{lem:seed-faces}, triangular faces correspond to triples of lines whose intersection points are consecutive on all three of these lines.
+From \eqref{eq:seed-orders} we obtain exactly 15 such triples:
+\[
+\begin{gathered}
+RY_0L_4,\quad RL_1L_5,\quad RL_2L_3,\quad
+RL_2L_6,\quad RL_3L_5,\\
+Y_0L_1L_2,\quad Y_0L_2L_5,\quad Y_0L_3L_4,\quad
+Y_0L_3L_6,\quad Y_0L_5L_6,\\
+L_1L_2L_4,\quad L_1L_4L_5,\quad L_2L_4L_6,\quad
+L_3L_4L_5,\quad L_4L_5L_6.
+\end{gathered}
+\]
+The first five contain $R$, and the others belong to $\mathcal A_0$.
+Removing $R$ creates no new triangles: the new adjacencies in rows $L_2$ and $L_3$ give no consecutive triples.
+By \cref{lem:seed-orders}, $P$ and $Q$ are the only multiple points of $\mathcal A_0$.
+\end{proof}
+
+\subsection{Wedges at the first step}
+
+At the first doubling step, $n=n_0=6$. This is the only value in the series with $n\equiv2\pmod4$.
+\Cref{lem:right-wedges} lists the right wedges for $n\equiv0\pmod4$ and does not extend to $n=6$.
+We treat this case separately.
+
+\begin{lemma}\label{lem:first-step}
+Let $n=6$, let the arrangement $\mathcal A$ satisfy \textup{(D1)--(D3)} and \textup{(W1)}, let the slope of the line $L_4$ be positive, and let
+\[
+\mathcal B=\mathcal A\cup\{M_1,\ldots,M_6\}.
+\]
+Then the right wedges of $\mathcal B$ that involve at least one new line are exactly the pairs
+\begin{equation}\label{eq:wedges-first-step}
+(M_1,M_3),\quad (L_4,M_2),\quad (M_4,M_5),\quad (Y_0,M_6).
+\end{equation}
+There are $4=n/2+1$ of them, and each of the lines $M_1,\ldots,M_6$ belongs to exactly one pair.
+Moreover, $\mathcal B$ satisfies \textup{(W1)} with $12$ in place of $6$ and $M_6$ in the role of $L_{10}$.
+\end{lemma}
+
+\begin{proof}
+Compared with the general case in \cref{lem:right-wedges}, the listing changes in two places.
+The auxiliary angles are
+\[
+\beta_1,\ldots,\beta_6
+=-\frac{5\pi}{12},\ -\frac\pi4,\ -\frac\pi{12},\
+\frac\pi{12},\ \frac\pi4,\ \frac{5\pi}{12},
+\]
+and condition \eqref{eq:Par1} $i+j=n/2+1=4$ holds for $i=1$, $j=3$, and also for $i=j=2$ ($\beta_1 + \beta_3 = 2\beta_2=-\pi/2$), so the line $M_2$ has no almost parallel partner.
+Similarly, \eqref{eq:Par2} reduces to $i+j=10$ and gives the index pair $(4,6)$, with $M_5$ left without a partner at $i=j=5$.
+In addition, $3n/4=9/2$ is not an integer, so the pair $(L_{n-2},M_{3n/4})$ of \eqref{eq:wedges-old} does not exist for $n=6$.
+Its place is taken by the pair $(L_4,M_2)$, and the slope of $L_4$ is positive rather than negative as in the general case.
+
+The rightmost intersection points are found by case analysis, as in \cref{lem:right-wedges}. The lines $M_1$ and $M_3$ satisfy \eqref{eq:Par1}, so
+\[
+x(M_1\cap M_3)=-n^6\sin(2\beta_1)=\frac{n^6}2>n^5.
+\]
+The lines $M_4$ and $M_5$ form a pair from \eqref{eq:wedges-high} with $i+j=3n/2=9$. Their auxiliary angles sum to $\pi/2-\pi/6=\pi/3$, and by \eqref{eq:M-M-coord} and \eqref{eq:theta}
+\[
+x(M_4\cap M_5)=\tan\frac\pi3+\theta=a_4+\theta,
+\qquad \frac3{n^8}<\theta<\frac1{n^2}.
+\]
+The line $M_6$ intersects $Y_0$ at $x=b_6=\cot(\pi/{12})=a_4+2$.
+
+It remains to list the points on $M_2$. For its intersections with $M_3,M_4,M_5,M_6$, the sums of auxiliary angles are $\beta_2+\beta_j=-\pi/3,-\pi/6,0,\pi/6$. By \eqref{eq:M-M-coord} and \eqref{eq:theta}, these intersection points satisfy
+\[
+x(M_2\cap M_j)=\tan(\beta_2+\beta_j)+\theta_j\le\tan\frac\pi6+\frac1{n^2}<1,
+\qquad |\theta_j|<\frac1{n^2}
+\]
+(exactly $x=0$ for $j=5$). The line $M_2$ intersects $Y_0$ at the point $x=b_2=-1$, and by \eqref{eq:L-M-coord} the old lines $L_k\neq L_4$ at points with
+\[
+x(M_2\cap L_k)\le a_3+\frac3{n^9}<1.
+\]
+For the point $M_1\cap M_2$ the sum is $-2\pi/3$, and the term $\theta$ in \eqref{eq:M-M-coord} is negative by \eqref{eq:theta} (all three factors $\beta_1+\beta_2$, $\beta_1$, $\beta_2$ are negative), so
+\[
+x(M_1\cap M_2)<\tan\Bigl(-\frac{2\pi}3\Bigr)-\frac3{n^8}=a_4-\frac3{n^8}.
+\]
+
+The intersection point $L_4\cap M_2$, by contrast, lies to the right of $a_4$.
+We argue as for the pair $(L_{n-2},M_{3n/4})$ in \cref{lem:right-wedges}, but now the slope $\ell$ of $L_4$ is positive, so $L_4$ lies below each line $M_j$ to the left of their common point and above it to the right.
+Hence $L_4\cap M_2$ is the rightmost point on $L_4$ among the intersection points with the new lines if at its $x$-coordinate the line $M_2$ is the highest of the new lines. By \eqref{eq:M-height}, as in \eqref{eq:F-gap}, this holds if $F_k-F_2>12/n^9$ for all $k\neq2$.
+By \eqref{eq:G-j} with $n=6$, the leading term is $G_j=-2\sin(\pi j/3)-1$. It attains its smallest value $-1-\sqrt3$ for two values, $j=1$ and $j=2$, which gives a tie (in the general case, by contrast, the maximum is separated from the closest values by $2\sin(\pi/n)$).
+The term $H_j$ from the proof of \cref{lem:right-wedges} breaks the tie:
+\[
+\begin{gathered}
+H_1=-\frac{2(\sqrt3-1)}{n^6},\qquad H_2=-\frac{\sqrt3+1}{n^6},\\
+F_1-F_2=\frac{3-\sqrt3}{n^{6}}>2.7\cdot10^{-5}>20\cdot\frac{12}{n^9}.
+\end{gathered}
+\]
+For the other $k$ the gap is at least $1$ already in the leading term.
+By (W1), there are no old intersection points on $L_4$ to the right of $a_4$. Moreover, $F_2<0$, because its leading term is $G_2=-1-\sqrt3$, so $M_2$ passes above the point $(a_4,0)$ of $L_4$, and $L_4\cap M_2$ lies to the right of $a_4$. Hence it is the rightmost point on $L_4$. It is also the rightmost point on $M_2$, since all other intersection points of $M_2$ lie to the left of $a_4$.
+Thus the right wedges with a new line are exactly the pairs \eqref{eq:wedges-first-step}. There are four of them, and each index $1,\ldots,6$ is covered once.
+In \textup{(W1)}, the role of $L_4$ with $a_4=\cot(\pi/6)$ passes to $M_6$ with $b_6=\cot(\pi/12)$.
+\end{proof}

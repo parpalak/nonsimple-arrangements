@@ -1,0 +1,6 @@
+$pdf_mode = 1;
+$interaction = 'nonstopmode';
+$bibtex_use = 1;
+$out_dir = 'build';
+$preview_mode = 0;
+$pdf_previewer = 'true';  # no-op, prevents launching xpdf/evince

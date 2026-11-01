@@ -1,0 +1,241 @@
+name: checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tools:
+    name: tools (ctest)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: addline
+        run: |
+          cmake -B combinatorics/addline/build -S combinatorics/addline -DCMAKE_BUILD_TYPE=Release
+          cmake --build combinatorics/addline/build -j
+          ctest --test-dir combinatorics/addline/build --output-on-failure
+
+      - name: sorter
+        run: |
+          cmake -B combinatorics/sorter/build -S combinatorics/sorter -DCMAKE_BUILD_TYPE=Release
+          cmake --build combinatorics/sorter/build -j
+          ctest --test-dir combinatorics/sorter/build --output-on-failure
+
+      - name: Classes and symmetries reproduce data/exhaustive
+        working-directory: data/exhaustive
+        run: |
+          set -euo pipefail
+          B=../../combinatorics/sorter/build
+          for n in 6 8 10 12; do
+            $B/sorter -i $n.words.txt --uniq P -p pid eid ')' gens 2>/dev/null | cmp - $n.uniq-p.txt
+            $B/sorter -i $n.words.txt --uniq E -p pid eid ')' gens 2>/dev/null | cmp - $n.uniq-e.txt
+            $B/sym_detect -i $n.uniq-p.txt 2>/dev/null | cmp - $n.uniq-p-sym.jsonl
+            echo "OK   n=$n"
+          done
+
+  enum:
+    name: search
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+        working-directory: search
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: g++ -O2 -std=c++17 -o multenum mult_enum.cpp
+
+      # Node counts are deterministic: a mismatch means the prunings changed.
+      - name: thm:small-n - no words with a3 >= max+1
+        run: |
+          set -euo pipefail
+          source ../.github/ci-lib.sh
+          eq "n=6, target 8"  "4368 0"    "$(nodes 6 8)"
+          eq "n=8, target 16" "3340252 0" "$(nodes 8 16)"
+
+      # Without --pruning n=10 takes 40 min; n=12 takes 2 h even with it.
+      - name: The exhaustive enumerations are reproduced by this program
+        run: |
+          set -euo pipefail
+          source ../.github/ci-lib.sh
+          for spec in "6 7 112" "8 15 32" "10 25 2848 --pruning 256M"; do
+            set -- $spec
+            words "$1" "$2" "${@:4}" > "$TMP/mine"
+            strip < "../data/exhaustive/$1.words.txt" > "$TMP/theirs"
+            diff -q "$TMP/theirs" "$TMP/mine" > /dev/null || {
+              echo "FAIL exhaustive/$1.words.txt not reproduced" >&2
+              diff -u "$TMP/theirs" "$TMP/mine" | head -20 >&2
+              exit 1
+            }
+            eq "exhaustive/$1.words.txt reproduced" "$3" "$(wc -l < "$TMP/mine" | tr -d ' ')"
+          done
+
+      - name: Pruning A/B - the word sets must coincide
+        run: |
+          set -euo pipefail
+          source ../.github/ci-lib.sh
+          for spec in "6 5" "6 4" "7 9" "7 10" "8 14" "8 15"; do
+            set -- $spec
+            words "$1" "$2" > "$TMP/base"
+            for f in "--no-doom" "--no-forced-descent" "--no-doom --no-forced-descent"; do
+              words "$1" "$2" $f > "$TMP/off"
+              diff -q "$TMP/base" "$TMP/off" > /dev/null \
+                || { echo "FAIL n=$1 target $2: $f changes the output" >&2; exit 1; }
+              echo "OK   n=$1 target $2, $f: same ($(wc -l < "$TMP/base" | tr -d ' ') words)"
+            done
+          done
+
+      # With 1K the table is evicted constantly.
+      - name: --pruning keeps the enumeration
+        run: |
+          set -euo pipefail
+          source ../.github/ci-lib.sh
+          for spec in "6 7" "7 10" "8 15" "8 14"; do
+            set -- $spec
+            words "$1" "$2" > "$TMP/base"
+            for t in "--pruning 1M" "--pruning 1K" "--pruning 1M --table-equal" \
+                     "--pruning 1M --no-table" "--pruning 1M --no-segments" \
+                     "--pruning 1M --no-pair-doom"; do
+              words "$1" "$2" $t > "$TMP/cat"
+              cmp -s "$TMP/base" "$TMP/cat" \
+                || { echo "FAIL n=$1 target $2, $t: enumeration differs" >&2; exit 1; }
+            done
+            echo "OK   n=$1 target $2: enumeration kept ($(wc -l < "$TMP/base" | tr -d ' ') words)"
+          done
+          out=$(./multenum 8 14 --quiet --pruning 1M 2>&1 >/dev/null | grep '^DONE')
+          case "$out" in *"lemma-violations=0/0/0"*) echo "OK   segment-count lemmas: no violations";; \
+            *) echo "FAIL $out" >&2; exit 1;; esac
+
+      - name: Chunk replay - the sum over subtrees equals the whole tree
+        run: |
+          set -euo pipefail
+          source ../.github/ci-lib.sh
+          ./multenum 8 16 --quiet --prefixes 3 2> /dev/null > "$TMP/pref"
+          eq "chunks of depth 3" "546" "$(wc -l < "$TMP/pref" | tr -d ' ')"
+          sum=0
+          while read -r c; do
+            n=$(./multenum 8 16 --quiet --chunk "$c" 2>&1 > /dev/null \
+                | sed -n 's/^DONE.*nodes=\([0-9]*\).*/\1/p')
+            sum=$((sum + n))
+          done < "$TMP/pref"
+          # Nodes above the chunk depth are not counted.
+          eq "node sum over chunks" "3340106" "$sum"
+
+      - name: n=14 - every chunk of the run finished with no words
+        run: |
+          set -euo pipefail
+          source ../.github/ci-lib.sh
+          R=../data/runs/14-55
+          ./multenum 14 55 --prefixes 8 --pruning 256M --reduced --quiet 2>/dev/null | grep '^0 ' > "$TMP/chunks"
+          cmp "$TMP/chunks" $R/first-fixed.reduced.chunks.txt
+          cut -f1 $R/first-fixed.pruning.reduced.tsv | sort | cmp - <(sort "$TMP/chunks")
+          awk -F'\t' '$2 != 0 || $4 != 0 { bad++ } END { exit bad > 0 }' $R/first-fixed.pruning.reduced.tsv
+          echo "OK   n=14: $(wc -l < "$TMP/chunks") chunks, all finished, no words"
+
+  catalogs:
+    name: enumerations
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Enumerations match tab:runs
+        working-directory: data
+        run: |
+          set -euo pipefail
+          for spec in "6 7 112" "8 15 32" "10 25 2848" "12 38 912"; do
+            set -- $spec; f=exhaustive/$1.words.txt
+            [ "$(wc -l < $f)" = "$3" ]                          # number of words
+            [ "$(grep -o ' K=[0-9]*' $f | sort -u)" = " K=$2" ]  # all at the maximum
+            ! grep -q '\*\*int' $f || exit 1                    # no points of multiplicity >= 4
+            echo "OK   n=$1: $3 words, K=$2"
+          done
+          grep -q '^DONE n=11 K>=33 zone=all flags=first-fixed: .* words=0 ' runs/11-33/first-fixed.log
+          echo "OK   n=11: no words with K=33"
+
+      - name: Independent face count
+        working-directory: data
+        run: |
+          set -euo pipefail
+          for n in 6 8 10 12; do
+            echo -n "exhaustive/$n.words.txt: "
+            python3 ../scripts/enumeration_faces.py $n exhaustive/$n.words.txt
+          done
+          for f in augmented/[0-9]*.txt; do
+            b=$(basename $f .txt); n=${b%%-*}
+            echo -n "$f: "
+            head -100 $f | python3 ../scripts/enumeration_faces.py $n - --resolve-parallels
+          done
+          for f in series/*.words.txt; do
+            n=$(basename $f .words.txt)
+            echo -n "$f: "
+            head -10 $f | python3 ../scripts/enumeration_faces.py $n -
+          done
+
+      - name: Füredi-Palásti arrangement
+        run: python3 scripts/furedi_palasti.py
+
+      - name: Line equations for n=20, 32, 38, 74 (Appendix B)
+        run: python3 scripts/appendix_b_lines.py
+
+      - name: Non-stretchable optima for n=10 (Appendix B)
+        run: python3 scripts/nonstretchable_n10.py
+
+      # Fails on a counting error, not on a violated conjecture.
+      - name: Inequalities of Section 5 on the enumerations
+        run: |
+          python3 scripts/conjectures.py
+          python3 scripts/conjectures.py --resolve-parallels data/augmented/[0-9]*.txt
+
+  series:
+    name: series (Section 2)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+        working-directory: scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Series in exact arithmetic
+        run: python3 series_construction.py
+
+      - name: Appendix A
+        run: python3 series_seed.py
+
+      - name: First doubling step
+        run: python3 series_first_step.py
+
+  canon:
+    name: canonical form
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+        working-directory: search
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: g++ -O2 -std=c++17 -o multenum mult_enum.cpp
+
+      # For n >= 8 the output guard refuses K = 0.
+      - name: Commutation classes of simple arrangements - OEIS A006245
+        run: |
+          set -euo pipefail
+          source ../.github/ci-lib.sh
+          for spec in "4 8" "5 62" "6 908" "7 24698"; do
+            set -- $spec
+            eq "n=$1: commutation classes of w0" "$2" "$(nodes "$1" 0 --max-mult 2 | cut -d' ' -f2)"
+          done

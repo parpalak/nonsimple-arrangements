@@ -1,0 +1,6 @@
+P6-u8db16zbxt1g E6-u8db16zbxt1g ) 0 1 0 2 3 2 1 0 2 4 3 2 1 0 2
+P6-1lbrbmj6m4m98 E6-1lbrbmj6m4m98 ) 0 1 0 2 4 3 2 1 0 2 4 3 2 1 2
+P6-164lhjrepo3s6 E6-ylsj6cyebkea ) 0 1 3 2 1 0 3 4 3 1* 0 3 2
+P6-2zjhn3p51nmp E6-1itqincypyqcy ) 0 1 3 2 0* 3 4 2* 1 0 2
+P6-1gq7ny2anztrs E6-21s6kwiggy2iq ) 0 1 4 2* 0* 4 2* 1 2
+P6-3c2fwzfzx2i19 E6-3c2fwzfzx2i19 ) 0 1 2* 0* 4 2* 1 0 2

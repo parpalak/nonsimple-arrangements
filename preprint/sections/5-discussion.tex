@@ -1,0 +1,129 @@
+\section{Discussion}\label{sec:discussion}
+
+\subsection{Our results}
+
+\Cref{thm:small-n} gives the maxima 7, 15, 25, 38, 54 for $n=6,8,10,12,14$, and all of them attain \eqref{eq:conj-bound}. For $n\equiv2\pmod6$, the series of \cref{sec:series} and the augmented arrangements of \cref{sec:augment} up to $n=44$ exceed \eqref{eq:blanc-even} by exactly one. For $n\equiv0,4\pmod6$, augmenting perfect arrangements attains \eqref{eq:blanc-even}. None of the arrangements we found exceeds \eqref{eq:conj-bound}.
+
+The doubling mechanism of \cref{sec:series}, with one line temporarily removed and then restored, may also work for starting arrangements of other series, e.g.\ $2\cdot2^t+2$, $14\cdot2^t+2$, $18\cdot2^t+2$. The first two, however, contain arrangements with the same number of triangles as the perfect arrangements of the series $2\cdot2^t+1$, $14\cdot2^t+1$~\cite{bbl} with an outermost line added, so they are of little interest as new results.
+
+Other series of line arrangements with $n\equiv2\pmod6$ attaining \eqref{eq:conj-bound}, such as $18\cdot2^t+2$, would be of interest, since they cannot be obtained by adding an outermost line. For pseudolines, such series exist.
+Doubling pseudolines needs only the combinatorial part (D3) of the hypotheses of \cref{lem:doubling}.
+The removed pseudoline $R$ can be drawn so that it cuts off triangles from the combinatorial analogs of the right wedges, as in \cref{lem:r-triangle}.
+With the increments $n^2$ and $n/2$ the result attains \eqref{eq:conj-bound} again.
+The arrangements of \cref{fig:n20-collapse,fig:n32} give the series $18\cdot2^t+2$ and $30\cdot2^t+2$ in pseudolines; their members up to $t=3$, all attaining \eqref{eq:conj-bound}, are in the repository~\cite{nonsimple-arrangements}. In contrast, the arrangement of \cref{fig:n44} violates (D3) for every choice of $Y_0$: every doubling of it gives 86 pseudolines with at least three triangles fewer than \eqref{eq:conj-bound}.
+
+The first three members of the pseudoline series $18\cdot2^t+2$, with $n=20,38,74$, are stretchable (\cref{fig:n20-collapse,fig:n38,tab:n20-collapse-lines,tab:n38-lines,tab:n74-lines}). Stretched members do not yet give a series of lines: doubling lines also needs the metric conditions (D1) and (D2), and the removed line has to be movable arbitrarily far away, like $R$ in \eqref{eq:base-lines}.
+We have a candidate construction of a series $18\cdot2^t+2$ of straight line arrangements that starts from another arrangement of 20 lines and avoids the last requirement. As $t$ grows, the point $R\cap Y_0$ approaches the point where $Y_0$ meets another line of the arrangement, rather than the point at infinity of $Y_0$. After the last doubling we change the affine chart so that $R$ becomes the line at infinity and the former line at infinity becomes a line of the arrangement. In this chart the arrangement attains \eqref{eq:conj-bound}. Its members with $n=20$ and $n=38$ are verified in rational interval arithmetic. We will present the construction separately.
+
+\subsection{Upper bounds and future work}\label{sec:upper-bounds}
+
+For non-simple arrangements the only applicable upper bound is \eqref{eq:a3-bound}.
+It is often referred to as Tamura's bound~\cite{cb07}.
+For even $n\ge6$ it is attained by no known arrangement, from the literature or from this paper.
+The gap is at least $\lfloor n/6\rfloor$, and we conjecture that this holds in general.
+
+\begin{conjecture}\label{conj:bound}
+For even $n$, the number of triangular faces of an arrangement $\mathcal{A}$ of $n$ pseudolines satisfies
+\begin{equation}\label{eq:conj-bound-2}
+a_{3}(\mathcal{A})\le\left\lfloor\dfrac{n(n - 2)}{3}\right\rfloor-\left\lfloor\dfrac{n}{6}\right\rfloor=\begin{cases}
+\dfrac{n(n - \frac52)}{3}, & n\equiv0,4\pmod 6 \\
+\dfrac{n(n - \frac52) + 1}{3}. &  n\equiv2\pmod 6
+\end{cases}
+\end{equation}
+\end{conjecture}
+
+This bound is convenient to restate in terms of the \emph{waste}, defined as
+\begin{equation}\label{eq:waste}
+w(\mathcal{A})=n(n-2)-3a_3(\mathcal{A}).
+\end{equation}
+The waste counts the segment units that do not go into triangles and reflects the gap between the actual number of triangular faces of the arrangement and \eqref{eq:a3-bound}. The conjecture \eqref{eq:conj-bound-2} then takes the same form for all even $n$:
+\begin{equation}\label{eq:conj-waste}
+w(\mathcal{A})\overset{?}{\ge} n/2-1.
+\end{equation}
+The definition \eqref{eq:waste} gives $w\equiv n(n-2)\pmod3$. Hence $w$ can equal $n/2-1$ only for $n\equiv2\pmod 6$, and for $n\equiv0,4\pmod 6$ the inequality \eqref{eq:conj-waste} automatically strengthens to $w(\mathcal{A})\ge n/2$. So the split into cases is due to rounding alone, and the uniform bound \eqref{eq:conj-waste} allows a triangle over \eqref{eq:blanc-even} only for $n\equiv2\pmod 6$.
+
+Why do we believe that the bound holds?
+\begin{enumerate}
+\item The series $6\cdot2^t+2$ of \cref{sec:series} and the series $2\cdot2^t+1$ with an outermost line added~\cite{for,bbl} attain the bound for infinitely many even $n$ in every residue class modulo 6.
+\item The bound has no exceptions at small $n$ (unlike \eqref{eq:p3-bound}): it holds for all even $n$ up to 14 by \cref{thm:small-n}, and no counterexample is known for larger $n$.
+\item It is natural to expect the bound to be polynomial in each residue class, as in the odd case~\cite{blanc11}. Tamura's bound \eqref{eq:a3-bound} and the known series fix the leading term as $n^2/3$. The exact values of \cref{sec:enum} for $n=6,8,10,12,14$ and the trivial case $n=4$ give two points in each residue class of $n$ modulo 6 and thereby fix the linear and the constant term.
+\item The exact values for $n\le14$ alone rule out some other candidates for a sharp bound, for example the bound of Cl\'ement and Bader~\cite{cb07} with the additional term $-1$ for some residues: the gap between Tamura's bound \eqref{eq:a3-bound} and the computed optima is exactly $\lfloor n/6\rfloor$ for these $n$. This is why it was important for us to check $n=12$ computationally, where the gap first reaches 2. For this case we had to develop the prunings of \cref{app:prunings} and prove that they lose no words.
+\end{enumerate}
+
+We anticipate a natural question from the reader. The series of \cref{sec:series} starts at $n=8$, and each of its arrangements has only two triple points. What guarantees that for larger $n$ additional multiple points will not absorb the unused segments and break the conjectured bound? Perhaps this effect is absent for small $n$ only because there is not enough room in the arrangement? We have no such guarantee, and this is exactly what the conjecture asserts. But we can show what would have to happen and how the growth of $n$ affects it.
+
+From here on we omit the argument $\mathcal{A}$ where this causes no confusion. In the simple case the waste $w$ equals the number $u$ of unused segments \eqref{eq:simple-segm}. More generally, if the only multiple points are $t_3$ triple points, \eqref{eq:non-simple-segm} gives
+\begin{equation}\label{eq:waste-eq}
+w=3t_3+u-d.
+\end{equation}
+Vertices of higher multiplicity add $\sum_{m\ge4}m(m-2)t_m=8t_4+15t_5+\cdots$ to the waste. We assume that triple points suffice to minimize the waste and omit higher multiplicities in this section.
+
+\emph{Can the unused segments be absorbed completely?} The answer is given by the identity \eqref{eq:waste-eq}, which reads as a conservation law for charge. We assign the charge $+1$ to an unused segment, $+3$ to a triple point (it takes three segment units), and $-1$ to a double segment. A simple arrangement has no double segments, so negative charge can appear only in the presence of triple points. The total charge $3t_3+u-d$ equals $w$ and is determined by $a_3$ alone.
+
+The question of what multiple points gain by absorbing unused segments is therefore the question whether the negative charge $d$ can exceed the positive charge $3t_3$ in absolute value. The computations give no example where it can. The inequality
+\begin{equation}\label{eq:compensation}
+d\overset{?}{\le}3t_3,
+\end{equation}
+which by \eqref{eq:waste-eq} is equivalent to $w\ge u$, holds for all arrangements from the exhaustive enumerations and from augmentation, and is strict for $t_3>0$: $d\le3t_3-1$.
+
+The waste decreases only if the multiple points destroy more unused segments than the remainder $3t_3-d$ of their own charge. Otherwise they only shift the waste between the terms. For example, in the extreme case $n=10$, each of the two optima of \cref{fig:n10} has $t_3=10$ triple points, no unused segments at all ($u=0$), but $d=25$. All five unused segments of the simple optimum went into the remainder $3t_3-d=5$, and the total charge $w=5=n/2$ did not change. For $n\equiv2\pmod6$ the multiple points do gain, but in every arrangement we have found the gain is at most one triangle.
+
+We could prove only a weaker form of \eqref{eq:compensation}: the discharging argument of \cref{cor:unused-bound} gives $u\le w+\tfrac32t_3$, that is, $d\le\tfrac92t_3$.
+
+\emph{Can the growth of $n$ help the waste disappear?} In the even case the waste is not a local phenomenon confined to small neighborhoods: it forms a global structure. To see this, pass from the arrangement $\mathcal{A}$ of $n$ pseudolines to its projective closure $\mathcal{A}^+$ of $N=n+1$ pseudolines, which contains the line at infinity. The notions of unused and double segments extend to $\mathcal{A}^+$, and we denote their numbers by $u^+$ and $d^+$. Unlike in \cref{sec:augment-patterns}, here $N$ is odd, so there is no checkerboard coloring, and we use the local coloring instead: triangles are black and all other faces are white. Two faces sharing a segment then have different colors if it is an ordinary used segment, and the same color if it is an unused or double segment. So if there are few unused and double segments, the arrangement has large regions (phases) where the local coloring is a checkerboard coloring. The phases are separated by a phase seam made of unused and double segments (\cref{fig:phase-seam}).
+
+\begin{figure}[p]
+\centering
+\captionsetup[sub]{skip=-2pt}% gap between the picture frame and the caption; may be negative
+\begin{subfigure}[t]{\linewidth}
+\input{figures/14-plane}
+\caption{An optimal arrangement of $14$ lines in the affine plane, from direct augmentation (\cref{sec:augment}).}
+\label{fig:phase-seam-plane}
+\end{subfigure}
+
+\vspace{18pt}
+\begin{subfigure}[t]{\linewidth}
+\centering
+\begin{minipage}{0.65\linewidth}% the picture is drawn in units of \linewidth
+\input{figures/phase-seam}
+\end{minipage}
+\caption{The same arrangement with the line at infinity on the sphere (phase seam shown dashed).}
+\label{fig:phase-seam-sphere}
+\end{subfigure}
+\caption{Phases of the local coloring and the phase seam.}
+\label{fig:phase-seam}
+\end{figure}
+
+\begin{definition}\label{def:seam}
+The \emph{phase seam} $Z$ is the set of unused and double segments of the projective closure $\mathcal A^+$.
+\end{definition}
+
+\begin{lemma}\label{lem:seam}
+Let $n$ be even. Then every vertex of $\mathcal A^+$ has even degree in $Z$, and exactly one connected component of $Z$ contains a closed curve that is non-contractible in $\mathbb{RP}^2$.
+\end{lemma}
+
+\begin{proof}
+A vertex is an endpoint of an even number of segments. On a full turn around it, the color changes at every segment outside $Z$ and returns to the starting one, so the number of segments outside $Z$ is even, and so is the number in $Z$.
+
+In the sphere model, take a path from a face to its antipode that avoids the vertices. It crosses each of the $n+1$ projective pseudolines an odd number of times, and since $n+1$ is odd, the total is odd. The antipode is the same projective face, with the same color, so the color changes an even number of times along the path, and the path crosses $Z$ an odd number of times.
+In $\mathbb{RP}^2$ the path becomes a non-contractible closed curve $\gamma$. Since all degrees in $Z$ are even, the segments of $Z$ split into closed curves. A contractible closed curve meets $\gamma$ an even number of times, so at least one of these curves is non-contractible.
+Only one component of $Z$ contains such curves: curves in different components are disjoint, while any two non-contractible closed curves in $\mathbb{RP}^2$ meet, like two projective lines.
+\end{proof}
+
+The proof uses the parity of $n$. For odd $n$ the conclusion fails: either there is no seam at all (perfect case) or the seam consists of the boundaries of the defects (see~\cite[Subsection~2.5]{pu26b}), and then it does not go around the projective plane.
+
+Thus the charged elements are not scattered arbitrarily over the arrangement: they lie on closed contours, and one of these contours goes around the projective plane.
+Even if no unused segments are left in the affine arrangement, as in \cref{fig:n10}, the seam does not disappear: in $\mathcal A^+$ it runs along the double segments of $\mathcal A$ and along the unused and double segments of $\mathcal A^+$ that lie on the former rays and on the line at infinity.
+The seam is a topological obstruction. It does not depend on $n$ being small or on the lack of room in the arrangement. Multiple points change the composition of the seam (see \eqref{eq:waste-eq}) but cannot destroy it.
+
+Unfortunately, $u$ and $d$ enter the ``length'' of the seam with the same sign, $|Z|=u^++d^+$, and \eqref{eq:waste-eq} with opposite signs. Therefore a lower bound on the length of the seam does not yield a bound on $w$. For the same reason, considerations of parity or of the checkerboard coloring do not help either: they do not distinguish $+d$ from $-d$. Moreover, the contribution of a multiple point is not determined by its neighborhood alone. It also depends on the neighborhoods of the opposite endpoints of the double segments. To prove the bound, one therefore has to pass from the statement ``the seam is unavoidable'' to the statement \eqref{eq:conj-waste} ``the waste is at least $n/2-1$''.
+
+Blanc's bound \eqref{eq:blanc-even} does not carry over to non-simple arrangements directly. His argument is a count over pseudolines in two stages, demand and sharing. Along a pseudoline with an odd number of vertices, the alternation of triangles cannot close up, so each pseudoline requires an adjacent unused segment~\cite[Proposition~2.3]{blanc11}. This is the demand. One segment serves at most two pseudolines, and this is the sharing. Multiple points break it in two ways. A pseudoline through triple points escapes the argument. At a triple point the alternation of triangles is thrown out of step, and an odd number of such points also changes the parity of the number of vertices, so the alternation is allowed to close up. A pseudoline free of triple points still has an odd number of vertices and still makes its demand, but the demand can be met from another source. Besides an adjacent unused bounded segment, as in Blanc's argument, it can be met by a double segment with one endpoint on the pseudoline and a triple point at the other (a ``simple leg'' of that triple point, see \cref{lem:simple-legs}). The demand is then met by the three units that the triple point contributes to \eqref{eq:waste-eq}. The arrangements of \cref{fig:n10} show the first mechanism in the limit: in each of them all ten lines pass through triple points, the demand disappears completely, and $u=0$.
+
+However, meeting the demand through $u$ or $d$ does not yield a bound on $w$. The reason is the same as for the length of the seam: double segments enter the demand with a plus sign and \eqref{eq:waste-eq} with a minus sign.
+
+We arrive at the following conclusions.
+In the even case, non-simple arrangements exceed the simple bound \eqref{eq:blanc-even} for arbitrarily large $n$ (\cref{sec:series}).
+The phase seam, which contains the support of the waste, is unavoidable for topological reasons.
+Every pseudoline free of triple points makes a demand for waste, and the demand is met by an unused segment or by the units of a triple point transferred through a double segment.
+What is missing for a proof is a quantitative statement of how much waste the triple points must transfer to the pseudolines with a demand and leave on the pseudolines through them.

@@ -1,0 +1,516 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{preamble}[2026/10/02 Preamble, derived from pseudoline-algorithms/preprint/arxiv_preamble.sty]
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{upquote}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage[expansion=false]{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{trimclip}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{etoolbox}
+
+% Gap between the title block (abstract) and the first section heading:
+% amsart sets it as \dimen@34\p@ minus \baselineskip in \@maketitle.
+\patchcmd{\@maketitle}{\dimen@34\p@}{\dimen@24\p@}{}{%
+  \PackageWarning{arxiv_preamble}{post-abstract skip patch failed}}
+
+\captionsetup[sub]{labelformat=parens, labelfont=normalfont, font=footnotesize}
+\renewcommand{\thesubfigure}{\alph{subfigure}}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{intersections,patterns,patterns.meta,arrows.meta,hobby}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\crefname{section}{Section}{Sections}
+\crefname{subsection}{Subsection}{Subsections}
+\crefname{appendix}{Appendix}{Appendices}
+\crefname{subappendix}{Appendix}{Appendices}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{problem}{Problem}{Problems}
+\crefname{definition}{Definition}{Definitions}
+\crefname{remark}{Remark}{Remarks}
+\crefname{observation}{Observation}{Observations}
+\crefname{figure}{Figure}{Figures}
+\crefname{table}{Table}{Tables}
+\crefname{equation}{Equation}{Equations}
+\crefname{conjecture}{Conjecture}{Conjectures}
+
+\hypersetup{
+  hidelinks,
+  pdftitle={Non-simple Arrangements of Lines and Pseudolines with Many Triangles},
+  pdfauthor={Roman Parpalak, Denis Utkin},
+  pdfcreator={LaTeX}
+}
+
+\numberwithin{equation}{section}
+
+\providecommand{\theoremname}{Theorem}
+\providecommand{\lemmaname}{Lemma}
+\providecommand{\corollaryname}{Corollary}
+\providecommand{\propositionname}{Proposition}
+\providecommand{\definitionname}{Definition}
+\providecommand{\conjecturename}{Conjecture}
+\providecommand{\remarkname}{Remark}
+\providecommand{\observationname}{Observation}
+\providecommand{\problemname}{Problem}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{\theoremname}[section]
+\newtheorem{proposition}[theorem]{\propositionname}
+\newtheorem{lemma}[theorem]{\lemmaname}
+\newtheorem{corollary}[theorem]{\corollaryname}
+\newtheorem{conjecture}[theorem]{\conjecturename}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{\definitionname}
+\newtheorem{problem}[theorem]{\problemname}
+\newtheorem{remark}[theorem]{\remarkname}
+\newtheorem{observation}[theorem]{\observationname}
+
+% Visible marker for unresolved items of the draft.
+\newcommand{\TODO}[1]{{\color{red}\textbf{TODO:} #1}}
+
+% Make \paragraph headings bold (amsart default is italic)
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}%
+  {\z@}{1.75ex \@plus 1ex \@minus .75ex}{-1em}%
+  {\normalfont\normalsize\bfseries}}
+
+\newcommand{\Sn}{S_n}
+\newcommand{\si}{\sigma_i}
+\newcommand{\K}{K}
+\newcommand{\wzero}{w_0}
+
+\tikzset{
+  pl/wire/.style={line width=0.4pt},
+  pl/wire highlight/.style={line width=0.9pt},
+  pl/wire descent/.style={line width=1.5pt},
+  pl/wire dots/.style={pl/wire, dash pattern=on 0.4pt off 3pt, line cap=round},
+  pl/region shaded/.style={fill=black!15,draw=none},
+  pl/region red/.style={fill=red!22,draw=none},
+  pl/region dots/.style={pattern=north east lines,pattern color=black!30,draw=none},
+  pl/generator even/.style={circle,fill=white,inner sep=0pt,font=\small},
+  pl/generator odd/.style={circle,fill=white,inner sep=0pt,font=\small},
+  pl/boundary label/.style={font=\small, outer sep=0pt},
+  pl/spec marker/.style={line width=0.5pt, dash pattern=on 1.2pt off 1pt}
+}
+
+\newcommand{\PL@set}[2]{\expandafter\xdef\csname #1\endcsname{#2}}
+\newcommand{\PL@appendpoint}[3]{%
+  \edef\PL@oldpath{\csname PL@path@#1\endcsname}%
+  \expandafter\xdef\csname PL@path@#1\endcsname{\PL@oldpath -- (#2,#3)}%
+}
+\newcommand{\PL@appendmove}[3]{%
+  \edef\PL@oldpath{\csname PL@path@#1\endcsname}%
+  \expandafter\xdef\csname PL@path@#1\endcsname{\PL@oldpath\space (#2,#3)}%
+}
+\newcommand{\PL@adddotseg}[5]{%
+  \edef\PL@olddpath{\csname PL@dotted@#1\endcsname}%
+  \expandafter\xdef\csname PL@dotted@#1\endcsname{\PL@olddpath\space (#2,#3) -- (#4,#5)}%
+}
+% Partial-highlight subpath for a wire, used by the wirefrom/N/C key.
+\newcommand{\PL@hstart}[3]{%
+  \expandafter\xdef\csname PL@hpath@#1\endcsname{(#2,#3)}%
+}
+\newcommand{\PL@happend}[3]{%
+  \edef\PL@oldh{\csname PL@hpath@#1\endcsname}%
+  \expandafter\xdef\csname PL@hpath@#1\endcsname{\PL@oldh\space -- (#2,#3)}%
+}
+
+% --- Red-region machinery ---
+% A cell is identified by (col, band, side):
+%   col  = 0 for the left stub, 1.. for generator columns (counting dots too);
+%   band = 0..n-2 (between levels band and band+1);
+%   side = F (full rect, no hit), L/R (triangles in odd hit band),
+%          T/B (triangles in even hit band).
+\def\PL@redkey#1#2#3{PL@red@#1@#2@#3}
+\newcommand{\PL@addredflag}[3]{%
+  \expandafter\xdef\csname \PL@redkey{#1}{#2}{#3}\endcsname{1}%
+  \xdef\PL@redlist{\PL@redlist,\PL@redkey{#1}{#2}{#3}}%
+}
+\def\PL@wirekw{wire}
+\def\PL@genkw{gen}
+\def\PL@speckw{spec}
+\def\PL@topkw{top}
+\def\PL@wfkw{wirefrom}
+\def\PL@parsered#1/#2/#3/#4\PL@nil{%
+  \def\PL@first{#1}%
+  \ifx\PL@first\PL@wirekw
+    \expandafter\xdef\csname PL@wire@#2\endcsname{1}%
+    \xdef\PL@redlist{\PL@redlist,PL@wire@#2}%
+  \else\ifx\PL@first\PL@genkw
+    \expandafter\xdef\csname PL@gen@#2@#3\endcsname{1}%
+    \xdef\PL@redlist{\PL@redlist,PL@gen@#2@#3}%
+  \else\ifx\PL@first\PL@speckw
+    \expandafter\xdef\csname PL@spec@#2@#3\endcsname{1}%
+    \xdef\PL@redlist{\PL@redlist,PL@spec@#2@#3}%
+  \else\ifx\PL@first\PL@topkw
+    \xdef\PL@topred{1}%
+    \xdef\PL@redlist{\PL@redlist,PL@topred}%
+  \else\ifx\PL@first\PL@wfkw
+    \expandafter\xdef\csname PL@dwire@#2\endcsname{#3}%
+    \xdef\PL@redlist{\PL@redlist,PL@dwire@#2}%
+    \xdef\PL@dwirelist{\PL@dwirelist,#2}%
+  \else
+    \def\PL@side{#3}%
+    \ifx\PL@side\@empty
+      \PL@addredflag{#1}{#2}{F}%
+      \PL@addredflag{#1}{#2}{L}%
+      \PL@addredflag{#1}{#2}{R}%
+      \PL@addredflag{#1}{#2}{T}%
+      \PL@addredflag{#1}{#2}{B}%
+    \else
+      \PL@addredflag{#1}{#2}{#3}%
+    \fi
+  \fi\fi\fi\fi\fi
+}
+\newcommand{\PL@settopstyle}{%
+  \expandafter\ifx\csname PL@topred\endcsname\relax
+    \def\PL@regstyle{pl/region shaded}%
+  \else
+    \def\PL@regstyle{pl/region red}%
+  \fi
+}
+\newcommand{\PL@setstyle}[3]{%
+  \expandafter\ifx\csname \PL@redkey{#1}{#2}{#3}\endcsname\relax
+    \def\PL@regstyle{pl/region shaded}%
+  \else
+    \def\PL@regstyle{pl/region red}%
+  \fi
+}
+
+\newcommand{\PseudolineWiringDiagram}[4][]{%
+  \begingroup
+  \def\PL@fill{0}%
+  \def\PL@noleft{0}%
+  \def\PL@noright{0}%
+  \def\PL@nolabels{0}%
+  \def\PL@optfill{fill}%
+  \def\PL@optnoleft{noleft}%
+  \def\PL@optnoright{noright}%
+  \def\PL@optnolabels{nolabels}%
+  \foreach \PL@opt in {#1} {%
+    \ifx\PL@opt\PL@optfill\xdef\PL@fill{1}\fi
+    \ifx\PL@opt\PL@optnoleft\xdef\PL@noleft{1}\fi
+    \ifx\PL@opt\PL@optnoright\xdef\PL@noright{1}\fi
+    \ifx\PL@opt\PL@optnolabels\xdef\PL@nolabels{1}\fi
+  }%
+  % Clear red-region flags from any previous invocation, then parse #4.
+  \@ifundefined{PL@redlist}{\xdef\PL@redlist{}}{}%
+  \@for\PL@cs:=\PL@redlist\do{%
+    \expandafter\global\expandafter\let\csname \PL@cs\endcsname\relax
+  }%
+  \xdef\PL@redlist{}%
+  \xdef\PL@dwirelist{}%
+  \foreach \PL@cell in {#4} {%
+    \expandafter\PL@parsered\PL@cell///\PL@nil
+  }%
+  \def\PL@dotsword{dots}%
+  \def\PL@stub{0.25}%
+  \def\PL@dotswidth{1.5}%
+  \pgfmathtruncatemacro{\PL@n}{#2}%
+  \pgfmathtruncatemacro{\PL@top}{#2-1}%
+  \def\PL@steps{0}%
+  \foreach \PL@i in {0,...,\PL@top} {%
+    \pgfmathtruncatemacro{\PL@y}{\PL@top-\PL@i}%
+    \PL@set{PL@level@\PL@i}{\PL@i}%
+    \PL@set{PL@path@\PL@i}{(0,\PL@y)}%
+    \PL@set{PL@dotted@\PL@i}{(0,\PL@y)}%
+    \ifnum\PL@noleft=0
+      % overlay + \path: the label reserves its width but not its height, so the
+      % bounding box ends at the outermost wire instead of half a label above it.
+      \node[left,pl/boundary label,overlay] (plblab) at (0,\PL@y) {$\PL@i$};%
+      \path (plblab.west |- 0,\PL@y);%
+    \fi
+  }%
+  \foreach \PL@i in {0,...,\PL@top} {%
+    \pgfmathtruncatemacro{\PL@y}{\PL@top-\PL@i}%
+    \PL@appendpoint{\PL@i}{\PL@stub}{\PL@y}%
+  }%
+  \xdef\PL@curx{\PL@stub}%
+  \xdef\PL@pcol{0}%
+  \foreach \PL@g in {#3} {%
+    \pgfmathtruncatemacro{\PL@pcoln}{\PL@pcol+1}\xdef\PL@pcol{\PL@pcoln}%
+    \ifx\PL@g\PL@dotsword
+      \pgfmathsetmacro{\PL@colstart}{\PL@curx}%
+      \pgfmathsetmacro{\PL@colend}{\PL@curx+\PL@dotswidth}%
+      \pgfmathsetmacro{\PL@xleft}{\PL@colstart+\PL@stub}%
+      \pgfmathsetmacro{\PL@xright}{\PL@colend-\PL@stub}%
+      \xdef\PL@curx{\PL@colend}%
+      \foreach \PL@level in {0,...,\PL@top} {%
+        \edef\PL@wire{\csname PL@level@\PL@level\endcsname}%
+        \pgfmathtruncatemacro{\PL@y}{\PL@top-\PL@level}%
+        \PL@appendpoint{\PL@wire}{\PL@xleft}{\PL@y}%
+        \PL@appendmove{\PL@wire}{\PL@xright}{\PL@y}%
+        \PL@appendpoint{\PL@wire}{\PL@colend}{\PL@y}%
+        \PL@adddotseg{\PL@wire}{\PL@xleft}{\PL@y}{\PL@xright}{\PL@y}%
+      }%
+    \else
+      \pgfmathsetmacro{\PL@colend}{\PL@curx+1}%
+      \xdef\PL@curx{\PL@colend}%
+      \foreach \PL@gi in \PL@g {%
+        \pgfmathtruncatemacro{\PL@gn}{\PL@gi}%
+        \pgfmathtruncatemacro{\PL@next}{\PL@gn+1}%
+        \edef\PL@wirea{\csname PL@level@\PL@gn\endcsname}%
+        \edef\PL@wireb{\csname PL@level@\PL@next\endcsname}%
+        \PL@set{PL@level@\PL@gn}{\PL@wireb}%
+        \PL@set{PL@level@\PL@next}{\PL@wirea}%
+      }%
+      \foreach \PL@level in {0,...,\PL@top} {%
+        \edef\PL@wire{\csname PL@level@\PL@level\endcsname}%
+        \pgfmathtruncatemacro{\PL@y}{\PL@top-\PL@level}%
+        \PL@appendpoint{\PL@wire}{\PL@colend}{\PL@y}%
+        \expandafter\ifx\csname PL@dwire@\PL@wire\endcsname\relax\else
+          \edef\PL@sc{\csname PL@dwire@\PL@wire\endcsname}%
+          \ifnum\PL@pcol<\PL@sc
+            \pgfmathtruncatemacro{\PL@scm}{\PL@sc-1}%
+            \ifnum\PL@pcol=\PL@scm\relax
+              \PL@hstart{\PL@wire}{\PL@colend}{\PL@y}%
+              \expandafter\xdef\csname PL@hlasty@\PL@wire\endcsname{\PL@y}%
+            \fi
+          \else
+            % Extend the highlight only while the wire keeps descending; once its
+            % height stops changing it has reached its final slot, so the tail
+            % ends at the last crossing and never turns horizontal.
+            \edef\PL@ly{\csname PL@hlasty@\PL@wire\endcsname}%
+            \ifnum\PL@y=\PL@ly\relax
+            \else
+              \PL@happend{\PL@wire}{\PL@colend}{\PL@y}%
+              \expandafter\xdef\csname PL@hlasty@\PL@wire\endcsname{\PL@y}%
+            \fi
+          \fi
+        \fi
+      }%
+    \fi
+  }%
+  \xdef\PL@finalx{\PL@curx}%
+  \pgfmathsetmacro{\PL@endx}{\PL@finalx+\PL@stub}%
+  \foreach \PL@level in {0,...,\PL@top} {%
+    \edef\PL@wire{\csname PL@level@\PL@level\endcsname}%
+    \pgfmathtruncatemacro{\PL@y}{\PL@top-\PL@level}%
+    \PL@appendpoint{\PL@wire}{\PL@endx}{\PL@y}%
+  }%
+  \ifnum\PL@fill=1\relax
+    \pgfmathsetmacro{\PL@exterior}{\PL@top+0.45}%
+    \pgfmathsetmacro{\PL@lowerexterior}{-0.45}%
+    \PL@settopstyle
+    \fill[\PL@regstyle] (0,\PL@exterior) rectangle (\PL@stub,\PL@top);
+    \pgfmathtruncatemacro{\PL@lastband}{\PL@top-1}%
+    \foreach \PL@band in {0,...,\PL@lastband} {%
+      \ifodd\PL@band
+        \pgfmathsetmacro{\PL@yupper}{\PL@top-\PL@band}%
+        \pgfmathsetmacro{\PL@ylower}{\PL@top-\PL@band-1}%
+        \PL@setstyle{0}{\PL@band}{F}%
+        \fill[\PL@regstyle] (0,\PL@yupper) rectangle (\PL@stub,\PL@ylower);
+      \fi
+    }%
+    \ifodd\PL@n
+    \else
+      \fill[pl/region shaded] (0,0) rectangle (\PL@stub,\PL@lowerexterior);
+    \fi
+    \xdef\PL@curx{\PL@stub}%
+    \xdef\PL@colidx{0}%
+    \foreach \PL@g in {#3} {%
+      \pgfmathtruncatemacro{\PL@col}{\PL@colidx+1}%
+      \xdef\PL@colidx{\PL@col}%
+      \ifx\PL@g\PL@dotsword
+        \pgfmathsetmacro{\PL@colstart}{\PL@curx}%
+        \pgfmathsetmacro{\PL@colend}{\PL@curx+\PL@dotswidth}%
+        \pgfmathsetmacro{\PL@dotsleft}{\PL@colstart+\PL@stub}%
+        \pgfmathsetmacro{\PL@dotsright}{\PL@colend-\PL@stub}%
+        \fill[pl/region shaded] (\PL@colstart,\PL@exterior) rectangle (\PL@dotsleft,\PL@top);
+        \fill[pl/region dots] (\PL@dotsleft,\PL@exterior) rectangle (\PL@dotsright,\PL@top);
+        \fill[pl/region shaded] (\PL@dotsright,\PL@exterior) rectangle (\PL@colend,\PL@top);
+        \foreach \PL@band in {0,...,\PL@lastband} {%
+          \pgfmathsetmacro{\PL@yupper}{\PL@top-\PL@band}%
+          \pgfmathsetmacro{\PL@ylower}{\PL@top-\PL@band-1}%
+          \ifodd\PL@band
+            \fill[pl/region shaded] (\PL@colstart,\PL@yupper) rectangle (\PL@dotsleft,\PL@ylower);
+            \fill[pl/region dots] (\PL@dotsleft,\PL@yupper) rectangle (\PL@dotsright,\PL@ylower);
+            \fill[pl/region shaded] (\PL@dotsright,\PL@yupper) rectangle (\PL@colend,\PL@ylower);
+          \else
+            \fill[pl/region dots] (\PL@dotsleft,\PL@yupper) rectangle (\PL@dotsright,\PL@ylower);
+          \fi
+        }%
+        \ifodd\PL@n
+        \else
+          \fill[pl/region shaded] (\PL@colstart,0) rectangle (\PL@dotsleft,\PL@lowerexterior);
+          \fill[pl/region dots] (\PL@dotsleft,0) rectangle (\PL@dotsright,\PL@lowerexterior);
+          \fill[pl/region shaded] (\PL@dotsright,0) rectangle (\PL@colend,\PL@lowerexterior);
+        \fi
+        \xdef\PL@curx{\PL@colend}%
+      \else
+      \pgfmathsetmacro{\PL@left}{\PL@curx}%
+      \pgfmathsetmacro{\PL@right}{\PL@curx+1}%
+      \pgfmathsetmacro{\PL@mid}{\PL@curx+0.5}%
+      \xdef\PL@curx{\PL@right}%
+      \pgfmathsetmacro{\PL@exterior}{\PL@top+0.45}%
+      \pgfmathsetmacro{\PL@lowerexterior}{-0.45}%
+      \xdef\PL@hitZero{0}%
+      \pgfmathtruncatemacro{\PL@bottomidx}{\PL@top-1}%
+      \xdef\PL@hitBottom{0}%
+      \foreach \PL@gi in \PL@g {%
+        \pgfmathtruncatemacro{\PL@gn}{\PL@gi}%
+        \ifnum\PL@gn=0\xdef\PL@hitZero{1}\fi
+        \ifnum\PL@gn=\PL@bottomidx\xdef\PL@hitBottom{1}\fi
+      }%
+      \PL@settopstyle
+      \ifnum\PL@hitZero=1
+        \pgfmathsetmacro{\PL@ymid}{\PL@top-0.5}%
+        \fill[\PL@regstyle]
+          (\PL@left,\PL@exterior) -- (\PL@right,\PL@exterior) --
+          (\PL@right,\PL@top) -- (\PL@mid,\PL@ymid) --
+          (\PL@left,\PL@top) -- cycle;
+      \else
+        \fill[\PL@regstyle]
+          (\PL@left,\PL@exterior) rectangle (\PL@right,\PL@top);
+      \fi
+      \ifodd\PL@n
+      \else
+        \ifnum\PL@hitBottom=1
+          \fill[pl/region shaded]
+            (\PL@left,0) -- (\PL@mid,0.5) -- (\PL@right,0) --
+            (\PL@right,\PL@lowerexterior) -- (\PL@left,\PL@lowerexterior) --
+            cycle;
+        \else
+          \fill[pl/region shaded]
+            (\PL@left,0) rectangle (\PL@right,\PL@lowerexterior);
+        \fi
+      \fi
+      \pgfmathtruncatemacro{\PL@lastband}{\PL@top-1}%
+      \foreach \PL@band in {0,...,\PL@lastband} {%
+        \pgfmathsetmacro{\PL@yupper}{\PL@top-\PL@band}%
+        \pgfmathsetmacro{\PL@ylower}{\PL@top-\PL@band-1}%
+        \pgfmathsetmacro{\PL@ymid}{(\PL@yupper+\PL@ylower)/2}%
+        \xdef\PL@hitBand{0}%
+        \foreach \PL@gi in \PL@g {%
+          \pgfmathtruncatemacro{\PL@gn}{\PL@gi}%
+          \ifnum\PL@gn=\PL@band\xdef\PL@hitBand{1}\fi
+        }%
+        \ifnum\PL@hitBand=1
+          \ifodd\PL@band
+            \PL@setstyle{\PL@col}{\PL@band}{L}%
+            \fill[\PL@regstyle]
+              (\PL@left,\PL@yupper) -- (\PL@mid,\PL@ymid) --
+              (\PL@left,\PL@ylower) -- cycle;
+            \PL@setstyle{\PL@col}{\PL@band}{R}%
+            \fill[\PL@regstyle]
+              (\PL@right,\PL@yupper) -- (\PL@mid,\PL@ymid) --
+              (\PL@right,\PL@ylower) -- cycle;
+          \else
+            \PL@setstyle{\PL@col}{\PL@band}{T}%
+            \fill[\PL@regstyle]
+              (\PL@left,\PL@yupper) -- (\PL@mid,\PL@ymid) --
+              (\PL@right,\PL@yupper) -- cycle;
+            \PL@setstyle{\PL@col}{\PL@band}{B}%
+            \fill[\PL@regstyle]
+              (\PL@left,\PL@ylower) -- (\PL@mid,\PL@ymid) --
+              (\PL@right,\PL@ylower) -- cycle;
+          \fi
+        \else
+          \ifodd\PL@band
+              \PL@setstyle{\PL@col}{\PL@band}{F}%
+              \fill[\PL@regstyle]
+                (\PL@left,\PL@yupper) rectangle (\PL@right,\PL@ylower);
+          \fi
+        \fi
+      }%
+      \fi
+    }%
+    \pgfmathsetmacro{\PL@endstub}{\PL@finalx}%
+    \PL@settopstyle
+    \fill[\PL@regstyle] (\PL@endstub,\PL@exterior) rectangle (\PL@endx,\PL@top);
+    \pgfmathtruncatemacro{\PL@lastband}{\PL@top-1}%
+    \foreach \PL@band in {0,...,\PL@lastband} {%
+      \ifodd\PL@band
+        \pgfmathsetmacro{\PL@yupper}{\PL@top-\PL@band}%
+        \pgfmathsetmacro{\PL@ylower}{\PL@top-\PL@band-1}%
+        \PL@setstyle{end}{\PL@band}{F}%
+        \fill[\PL@regstyle] (\PL@endstub,\PL@yupper) rectangle (\PL@endx,\PL@ylower);
+      \fi
+    }%
+    \ifodd\PL@n
+    \else
+      \fill[pl/region shaded] (\PL@endstub,0) rectangle (\PL@endx,\PL@lowerexterior);
+    \fi
+  \fi
+  \foreach \PL@i in {0,...,\PL@top} {%
+    \expandafter\ifx\csname PL@wire@\PL@i\endcsname\relax
+      \def\PL@wstyle{pl/wire}%
+    \else
+      \def\PL@wstyle{pl/wire highlight}%
+    \fi
+    \draw[\PL@wstyle, rounded corners=0.05cm] \csname PL@path@\PL@i\endcsname;%
+  }%
+  \foreach \PL@w in \PL@dwirelist {%
+    \expandafter\ifx\csname PL@hpath@\PL@w\endcsname\relax\else
+      \draw[pl/wire descent, rounded corners=0.05cm]
+        \csname PL@hpath@\PL@w\endcsname;%
+    \fi
+  }%
+  \xdef\PL@curx{\PL@stub}%
+  \xdef\PL@colidx{0}%
+  \foreach \PL@g in {#3} {%
+    \pgfmathtruncatemacro{\PL@col}{\PL@colidx+1}%
+    \xdef\PL@colidx{\PL@col}%
+    \ifx\PL@g\PL@dotsword
+      \pgfmathsetmacro{\PL@colend}{\PL@curx+\PL@dotswidth}%
+      \xdef\PL@curx{\PL@colend}%
+    \else
+      \pgfmathsetmacro{\PL@xpos}{\PL@curx+0.5}%
+      \pgfmathsetmacro{\PL@colend}{\PL@curx+1}%
+      \xdef\PL@curx{\PL@colend}%
+      \foreach \PL@gi in \PL@g {%
+        \pgfmathtruncatemacro{\PL@gn}{\PL@gi}%
+        \pgfmathsetmacro{\PL@ypos}{\PL@top-\PL@gn-0.5}%
+        \def\PL@drawlabel{1}%
+        \ifnum\PL@nolabels=1
+          \expandafter\ifx\csname PL@gen@\PL@col @\PL@gn\endcsname\relax
+            \def\PL@drawlabel{0}%
+          \fi
+        \fi
+        \ifnum\PL@drawlabel=1
+        \ifodd\PL@gn
+          \node[pl/generator odd] at (\PL@xpos,\PL@ypos) {$\sigma_{\PL@gn}$};%
+        \else
+          \node[pl/generator even] at (\PL@xpos,\PL@ypos) {$\sigma_{\PL@gn}$};%
+        \fi
+        \fi
+      }%
+      \pgfmathtruncatemacro{\PL@maxg}{\PL@top-1}%
+      \foreach \PL@sgn in {0,...,\PL@maxg} {%
+        \expandafter\ifx\csname PL@spec@\PL@col @\PL@sgn\endcsname\relax
+        \else
+          \pgfmathsetmacro{\PL@sypos}{\PL@top-\PL@sgn-0.5}%
+          \draw[pl/spec marker]
+            (\PL@xpos-0.45,\PL@sypos-0.45) -- (\PL@xpos+0.45,\PL@sypos+0.45);
+          \draw[pl/spec marker]
+            (\PL@xpos-0.45,\PL@sypos+0.45) -- (\PL@xpos+0.45,\PL@sypos-0.45);
+        \fi
+      }%
+    \fi
+  }%
+  \ifnum\PL@noright=0
+    \foreach \PL@level in {0,...,\PL@top} {%
+      \edef\PL@wire{\csname PL@level@\PL@level\endcsname}%
+      \pgfmathtruncatemacro{\PL@y}{\PL@top-\PL@level}%
+      \node[right,pl/boundary label,overlay] (plblab) at (\PL@endx,\PL@y) {$\PL@wire$};%
+      \path (plblab.east |- 0,\PL@y);%
+    }%
+  \fi
+  \endgroup
+}

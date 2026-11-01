@@ -1,0 +1,43 @@
+
+\definecolor{phaseA-tri}{HTML}{305753}
+\definecolor{phaseA-tri-ext}{HTML}{A0BBB8}
+\definecolor{phaseA-face}{HTML}{F1FFFD}
+\definecolor{phaseB-tri}{HTML}{D68E8A}
+\definecolor{phaseB-tri-ext}{HTML}{EEC2BF}
+\definecolor{phaseB-face}{HTML}{F9E3E2}
+\colorlet{seam-edge}{black}
+\colorlet{seam-d}{black}
+\colorlet{seam-u}{black}
+\colorlet{seam-gap}{white}
+\colorlet{plane-line}{black}
+
+\definecolor{r-line}{HTML}{BF3B3F}
+\tikzset{
+  oldline/.style={line width=.3pt, black},
+  newline/.style={line width=.3pt, black},
+  rline/.style={line width=1.3pt, r-line, dash pattern=on 4pt off 2pt},
+  face/.style={fill=gray!20},
+  rface/.style={pattern={Lines[angle=-45, distance=5pt, line width=1.8pt]}, pattern color=phaseA-tri-ext},
+  starpt/.style={fill=black},
+  lbl/.style={font=\scriptsize, inner sep=1.4pt},
+  rimlbl/.style={font=\small, inner sep=2pt},
+  starlbl/.style={font=\small, inner sep=3pt},
+}
+
+\tikzset{
+  g-b-int-s3/.style={fill=phaseA-tri},
+  g-b-ext-s3/.style={fill=phaseA-tri-ext},
+  g-w/.style={fill=phaseA-face},
+  g-s4-w/.style={fill=phaseA-face},
+  g-int-s3-w/.style={fill=phaseB-tri},
+  g-ext-s3-w/.style={fill=phaseB-tri-ext},
+  g-b-int/.style={fill=phaseB-face},
+  g-b-ext/.style={fill=phaseB-face},
+  g-b-int-s4/.style={fill=phaseB-face},
+  g-b-ext-s4/.style={fill=phaseB-face},
+}
+
+\tikzset{
+  zoom-mark/.style={draw=black, line width=0.5pt},
+  zoom-frame/.style={draw=black, line width=0.5pt},
+}

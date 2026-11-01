@@ -1,0 +1,77 @@
+\section{Introduction}\label{sec:intro}
+
+\subsection{Background}
+
+Line and pseudoline arrangements with many triangular faces have been studied by several authors. In the affine setting this is the Kobon triangle problem~\cite{fujimura78,a006066}, which asks for the maximum number of triangular faces determined by $n$ lines in the plane. A brief survey of the literature and the basic notions is given in our previous paper~\cite{pu26b}, which deals with enumeration and classification algorithms for triangle-maximal affine arrangements of an odd number of pseudolines. There we also proved that the enumeration algorithms miss no arrangements, obtained the exhaustive enumeration for $n=27$ pseudolines, and found examples up to $n=93$.
+
+The even case turned out to be harder: its arrangements have a more complicated structure, and, unlike in the odd case, no known upper bound for arbitrary arrangements matches the known examples for any $n\ge6$. Consider the bounds first. Roudneff~\cite{roudneff96} proved that the number $p_3$ of triangles in a projective arrangement $\mathcal{A}$ of $N$ pseudolines satisfies
+\begin{equation}\label{eq:p3-bound}
+p_3(\mathcal{A})\le\left\lfloor\frac{N(N-1)}{3}\right\rfloor,\qquad N\ge 9.
+\end{equation}
+
+Felsner and Kriegel claim that the proof can be adapted to the affine case~\cite[Theorem~2(3)]{fk99}. This gives a bound on the number $a_3$ of triangles in an affine arrangement $\mathcal{A}$ of $n$ pseudolines:
+\begin{equation}\label{eq:a3-bound}
+a_3(\mathcal{A})\le\left\lfloor\frac{n(n-2)}{3}\right\rfloor.
+\end{equation}
+
+Both bounds are stated for arbitrary pseudoline arrangements. For \emph{simple} arrangements, which have no point where three or more pseudolines cross (\emph{multiple points}), \eqref{eq:a3-bound} follows from an elementary segment count~\cite[Subsection~2.3]{pu26b}. The other $n-1$ pseudolines cut each pseudoline into $n-2$ bounded segments, and each segment is a side of at most one triangle. Let $u(\mathcal A)$ be the number of \emph{unused segments}, which are sides of no triangle. Counting all segments gives
+\begin{equation}\label{eq:simple-segm}
+3a_3(\mathcal{A})+u(\mathcal{A})=n(n-2),
+\end{equation}
+which implies \eqref{eq:a3-bound}.
+
+For odd $n$, some simple arrangements have no unused segments and attain \eqref{eq:a3-bound} without rounding. Such arrangements are called \emph{perfect}.
+By divisibility, they can exist only for $n\equiv 3,5\pmod 6$.
+Their triangles alternate along every pseudoline, and the alternation is consistent across the whole arrangement: in a checkerboard coloring, all triangles are black and all other faces are white~\cite[Lemma~2.2]{pu26b}.
+
+In a simple arrangement with even $n$, the alternation cannot propagate: for every pseudoline $\ell$, some other pseudoline has an unused segment with an endpoint on $\ell$~\cite[Proposition~2.3]{blanc11}. Each such segment serves at most two pseudolines, so $u\ge n/2$. This gives Blanc's bound~\cite[Corollary~2.4]{blanc11}:
+\begin{equation}\label{eq:blanc-even}
+a_{3}(\mathcal{A}_\text{simple})\le\left\lfloor\dfrac{n\left(n - \frac52\right)}{3}\right\rfloor=\begin{cases}
+\dfrac{n\left(n - \frac52\right)}{3}, & n\equiv0,4\pmod 6 \\
+\dfrac{n\left(n - \frac52\right) - 2}{3}. &  n\equiv2\pmod 6
+\end{cases}
+\end{equation}
+Compared with \eqref{eq:a3-bound}, the bound \eqref{eq:blanc-even} loses $n/6$ triangles, up to rounding, to the $n/2$ unavoidable unused segments.
+
+In the even case, however, one can no longer restrict attention to simple arrangements.
+Two examples were already known in which multiple points yield an extra triangle.
+The arrangement of $n=8$ lines in \cref{fig:seed} has 15 triangles, while \eqref{eq:blanc-even} allows only 14.
+For $n=12$, an arrangement found by Kabanovich~\cite{khodulev99} attains \eqref{eq:blanc-even} with 38 triangles, although no simple arrangement has 38 triangles (see \cref{tab:triple-points}).
+We found a third example, $n=14$ with 54 triangles, and it was the starting point of this work. Maiorana~\cite{maiorana26} found it independently while this paper was in preparation.
+Still, none of these examples attains the general bound \eqref{eq:a3-bound}, and the literature gives no intermediate bound for non-simple arrangements.
+
+Thus in the even case triangles cannot be packed with the unbroken alternation of perfect arrangements: parity or multiple points break it.
+The breaks are reflected in the gap between \eqref{eq:a3-bound} and the known examples, which grows with $n$.
+They also affect the computer search: in the perfect case a branch can be discarded at the first break of the alternation, whereas in the even case the search has to work with a budget on the number of triangles (cf.~\cite[Section~3]{pu26b}).
+
+A further difficulty of the even case is that the known infinite series of even line arrangements are obtained from odd ones~\cite{for,bbl} by adding a line far from all intersection points~\cite{bbl,blanc11,savchuk25}, and they do not exceed \eqref{eq:blanc-even}. No construction was previously known that takes an even arrangement as input. The known odd series are $2\cdot2^t+1$, $6\cdot2^t+1$, $14\cdot2^t+1$~\cite{bbl} and $18\cdot2^t+1$, which we found earlier~\cite{pu26}. Iterative doubling~\cite{bbl}, on which these series are based, takes a suitable arrangement of an odd number $n$ of lines and produces an arrangement of $2n-1$ lines.
+
+\subsection{Overview of results}
+
+This paper is concerned with maximizing the number $a_{3}(\mathcal{A})$ of triangular faces in the even case, over simple and non-simple affine arrangements of pseudolines and of straight lines.
+
+We adapt iterative doubling to an even number of lines and apply it to an arrangement of $n=8$ lines. The adaptation temporarily removes one line, applies doubling as many times as needed, and puts the line back. This procedure gives an infinite series of arrangements $\mathcal{C}_t$ of $n=6\cdot2^t+2$ lines with one triangle more than \eqref{eq:blanc-even} allows:
+\[
+a_3(\mathcal{C}_t)=\frac{n\left(n-\frac52\right)+1}{3}
+=\frac{n\left(n-\frac52\right)-2}{3}+1.
+\]
+The series contains arrangements of $n=8$, $14$, $26$, $50,\ldots$ lines with $a_3=15$, $54$, $204$, $792,\ldots$ triangles. This series (\cref{thm:series}, proved in \cref{sec:series}) constitutes the main part of our results.
+
+\Cref{sec:enum} describes a computer search for pseudoline arrangements, possibly with multiple points. Its results include exhaustive enumerations for $n=6, 8, 10, 12$ and a proof that no arrangement of $n=14$ pseudolines has $a_3>54$. This verifies that the maximum numbers of triangles for these $n$ are 7, 15, 25, 38, 54. The result extends to straight lines: these maxima are attained by the line arrangements mentioned above and by other known ones. We also checked that no arrangement of $n=11$ pseudolines has $a_3=33$, simple or not.
+
+\Cref{sec:augment} describes augmentation, which produces arrangements of an even number of pseudolines from odd ones.
+Augmenting perfect arrangements of $n-1$ pseudolines gives arrangements that attain \eqref{eq:blanc-even} for $n\equiv0,4\pmod 6$.
+For $n\equiv2\pmod 6$, augmentation can exceed \eqref{eq:blanc-even} by one, like the series above. We found such augmentations for $n=8,14,20,26,32,38,44$.
+
+We found realizations by straight lines of all arrangements, up to isomorphism, given by the exhaustive enumerations of \cref{sec:enum} for even $n$, except two arrangements of $n=10$ pseudolines. These two are not stretchable (verified by the method of biquadratic final polynomials~\cite{br90}). Line realizations of augmented arrangements (\cref{sec:augment}) of $n=20$ and $n=32$ pseudolines with 117 and 315 triangles were found as well. All these line arrangements are collected in \cref{app:figures}.
+
+We also applied the doubling of \cref{sec:series} to pseudolines. Starting from the augmented arrangements with $n=20$ and $n=32$ (\cref{fig:n20-collapse,fig:n32}), we obtained the members with $t\le3$ of the pseudoline series $18\cdot2^t+2$ and $30\cdot2^t+2$, up to $n=146$ and $n=242$. Each of them exceeds \eqref{eq:blanc-even} by one. The members with $n=38$ and $n=74$, with 450 and 1764 triangles, are also realizable by straight lines (\cref{fig:n38,tab:n74-lines}).
+
+These results lead us to conjecture that every arrangement of an even number $n$ of pseudolines satisfies
+\begin{equation}\label{eq:conj-bound}
+a_{3}\le\left\lfloor\dfrac{n(n - 2)}{3}\right\rfloor-\left\lfloor\dfrac{n}{6}\right\rfloor=\begin{cases}
+\dfrac{n(n - \frac52)}{3}, & n\equiv0,4\pmod 6 \\
+\dfrac{n(n - \frac52) + 1}{3}. &  n\equiv2\pmod 6
+\end{cases}
+\end{equation}
+\Cref{sec:discussion} discusses the results and the conjecture.

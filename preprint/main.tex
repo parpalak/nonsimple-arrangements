@@ -1,0 +1,64 @@
+\documentclass[oneside,reqno]{amsart}
+
+\usepackage{preamble}
+\input{figures/tikz-styles}
+\graphicspath{{figures/}}
+
+\title[Non-simple Arrangements with Many Triangles]{Non-simple Arrangements of Lines\\ and Pseudolines with Many Triangles}
+\author{Roman Parpalak}
+\author{Denis Utkin}
+\thanks{Email: \texttt{roman@parpalak.com} (R.\,Parpalak),
+  \texttt{ud1@mail.ru} (D.\,Utkin).}
+\date{November 2, 2026}
+
+\begin{document}
+
+\begin{abstract}
+We study affine arrangements of an even number $n$ of lines and pseudolines with many
+triangles. For simple ones, Blanc's bound limits the number of triangular faces
+to $\lfloor n(n-5/2)/3\rfloor$.
+Adapting the Bartholdi--Blanc--Loisel doubling to the even case, we construct
+an infinite series of arrangements of $n=6\cdot2^t+2$ ($8,14,26,50,\ldots$) straight lines with two
+triple points and $(n(n-5/2)+1)/3$ triangles, one more than the simple bound
+allows.
+
+We obtain exhaustive enumerations of triangle-maximal pseudoline
+arrangements, simple or not, for even $n\le12$. For $n=6,8,10,12,14$ the maximum
+number of triangles, for both lines and pseudolines, is $7,15,25,38,54$; for
+$n=8,12,14$ every optimal arrangement has multiple points. All optimal arrangements
+for even $n\le12$ are realizable by straight lines, except two arrangements of 10
+pseudolines, which are not stretchable. For the odd value $n=11$, no
+arrangement with $33$ triangles exists even with multiple points.
+
+We also obtain even arrangements by adding a line to odd ones. For
+$n\equiv2\pmod 6$ this again gives one triangle more than the simple bound, in
+pseudolines up to $n=44$ and in straight lines for $n=20$ and $n=32$.
+Doubling these pseudoline arrangements gives members of the series
+$18\cdot2^t+2$ and $30\cdot2^t+2$ with the same excess, up to $n=146$ and
+$n=242$, respectively; those with $n=38$ and $n=74$ are realizable by straight lines.
+
+These results lead us to conjecture that an arrangement of an even number $n$
+of pseudolines has at most $\lfloor n(n-2)/3\rfloor-\lfloor n/6\rfloor$
+triangles.
+\end{abstract}
+
+\maketitle
+
+\input{sections/1-introduction}
+\input{sections/2-doubling}
+\input{sections/3-enumeration}
+\input{sections/4-augmentation}
+\input{sections/5-discussion}
+
+\appendix
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\input{appendix/a-seed-orders}
+\input{appendix/b-figures}
+\input{appendix/c-prunings}
+
+\clearpage
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}

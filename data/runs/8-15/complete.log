@@ -1,0 +1,2 @@
+multenum n=8 K>=15 zone=all flags=default
+DONE n=8 K>=15 zone=all flags=default: nodes=8321398 words=32 time=0s doom-cuts=3228332

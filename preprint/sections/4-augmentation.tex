@@ -1,0 +1,141 @@
+\section{Augmenting odd arrangements}\label{sec:augment}
+
+We continue with ways to obtain arrangements of an even number of pseudolines, now by adding one pseudoline to a triangle-maximal odd arrangement.
+
+\subsection{Augmentation by an outermost line}
+
+Even arrangements of straight lines with the largest known number of triangles are often obtained by adding one line that passes far from all intersection points~\cite{bbl,blanc11,savchuk25}. We call such a line \emph{outermost}. A perfect arrangement of $n$ lines, $n\equiv3,5\pmod 6$, has $n(n-2)/3$ triangles and $n$ external digons~\cite[Lemma~2.3]{pu26b}.
+The outermost line crosses both sides of $(n-1)/2$ external digons and cuts off a new triangle from each of them (see \cref{fig:outermost} for pseudolines).
+The new simple arrangement $\mathcal{A}$ of $N=n+1$ lines therefore has
+\[
+a_3(\mathcal{A})=\frac{n(n-2)}3+\frac{n-1}2=\frac{N(2N-5)}6
+\]
+triangles, so it attains the bound \eqref{eq:blanc-even}.
+
+\begin{figure}[H]
+\centering
+\tikzset{every picture/.append style={yscale=0.71}}
+\begin{minipage}{0.85\linewidth}
+\input{figures/9+outermost}
+\end{minipage}
+\caption{A perfect arrangement of 9 pseudolines, labeled 0 to 8, and the outermost pseudoline 9 (dashed).
+The resulting arrangement of 10 pseudolines has $a_3=25$ triangles.}
+\label{fig:outermost}
+\end{figure}
+
+\subsection{Augmentation patterns for multiple points}\label{sec:augment-patterns}
+
+For $n\equiv1\pmod 6$ there are no perfect arrangements. Here the triangle-maximal arrangements belong to the wider family of \emph{2-defective arrangements}. This family can be introduced as follows. Pass to the projective closure by adding the line at infinity. It consists of an even number $n+1$ of pseudolines, so its faces admit a checkerboard coloring, in which faces sharing a side get different colors. Call black the color of at least half of the faces. The black faces are the same for all affine charts of the projective arrangement, whichever of its pseudolines is sent to infinity. The non-triangular projective black faces are called \emph{defects}. For $n\equiv1\pmod 6$ the number of black faces is maximal precisely when there are either two quadrilateral defects or one pentagonal defect; such arrangements are called \emph{2-defective}~\cite[Lemma~2.7 and Definition~2.8]{pu26b}. An affine arrangement is triangle-maximal if and only if it is 2-defective and all its defects are external (unbounded)~\cite[Lemma~2.9]{pu26b}.
+
+We now consider how 2-defective arrangements can be augmented.
+An outermost line can still be added~\cite[Proposition~5.1]{blanc11}, but its position must be chosen so that it does not cross both unbounded sides of an external defect. Otherwise it cuts off fewer than $(n-1)/2$ new triangles. The result is again a simple arrangement, and the same bound \eqref{eq:blanc-even} holds for it.
+We found two augmentation patterns for 2-defective arrangements that can exceed this bound.
+
+In the first pattern, which we call \emph{direct augmentation}, the new pseudoline is drawn directly through the original 2-defective arrangement (\cref{fig:direct}). It must cut off triangles from both quadrilateral defects and close up through other sides and vertices. After a possible change of affine chart, the number of triangles can reach the value given by \eqref{eq:conj-bound}.
+
+\begin{figure}[p]
+\centering
+\tikzset{every picture/.append style={yscale=0.86}}
+%\tikzset{every picture/.append style={execute at end picture={\draw[red,thin] (current bounding box.south west) rectangle (current bounding box.north east);}}}% DEBUG: picture frame
+\captionsetup[sub]{skip=-8pt}% gap between the picture frame and the caption; may be negative
+\begin{subfigure}[b]{0.75\linewidth}
+\centering
+\input{figures/13-before-augmentation}
+\caption{}
+\end{subfigure}
+
+\vspace{2\bigskipamount}
+\begin{subfigure}[b]{0.75\linewidth}
+\centering
+\input{figures/14-augmented}
+\caption{}
+\end{subfigure}
+\caption{Direct augmentation. (a) A 2-defective arrangement of 13 pseudolines, labeled 0 to 12, with defects $F$, $F'$. The new pseudoline 13 is added to it (dashed). The pseudolines are not relabeled, so their labels are not in order at infinity. (b) The arrangement after a change of affine chart. Pseudoline 12 has moved to infinity. It contained sides of both defects, so both of them have become external. The former line at infinity, labeled $\infty$, has become affine. In this affine chart the arrangement has $a_3=54$ triangles.}
+\label{fig:direct}
+\end{figure}
+
+In the second pattern, \emph{collapse augmentation}, two particular triangles are first collapsed into triple points, and then the new pseudoline is drawn. This pattern needs an original arrangement in which the two defects $F$ and $F'$ share a vertex (\cref{fig:collapse}), and one of the two white faces at this vertex is a quadrilateral $Q$. In addition, the defect $F$ must share a side with a white pentagon $P$. The two triangles with vertices at the endpoints of the common side of $F$ and $P$ are collapsed into triple points. The pentagon $P$ and the quadrilateral $Q$ then become triangles. The total number of triangles does not change yet: two disappear and two appear. However, the triple point between $P$ and $Q$ is now surrounded by four triangles and is already reduced. The second triple point is surrounded by only three triangles. The new pseudoline must cut off a fourth triangle from the non-triangular face at the second triple point, so that this point becomes reduced as well. Otherwise, by \cref{lem:perturbation}, this triple point gives no advantage.
+
+\begin{figure}[p]
+\centering
+\tikzset{every picture/.append style={yscale=0.9}}
+\captionsetup[sub]{skip=-8pt}% gap between the picture frame and the label; may be negative
+\begin{subfigure}[c]{0.64\linewidth}
+\centering
+\input{figures/13-before-collapse}
+\caption{}
+\end{subfigure}\hfill
+\begin{subfigure}[c]{0.35\linewidth}% a third of the width of (a): the same scale
+\centering
+% Lower left cell of a 3x3 grid: a picture as wide as (a), clipped by 2/3 on the right and at the top.
+\clipbox{0pt 0pt {0.65\width} {0.6\height}}{\begin{minipage}[b]{2.5\linewidth}\input{figures/13-after-collapse}\end{minipage}}
+\caption{}
+\end{subfigure}
+
+\bigskip
+\begin{subfigure}[b]{0.64\linewidth}
+\centering
+\input{figures/13+1-after-collapse}
+\caption{}
+\end{subfigure}
+\caption{Collapse augmentation. (a) The original arrangement. $F$ and $F'$ are the internal and the external defect. Next to them are the white quadrilateral $Q$ and the pentagon $P$. (b) The triangles with vertices at the endpoints of the common side of $P$ and $F$ are collapsed into triple points. Then $P$ and $Q$ become triangles. The common triple point of $P$ and $Q$ is already surrounded by four triangles, and the other triple point by only three. The third of these triangles is projective, bounded by pseudolines $3,4,\infty$. (c) Pseudoline 13 is added so that the second triple point gets a fourth triangle, bounded by pseudolines $1,3,13$. The resulting arrangement of 14 pseudolines has $a_3=54$ triangles and a third triple point.}
+\label{fig:collapse}
+\end{figure}
+
+\subsection{Augmentation algorithm}
+
+We wrote a program that adds one pseudoline to an arrangement in all possible ways to reach $a_3\ge K$ for a given $K$, by default \eqref{eq:conj-bound}. The source code and the output words are published in the repository~\cite{nonsimple-arrangements}. The new pseudoline follows a route through the faces of the projective closure and crosses each pseudoline once. It leaves a face through a side or through a simple vertex, which then becomes a triple point.
+Working in the projective closure lets the program treat external defects as quadrilaterals, as both patterns require.
+
+Augmentation patterns restrict the routes. For direct augmentation, the route must pass through a defect. For collapse augmentation, the program first finds suitable triangles to turn into triple points, and the route must cut off a triangle at the triple point surrounded by three triangles. If there are no quadrilateral defects, all routes are searched, including the outermost line.
+The search has two stages. A dynamic program over the faces bounds from above, for every affine chart simultaneously, the number of triangles that a route can give. Then a depth-first search enumerates the routes, pruned by this bound.
+
+After the new pseudoline has been drawn, the program tests all affine charts (that is, all choices of the pseudoline of the projective arrangement that goes to infinity) and looks for one in which $a_3\ge K$.
+If the pseudoline sent to infinity passes through a triple point, the other two pseudolines of the point do not cross in the affine chart, like parallel lines. Such charts are allowed.
+
+Because of the projective nature of the computations, it is enough to take as input one representative of each projective equivalence class ($P$-class,~\cite[Definition~5.8]{pu26b}), not all affine arrangements with an odd number of pseudolines.
+For every input and every route found, the program emits one word, in an affine chart where $a_3\ge K$.
+
+\subsection{Computational results}
+
+In~\cite{pu26b} we obtained exhaustive enumerations of 2-defective arrangements for $n\equiv1\pmod 6$ with $n=7,13,19$, and of perfect arrangements for $n\le27$. As input we took the representatives of their $P$-classes~\cite[Subsection~7.2]{pu26b}. The results for 2-defective inputs are summarized in \cref{tab:augmentation}.
+
+\begin{table}[tb]
+\centering
+\caption{Augmentation of 2-defective arrangements, by $P$-classes. The target $a_3$ is the bound \eqref{eq:conj-bound}; an input is productive if at least one of its augmentations reaches it.}
+\label{tab:augmentation}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+ & & & \multicolumn{3}{c}{productive inputs} & \multicolumn{3}{c}{output $P$-classes} \\
+\cmidrule(lr){4-6}\cmidrule(lr){7-9}
+$n\to N$ & $a_3$ & inputs & direct & collapse & total & direct & collapse & total \\
+\midrule
+$7\to8$   & 15  & 1    & 1  & 1  & 1   & 1   & 1   & 1   \\
+$13\to14$ & 54  & 6    & 3  & 2  & 4   & 10  & 4   & 14  \\
+$19\to20$ & 117 & 1312 & 64 & 75 & 137 & 275 & 168 & 443 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At $n=7$ the single input class is productive under both patterns, and they give the same output $P$-class.
+At $n=13$ one of the four productive input classes is productive under both patterns, and at $n=19$ two of the 137.
+At $N=14,20$ the patterns share no output class: each of the 14 output classes at $N=14$ and each of the 443 at $N=20$ comes from exactly one input class by exactly one pattern.
+For many input arrangements, the program finds no route that reaches \eqref{eq:conj-bound}.\footnote{Consider direct augmentation.
+To exceed \eqref{eq:blanc-even}, the new pseudoline must pass through vertices of the original arrangement, which are all simple, so it creates triple points.
+At least one of them must be reduced: otherwise, by \cref{lem:perturbation}, the triple points can be removed without losing triangles, and the result is a simple arrangement.
+A reduced triple point is an endpoint of double segments (\cref{sec:segment-count}). Unused and double segments form the phase seam, which contains a closed curve that is non-contractible in $\mathbb{RP}^2$ (\cref{lem:seam}; \cref{fig:phase-seam} shows it for an arrangement obtained by direct augmentation).
+The local coloring differs from the checkerboard coloring of the original arrangement only in the faces cut by the new pseudoline, so the seam lies within these faces and runs along the new pseudoline, which is non-contractible as well.
+% The reduced triple points lie on both.
+We expect the criterion for reaching \eqref{eq:conj-bound} to lie in the relative position of these two curves, but we have not found it.}
+For larger $n$, augmentation also reaches \eqref{eq:conj-bound}: we found examples at $n=25,31,37,43$~\cite{nonsimple-arrangements}.
+
+As mentioned above, a 2-defective arrangement may contain one pentagonal defect. Such arrangements first appear at $n=25$. For all 2324 $P$-classes of such arrangements of 25 pseudolines, the program finds no augmentation reaching \eqref{eq:conj-bound}.
+
+Applied to perfect arrangements, the program produces simple and non-simple arrangements, but none exceeds \eqref{eq:blanc-even}: multiple points give no advantage there.
+
+Both augmentation patterns work for pseudolines and do not guarantee stretchability.
+We stretched all 14 augmented $P$-classes for $N=14$, 353 of the 443 for $N=20$, and 25 for $N=32$; they are published in the online gallery~\cite{gallery}.
+Some of them contain a pair of parallel lines; a small rotation of one line of the pair  makes them cross without decreasing the number of triangles.
+Examples are shown in \cref{fig:n20,fig:n20-collapse,fig:n32}, and an arrangement of 44 pseudolines in \cref{fig:n44}.
+
+Augmentation does not produce all known optima. A new pseudoline added to 9 pseudolines creates at most 4 triple points, and collapse adds at most 2, so the arrangements with $N=10$ and 10 triple points (\cref{fig:n10}) cannot be obtained this way. For $N=12$, there is no perfect arrangement of 11 pseudolines, and for the optimal arrangements of 11 pseudolines the program finds no augmentation reaching \eqref{eq:conj-bound}; all optima for $N=12$ are non-simple (\cref{tab:triple-points}).

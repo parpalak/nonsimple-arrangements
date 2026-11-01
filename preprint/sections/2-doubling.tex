@@ -1,0 +1,692 @@
+\section{An infinite series of arrangements of \texorpdfstring{$6\cdot2^t+2$}{6·2ᵗ + 2} straight lines}\label{sec:series}
+
+We now construct an infinite series of arrangements of an even number of lines.
+The starting arrangement of the series has $N_0=8$ lines and two triple points.
+The other arrangements are obtained from it by temporarily removing one line, applying the Bartholdi--Blanc--Loisel doubling~\cite{bbl} the required number of times, and restoring the removed line.
+
+In the notation of~\cite{bbl}, $n$ has a special meaning: it is the number of added lines.
+To avoid confusion, in this section, unlike the others, the number of lines in an arrangement is always denoted by $N$.
+An arrangement $\mathcal A$ of $N$ straight lines in the affine plane is a set of $N$ distinct lines, no two of which are parallel.
+The \emph{multiplicity} of a point is the number of lines of the arrangement passing through it.
+A point of multiplicity 2 is called \emph{simple}, and a point of higher multiplicity is called \emph{multiple}.
+An arrangement is \emph{simple} if all its intersection points are simple.
+
+The lines divide the plane into \emph{faces}.
+A face is \emph{triangular} if it is bounded and its sides lie on exactly three lines of the arrangement.
+We denote by $a_3(\mathcal A)$ the number of triangular faces of the arrangement $\mathcal A$.
+
+\begin{theorem}\label{thm:series}
+For every integer $t\ge0$ there exists an arrangement $\mathcal{C}_t$ of
+\begin{equation}\label{eq:N-t}
+N_t=6\cdot2^t+2
+\end{equation}
+lines with two triple points and exactly
+\begin{equation}\label{eq:a3-series}
+a_3(\mathcal{C}_t)=\frac{N_t(N_t-\frac52)+1}{3}
+\end{equation}
+triangular faces.
+\end{theorem}
+
+\subsection{The starting arrangement}
+
+Fix an arbitrary integer $t\ge0$ for which the theorem is to be proved. For the intermediate values $s$, $0\le s\le t$, set
+\[
+n_s=6\cdot2^s.
+\]
+Consider the eight lines given by the equations
+\begin{equation}\label{eq:base-lines}
+\begin{array}{ll}
+R:y=x-\delta,
+&Y_0:y=0,\\[4pt]
+L_1:y=-\dfrac12\left(x+\sqrt3\right),
+&L_2:y=-\eta\Bigl(x+\dfrac1{\sqrt3}\Bigr),\\[6pt]
+L_3:y=\eta\Bigl(x-\dfrac1{\sqrt3}\Bigr),
+&L_4:y=\dfrac25\left(x-\sqrt3\right),\\[8pt]
+L_5:y=u(\varepsilon,\eta)(x+\varepsilon),
+&L_6:y=v(\varepsilon)(x-\varepsilon).
+\end{array}
+\end{equation}
+These equations have three free parameters. We tie them to the target value $t$:
+\begin{equation}\label{eq:params}
+\varepsilon=\frac1{4n_t},
+\qquad
+\eta=3\sqrt3\,n_t^6,
+\qquad
+\delta=2n_t^6.
+\end{equation}
+The remaining two dependent parameters $u(\varepsilon,\eta)$ and $v(\varepsilon)$ are defined as follows:
+\begin{equation}\label{eq:star-slopes}
+u(\varepsilon,\eta)=-\frac{4\eta}{2\eta-3+\varepsilon\sqrt3(2\eta+1)},
+\qquad
+v(\varepsilon)=\frac{4\sqrt3}{\sqrt3+9\varepsilon}.
+\end{equation}
+
+With these equations, the eight lines form an arrangement with 15 triangular faces (\cref{fig:seed}).
+The line $Y_0$ is horizontal, and the lines $L_1,\ldots,L_6$ intersect it at the points $x=\pm\varepsilon,\tan(\pm\pi/6),\tan(\pm2\pi/6)$,
+as the doubling requires~\cite[Prop.~3.1]{bbl}. The parameter $\varepsilon$ satisfies the condition under which the doubling can be iterated~\cite[Remark~3.2]{bbl}.
+The slopes of $L_1,L_4$ are fixed and equal to $-1/2, 2/5$, respectively. The slopes of $L_2,L_3$ are set by \eqref{eq:params} and depend on $t$.
+The slopes \eqref{eq:star-slopes} of $L_5,L_6$ are chosen so that three lines meet at each of two points:
+\[
+P=L_1\cap L_4\cap L_6,
+\qquad
+Q=L_1\cap L_3\cap L_5.
+\]
+The parameters $\eta,\delta$ ensure that after $t$ iterations of the doubling all new intersection points lie on one side of the line $R$.
+This line plays a special role:
+removing it before the doubling makes the doubling possible, and afterwards the line is restored.
+We call a triangular face with a side on $R$ an \emph{$R$-triangle}, and write $r(\cdot)$ for the number of $R$-triangles of an arrangement.
+
+All lines in \eqref{eq:base-lines} have finite slope, that is, none of them is vertical.
+Therefore the order of the intersection points along any line of the arrangement is uniquely determined by the order of their $x$-coordinates, and below the words ``to the right'' and ``rightmost'' refer to comparing $x$-coordinates.
+
+\begin{figure}[t]
+\centering
+\resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{\input{figures/fig-seed}}
+\caption{The starting arrangement \eqref{eq:base-lines}, with 15 triangular faces (5 of them $R$-triangles, hatched) and two triple points $P$ and $Q$. The values of $\varepsilon,\eta,\delta$ differ from \eqref{eq:params} for readability, but the order of intersection points on each line is the same.}
+\label{fig:seed}
+\end{figure}
+
+\begin{lemma}\label{lem:seed}
+The starting arrangement has exactly 15 triangular faces, and 5 of them are $R$-triangles.
+After the line $R$ is removed, the arrangement
+\[
+\mathcal A_0=\{Y_0,L_1,\ldots,L_6\}
+\]
+has exactly two triple points $P$ and $Q$ (and no other multiple points) and 10 triangular faces.
+\end{lemma}
+
+\begin{proof}
+\Cref{fig:seed} illustrates the statement, which is verified in \cref{app:seed-faces}.
+\end{proof}
+
+We construct the arrangements $\mathcal A_1,\ldots,\mathcal A_t$ recursively. The arrangement $\mathcal A_0$ has been defined above.
+The arrangement $\mathcal A_{s+1}$ is obtained from $\mathcal A_s$ by adding the $n_s$ lines $M_j$ given by the conditions of~\cite[Prop.~3.1]{bbl} with $n=n_s$.
+By construction, $\mathcal A_s$ consists of $n_s+1$ lines.
+The line $R$ is not used in the doublings; after $t$ doublings, we add it to $\mathcal A_t$. This gives the required arrangement $\mathcal C_t$:
+\[
+\mathcal C_t=\mathcal A_t\cup\{R\},
+\]
+containing $N_t=n_t+2$ lines \eqref{eq:N-t}, for which we prove the statement of the theorem.
+
+\subsection{The doubling step}
+
+Let $n$ be even, and let the arrangement
+\[
+\mathcal A=\{Y_0,L_1,\ldots,L_n\}
+\]
+be obtained at one of the steps of the construction. Choose coordinates in which
+\[
+Y_0:y=0,
+\qquad
+L_i:y=m_i(x-a_i).
+\]
+The added lines are those of~\cite[Prop.~3.1]{bbl}:
+\begin{equation}\label{eq:new-lines}
+\begin{gathered}
+M_j:y=\mu_j\left(x-b_j\right),
+\qquad
+b_j=\tan\beta_j,
+\qquad
+\beta_j=-\frac\pi2+\left(j-\frac12\right)\frac\pi n,\\
+\mu_j=-\frac{m_{\min}}{n^{10}}
+\left(\sin(2\beta_j)+\frac1{n^6b_j}\right),
+\qquad
+m_{\min}=\min_{1\le i\le n}|m_i|,
+\qquad
+j=1,\ldots,n.
+\end{gathered}
+\end{equation}
+The factor $-1$ in $\mu_j$ is the sign $\sigma$ of~\cite[Prop.~3.1]{bbl}, which equals $-1$ when $L_{n-1}$ and $L_n$ meet below $Y_0$, as $L_5$ and $L_6$ in \eqref{eq:base-lines} do.
+The result of the first doubling step is shown in \cref{fig:double}.
+From now on, the indices $i$ and $j$ always run over $1,\ldots,n$. The subscript of $L_i$, $a_i$, $m_i$ refers to an old line, and the subscript of $M_j$, $b_j$, $\beta_j$, $\mu_j$ refers to a new one.
+Below we compare $m_{\min}$ for different arrangements, so where confusion is possible, we add the arrangement as an argument: $m_{\min}(\mathcal A)$.
+
+\begin{figure}[t]
+\centering
+\resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{\input{figures/fig-double}}
+\caption{The starting arrangement after the doubling step \eqref{eq:new-lines}, with 54 triangular faces (8 of them $R$-triangles); the triple points are preserved.
+The slopes $\mu_j$ are larger in absolute value than in \eqref{eq:new-lines}, since with the actual values the strip \eqref{eq:strip} would be indistinguishable at this scale, but the order of intersection points on each line is the same.}
+\label{fig:double}
+\end{figure}
+
+The lines $L_1,\ldots,L_{n-2}$ are numbered in increasing order of their $x$-intercepts, so that $a_1<\cdots<a_{n-2}$. The lines $L_{n-1},L_n$ form the \emph{special pair}.
+The doubling step imposes the following conditions on $\mathcal A$:
+\begin{enumerate}[label=\textup{(D\arabic*)}]
+\item the $x$-intercepts form the grid
+\begin{equation}\label{eq:x-grid}
+\begin{gathered}
+\{a_1,\ldots,a_{n-2}\}
+=\Bigl\{\tan\frac{k\pi}{n}:1\le |k|\le\frac n2-1\Bigr\},
+\\
+-\frac1n<a_{n-1}<0<a_n<\frac1n,
+\end{gathered}
+\end{equation}
+in particular, $a_{n-2}=\cot(\pi/n)$;
+\item the slopes of the special pair satisfy $m_{n-1}<0<m_n$;
+\item each of the $n-1$ bounded segments of $Y_0$ is a side of exactly one triangular face of $\mathcal A$, and the faces on consecutive segments lie on opposite sides of $Y_0$.
+\end{enumerate}
+Under (D1) and (D2), the point $L_{n-1}\cap L_n$ lies below $Y_0$, and its $x$-coordinate lies in the interval $(a_{n-1},a_n)$.
+
+\begin{lemma}[doubling step]\label{lem:doubling}
+Let $n\ge2$ be even, and let $\mathcal A$ be a not necessarily simple arrangement satisfying \textup{(D1)--(D3)}. Then
+\[
+\mathcal B=\mathcal A\cup\{M_1,\ldots,M_n\}
+\]
+preserves all multiple points of $\mathcal A$ together with their multiplicities, has no new multiple points, and satisfies
+\[
+a_3(\mathcal B)=a_3(\mathcal A)+n^2.
+\]
+The arrangement $\mathcal B$ satisfies \textup{(D3)} with $2n$ in place of $n$. If, in addition,
+\begin{equation}\label{eq:special-slopes}
+|a_{n-1}|<\frac1{2n},\quad |a_n|<\frac1{2n},
+\end{equation}
+then $\mathcal B$ (after relabeling its lines) satisfies \textup{(D1)--(D3)} with $2n$ in place of $n$.
+Finally,
+\begin{equation}\label{eq:m-min}
+m_{\min}(\mathcal B)<\frac{2\,m_{\min}(\mathcal A)}{n^{10}}<m_{\min}(\mathcal A).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The computations in items~1--4 of the proof of~\cite[Prop.~3.1]{bbl} rely only on the equations of the lines: on condition \eqref{eq:x-grid}, on the signs of the slopes of the special pair,\footnote{However, item~4 of~\cite[Prop.~3.1]{bbl} needs a correction. There the signs of the slopes of the special pair are derived from the position of the point $L_{n-1}\cap L_n$ relative to $Y_0$. But the position of this point does not determine them: the two lines can also meet on that same side of $Y_0$ when their slopes have the same sign (then the $x$-coordinate of their intersection point lies outside $(a_{n-1},a_n)$). Therefore the signs $m_{n-1}<0<m_n$ are included in the hypotheses of the lemma as (D2), and everything the proof of~\cite[Prop.~3.1]{bbl} derives from the signs, namely $x(M_j\cap L_{n-1})<0<x(M_j\cap L_n)$, follows from the inequalities \eqref{eq:special-x} proved below.}
+and on formulas \eqref{eq:new-lines}.
+These computations do not use the simplicity of the arrangement. Therefore the estimates~\cite[(3)--(9)]{bbl}, the case analysis 3a--3c, and the resulting strict order of the intersection points on each line $M_j$ remain valid for our $\mathcal A$.
+We restate the results of these computations as the following inequalities.
+First, by~\cite[(6)]{bbl},
+\begin{equation}\label{eq:L-M-coord}
+|y(L_i\cap M_j)|<\frac{3m_{\min}}{n^9},
+\qquad
+|x(L_i\cap M_j)-a_i|<\frac3{n^9}.
+\end{equation}
+Second, by~\cite[(5)]{bbl}, the $y$-coordinates of the old intersection points off $Y_0$ are bounded away from zero:
+\begin{equation}\label{eq:L-L-coord}
+|y(L_i\cap L_j)|>\frac{m_{\min}}n,
+\qquad \{i,j\}\neq\{n-1,n\},
+\end{equation}
+where the special pair $L_{n-1},L_n$ is excluded from the estimate because the $y$-coordinate of $L_{n-1}\cap L_n$ can be arbitrarily close to zero. Third, the case analysis 3a--3c and the estimates~\cite[(7)--(9)]{bbl} give the following:
+\begin{equation}\label{eq:M-M-coord}
+x(M_i\cap M_j)=
+\begin{cases}
+0, & \beta_i+\beta_j=0 \quad\text{(case 3a)},\\
+-n^6\sin(2\beta_i), & \beta_i+\beta_j=\pm\pi/2 \quad\text{(case 3b)},\\
+\tan(\beta_i+\beta_j)+\theta_{ij}, & \text{otherwise} \quad\text{(case 3c)},
+\end{cases}
+\end{equation}
+where in case 3c
+\begin{equation}\label{eq:theta}
+\lvert\tan(\beta_i+\beta_j)\rvert<\frac n\pi,
+\quad \frac3{n^8}<|\theta_{ij}|<\frac1{n^2},
+\quad \operatorname{sgn}\theta_{ij}=\operatorname{sgn}\bigl((\beta_i+\beta_j)\beta_i\beta_j\bigr).
+\end{equation}
+Hence
+\begin{equation}\label{eq:x-far}
+|x(M_i\cap M_j)|\le n^6.
+\end{equation}
+Fourth,
+\begin{equation}\label{eq:special-x}
+x(M_j\cap L_{n-1})<a_{n-1}<0<a_n<x(M_j\cap L_n).
+\end{equation}
+Indeed,
+\[
+x(M_j\cap L_n)-a_n=\frac{\mu_j\,(a_n-b_j)}{m_n-\mu_j}.
+\]
+The denominator is positive: $|\mu_j|<2m_{\min}/n^{10}<m_{\min}\le m_n$ by~\cite[(3)]{bbl}.
+Both factors $\mu_j$ and $a_n-b_j$ in the numerator have the sign of $-b_j$. For $\mu_j$ this is~\cite[(3)]{bbl} (for $\sigma=1$ the values $\mu_j$ and $b_j$ have the same sign, and here $\sigma=-1$). For $a_n-b_j$ it follows from $|b_j|\ge\tan\frac{\pi}{2n}>\frac1n>|a_n|$.
+The computation for $L_{n-1}$ is similar.
+Together with the signs of the slopes $m_{n-1}<0<m_n$, this implies that the new lines intersect the special pair strictly above $Y_0$.
+
+Moreover, by~\cite[(3)]{bbl}, $|b_j|<2n/\pi$ and $|\mu_j|<2m_{\min}/n^{10}$.
+The point $M_i\cap M_j$ lies on $M_j$, and its $y$-coordinate equals $\mu_j(x-b_j)$, where $x=x(M_i\cap M_j)$. For $n\ge2$ we have $|x-b_j|\le|x|+|b_j|<n^6+2n/\pi<2n^6$, and therefore
+\[
+|y(M_i\cap M_j)|=|\mu_j|\,|x-b_j|
+<\frac{2m_{\min}}{n^{10}}\cdot2n^6=\frac{4m_{\min}}{n^4}.
+\]
+Since $4/n^4<1/n$ and $3/n^9<1/n$ for $n\ge2$, all intersection points involving at least one line $M_j$ lie in the strip
+\begin{equation}\label{eq:strip}
+|y|<\frac{m_{\min}}n.
+\end{equation}
+The threshold $m_{\min}/n$ is the same as in \eqref{eq:L-L-coord}. It separates the region where the old intersection points remain from the region where the new points appear.
+
+Extending~\cite{bbl} to the non-simple case requires three more checks.
+
+\emph{Old multiple points are preserved.}
+Condition \eqref{eq:x-grid} gives $n$ distinct points $L_i\cap Y_0$, so all intersection points on $Y_0$ are simple, and every multiple point of $\mathcal A$ has the form $L_i\cap L_j$.
+By \eqref{eq:L-L-coord}, it lies outside the strip \eqref{eq:strip}.
+This holds for $L_{n-1}\cap L_n$ as well: this point lies below $Y_0$, so if it is multiple, it equals $L_k\cap L_{n-1}$ for some $k\notin\{n-1,n\}$, and \eqref{eq:L-L-coord} applies.
+All intersection points on the new lines lie in the strip, so no new line passes through a multiple point of $\mathcal A$, and these points are preserved together with their multiplicities.
+
+\emph{No new multiple points appear.}
+A multiple point of $\mathcal B$ on a new line $M_j$ would mean that two intersection points on $M_j$ coincide.
+But item~4 of the proof of~\cite[Prop.~3.1]{bbl} (with \eqref{eq:special-x} in place of the signs of the special pair) places the intersection points of $M_j$ with all other lines of $\mathcal B$ at pairwise distinct $x$-coordinates.
+Also, $L_{n-1}\cap L_n$ is the only old intersection point off $Y_0$ that may lie in the strip \eqref{eq:strip}. Its $x$-coordinate lies in the interval $(a_{n-1},a_n)$, so by \eqref{eq:special-x} no new line passes through it.
+
+\emph{Multiple points do not affect the triangle count.}
+By \eqref{eq:L-L-coord}, the strip \eqref{eq:strip} contains no old intersection points except the $n$ intersection points on $Y_0$ and possibly $L_{n-1}\cap L_n$.
+The new lines enter only the faces of $\mathcal A$ that have a side on $Y_0$.\footnote{In~\cite{bbl} this is stated with reference to estimates (5) and (6), which do not take the point $L_{n-1}\cap L_n$ into account. For $L\in\{L_{n-1},L_n\}$ this point lies below $Y_0$, while by \eqref{eq:special-x} $M_j$ meets $L$ above $Y_0$; for any other line $L$ through this point, the point is multiple and lies outside the strip (see above). Hence inside the strip every line of $\mathcal A$ meets $M_j$ on an edge ending on $Y_0$, so every face that $M_j$ enters has a side on $Y_0$.}
+By \eqref{eq:L-M-coord}, the new lines intersect the old ones in the $3/n^{9}$-neighborhoods of the points $a_i=x(L_i\cap Y_0)$.
+By (D3), the triangles with a side on $Y_0$ alternate between the two sides of $Y_0$, as they automatically do in a simple arrangement.
+Therefore inside the strip the arrangement looks the same as in the simple case, and the count from the last paragraph of the same proof carries over unchanged: the new lines cut only the $n-1$ triangles with a side on $Y_0$, and each of them is replaced by $n+1$ triangles; another $n$ triangles appear at the two far ends of the strip; there are no other new triangles, and the remaining old ones are preserved.\footnote{
+Strictly speaking, only $n-2$ of the triangles with a side on $Y_0$ disappear.
+The triangle $Y_0L_{n-1}L_n$ bounded by the special pair is not replaced but remains a face of $\mathcal B$. It lies below $Y_0$, while by \eqref{eq:special-x} the new lines intersect $L_{n-1}$ and $L_n$ above $Y_0$ and intersect $Y_0$ outside the interval $[a_{n-1},a_n]$, since $|b_j|>1/n$.
+Hence no new line crosses its boundary, and therefore no new line enters it.
+However, $n$ new triangles are formed between the lines of the special pair, so this remark does not affect the triangle count.
+Also, in the intuitive picture (\cref{fig:double}), where $Y_0$ ``thickens'' into the set $\{Y_0, M_1, \ldots, M_n\}$, this preserved triangle does not differ from the disappearing ones.}
+Consequently,
+\[
+a_3(\mathcal B)
+=a_3(\mathcal A)-(n-1)+(n-1)(n+1)+n
+=a_3(\mathcal A)+n^2.
+\]
+The argument that each bounded segment of $Y_0$ is a side of at least one triangular face of $\mathcal B$ also carries over.
+A segment cannot be a side of two such faces, since both its endpoints are intersection points of multiplicity 2 (see \cref{lem:double-segment}).
+Suppose that the triangles on two consecutive segments of $Y_0$ lie on the same side of $Y_0$. Both have a side on the line $L$ through the common endpoint of the segments, and this side is the edge of $L$ that starts at $Y_0$ on that side. Hence the third vertex of both triangles is the other endpoint of this edge, and the three lines through the three consecutive intersection points on $Y_0$ meet there.
+In $\mathcal B$ this is impossible: the points $b_j$ alternate on $Y_0$ with the points $a_1,\ldots,a_{n-2}$, and the pair $a_{n-1},a_n$ lies between $b_j=\pm\tan\frac\pi{2n}$, since $\tan\frac\pi{2n}>\frac1n$. So among any three consecutive points at least one lies on a new line, and the new lines have no multiple points.
+
+Finally,
+\[
+\{a_1,\ldots,a_{n-2}\}\cup\{b_1,\ldots,b_n\}
+=\left\{\tan\frac{k\pi}{2n}:1\le|k|\le n-1\right\}.
+\]
+If \eqref{eq:special-slopes} holds, then, after relabeling, $a_{n-1}$ and $a_n$ remain the $x$-intercepts of the special pair, and the others, numbered in increasing order, satisfy \eqref{eq:x-grid} with $2n$ in place of $n$.
+Since the same two lines remain the special pair, condition (D2) and the sign $\sigma=-1$ are inherited.
+The estimate \eqref{eq:m-min} follows from $|\mu_j|<2m_{\min}/n^{10}$, whose right-hand side is less than $m_{\min}$ for $n\ge2$. So the minimum $m_{\min}(\mathcal B)$ is attained at one of the new lines.
+\end{proof}
+
+\Cref{lem:doubling} describes the doubling without the line $R$, as in~\cite{bbl}.
+When $R$ is restored, the new lines also change the $R$-triangles, and we now count these changes.
+Since $R$ lies far to the right, it cuts off triangles from pairs of lines that meet at their last intersection point.
+
+We call a pair of lines of an arrangement a \emph{right wedge} (\cref{fig:double-zoom}) if their common point (the \emph{apex}) is
+the rightmost intersection point on each of them. Beyond this point, neither line
+meets any other line of the arrangement.
+By \eqref{eq:x-grid}, the rightmost intersection point of the old lines $L_i$ with $Y_0$ has $x$-coordinate $a_{n-2}=\cot(\pi/n)$.
+For the count of $R$-triangles, the doubling step imposes two more conditions on $\mathcal A$:
+\begin{enumerate}[label=\textup{(W\arabic*)}]
+\item $(Y_0,L_{n-2})$ is a right wedge of $\mathcal A$;
+\item no $R$-triangle of $\mathcal A\cup\{R\}$, except the triangle $\Delta_n$ bounded by $R$, $Y_0$, and $L_{n-2}$, meets the strip \eqref{eq:strip}.
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{\input{figures/fig-double-zoom}}
+\caption{The $R$-triangle at the point $R\cap Y_0$ in \cref{fig:double} ($n=6$), enlarged. The line $R$ cuts it off from the right wedge $(Y_0,M_6)$. This is the triangle $\Delta_{12}$ of \textup{(W2)} at the next step, with $M_6$ in the role of $L_{10}$.}
+\label{fig:double-zoom}
+\end{figure}
+
+The following lemma lists the right wedges of $\mathcal B$ that involve a new line, for $n\equiv0\pmod4$.
+In our series, this case covers all iterations with $s\ge1$: $n_s=6\cdot2^s\equiv0\pmod{12}$.
+The only remaining case $s=0$ (that is, $n=6$) is treated in \cref{lem:first-step}.
+
+\begin{lemma}\label{lem:right-wedges}
+Let $n\ge8$, with $n\equiv0\pmod4$, let the arrangement $\mathcal A$ satisfy \textup{(D1)--(D3)} and \textup{(W1)}, let the slope of the line $L_{n-2}$ be negative, and let $\mathcal B=\mathcal A\cup\{M_1,\ldots,M_n\}$.
+Then the right wedges of $\mathcal B$ that involve at least one new line are exactly the pairs
+\begin{gather}
+(M_i, M_{n/2+1-i}),
+\qquad 1\le i\le\frac n4,\label{eq:wedges-low}\\
+(M_i,M_{3n/2-i}),
+\qquad \frac n2<i<\frac{3n}{4},\label{eq:wedges-high}\\
+(L_{n-2},M_{3n/4}),
+\qquad
+(Y_0,M_n).\label{eq:wedges-old}
+\end{gather}
+There are $n/2+1$ of them, and each new line belongs to exactly one.
+Moreover, $\mathcal B$ satisfies \textup{(W1)} with $2n$ in place of $n$ and $M_n$ in the role of $L_{2n-2}$.
+\end{lemma}
+
+\begin{proof}
+Among all pairs of new lines $(M_i,M_j)$, $i\neq j$, consider those with $\beta_i+\beta_j=\pm\pi/2$.
+By \eqref{eq:new-lines}, $\beta_i+\beta_j=-\pi+(i+j-1)\pi/n$, so
+\begin{gather}
+\beta_i+\beta_j=-\pi/2 \iff i+j=n/2+1,\label{eq:Par1}\\
+\beta_i+\beta_j=\pi/2 \iff i+j=3n/2+1.\label{eq:Par2}
+\end{gather}
+Each of these equalities implies $b_ib_j=1$ and $\sin(2\beta_i)=\sin(2\beta_j)$.
+For such values the slopes $\mu_i$ and $\mu_j$ differ only in the term with $n^{-6}$. Hence the angle between the lines $M_i,M_j$ is small, and they intersect far from the other intersection points of the arrangement.
+We call such a pair \emph{almost parallel}. It corresponds to case 3b of~\cite[Prop.~3.1]{bbl}, and by \eqref{eq:M-M-coord} $x(M_i\cap M_j)=-n^6\sin(2\beta_i)$.
+
+For a pair of lines satisfying \eqref{eq:Par1}, both $\beta_i$ and $\beta_j$ are negative, so $\sin(2\beta_i)<0$ and $x(M_i\cap M_j)>0$. Together with the inequality $\lvert\sin(2\beta_i)\rvert>\pi/2n$ from~\cite[(3)]{bbl}, this gives $x(M_i\cap M_j)>\pi n^5/2>n^5$.
+For a pair of lines satisfying \eqref{eq:Par2}, both $\beta_i$ and $\beta_j$ are positive, and a similar estimate gives $x(M_i\cap M_j)<-n^5$, so these intersection points lie far to the left and are not the rightmost points on their lines.
+
+Let $\beta_i<0$, that is, $i\le n/2$.
+Then $M_i$ has an almost parallel partner $M_j$ with $\beta_j$ determined by \eqref{eq:Par1}: $j=n/2+1-i$, and $j\neq i$, since $n/2+1$ is odd for $n\equiv0\pmod4$.
+All other intersection points of $M_i$ lie in the region $|x|<n$: $x(M_i\cap Y_0)=b_i$, $x(M_i\cap L_k)$
+is bounded by \eqref{eq:L-M-coord}, and the bounds on the intersection points of $M_i$ with the other new lines are given by cases 3a and 3c of~\cite[Prop.~3.1]{bbl}.
+Therefore the intersection point $M_i\cap M_j$ with $x$-coordinate greater than $n^5$ is the rightmost on $M_i$.
+The angle $\beta_j$ is also negative, and the same argument applies to $M_j$: its partner from \eqref{eq:Par1} is $M_i$.
+Hence the pairs \eqref{eq:wedges-low} form right wedges.
+With \eqref{eq:Par1}, the condition $i<j$, which orders the lines in a pair and lists each pair once, reduces to $i\le n/4$.
+
+Now let $\beta_i>0$, that is, $i>n/2$.
+As shown above, for the almost parallel line $M_j$ from \eqref{eq:Par2} we have $x(M_i\cap M_j)<-n^5$, so their intersection point lies far to the left.
+We look for the rightmost of the remaining intersection points on $M_i$. In case 3c of~\cite[Prop.~3.1]{bbl}, by \eqref{eq:M-M-coord} and \eqref{eq:theta}, the intersection with a new line $M_j$ has $x=\tan(\beta_i+\beta_j)+\theta_j$ with $3/n^8<|\theta_j|<1/n^2$. In case 3a, it has exactly $x=0=\tan(\beta_i+\beta_j)$. The intersection with an old line $L_k$ lies in the $3/n^{9}$-neighborhood of the point $a_k$ by \eqref{eq:L-M-coord}. The intersection with $Y_0$ is exactly the point $b_i$.
+
+Since $\beta_i>0$, the sums $z=\beta_i+\beta_j$ lie in the interval $(-\pi/2,\pi)$.
+For $z\in(\pi/2,\pi)$ the tangent is negative, and such points lie to the left of zero and hence to the left of $a_{n-2}$.
+On the interval $(-\pi/2,\pi/2)$ the tangent increases, so the rightmost point corresponds to the largest sum in this interval.
+On the grid \eqref{eq:new-lines} the sums are spaced $\pi/n$ apart, and the value $z=\pi/2$ corresponds to \eqref{eq:Par2}, that is, to the almost parallel partner, whose intersection point lies far to the left.
+Therefore the largest available sum is $\pi/2-\pi/n$.
+It corresponds to the partner $M_{3n/2-i}$ (if $3n/2-i\neq i$) and gives
+\[
+x(M_i\cap M_{3n/2-i})=\tan\left(\frac\pi2-\frac\pi n\right)+\theta
+=a_{n-2}+\theta,
+\qquad \frac3{n^8}<|\theta|<\frac1{n^2} .
+\]
+Here we used $\tan(\pi/2-\pi/n)=\cot(\pi/n)=a_{n-2}$. By \eqref{eq:theta}, the sign of $\theta$ is the sign of the product $(\beta_i+\beta_j)\beta_i\beta_j$. For $i\le n-1$ all three factors are positive, since we consider $\beta_i>0$, and $\beta_j=\pi/2-\pi/n-\beta_i>0$; for $i=n$ we have $\beta_j<0$.
+Among the intersections of $M_i$ with the new lines, the rightmost neighborhood is that of the point $a_{n-2}$. By \eqref{eq:L-M-coord}, the intersection of $M_i$ with the rightmost old line $L_{n-2}$ falls into the neighborhood of the same point (for the other old lines $L_k$ we have $a_k<a_{n-2}$).
+Within this neighborhood, for $i\le n-1$ the intersection with $M_{3n/2-i}$ lies farther to the right, since its offset $\theta$ is greater than $3/n^{8}$, while the offset of the point $M_i\cap L_{n-2}$ is less than $3/n^{9}$ in absolute value.
+It remains to take the line $Y_0$ into account. Its intersection point with $M_i$ has $x$-coordinate $b_i$ and lies in none of the neighborhoods listed, so it has to be compared with $a_{n-2}$ separately.
+The values $b_i$ increase with $i$.
+For $i<n$ we have
+\[
+a_{n-2}-b_i\ge a_{n-2}-b_{n-1}=\cot\frac\pi n-\cot\frac{3\pi}{2n}=\frac{\sin(\pi/2n)}{\sin(\pi/n)\sin(3\pi/2n)}\ge\sin\frac\pi{2n}\ge\frac1n,
+\]
+so the point $M_i\cap Y_0$ lies to the left of the neighborhood of $a_{n-2}$ and is not the rightmost point on $M_i$.
+For $i=n$, by the identity $\cot(x/2)=\cot x+1/\sin x$,
+\begin{equation}\label{eq:b-n}
+b_n=\cot\frac\pi{2n}=a_{n-2}+\frac1{\sin(\pi/n)}>a_{n-2}+\frac n\pi,
+\end{equation}
+so on the line $M_n$ the point $M_n\cap Y_0$ is the rightmost.
+It is the rightmost on $Y_0$ as well: the other intersection points on $Y_0$ have $x$-coordinates $b_j<b_n$ and $a_k\le a_{n-2}<b_n$.
+Hence $(Y_0,M_n)$ is a right wedge, the second pair in \eqref{eq:wedges-old}.
+
+The argument with the partner $M_{3n/2-i}$ has one exception, $i=3n/4$, when $3n/2-i=i$ and there is no partner with the sum $\pi/2-\pi/n$.
+The next available sum $\pi/2-2\pi/n$ gives only $x\le\cot(2\pi/n)+1/n^{2}$.
+This is to the left of the neighborhood of $a_{n-2}$, which has radius less than $1/n^{2}$, since
+\[
+a_{n-2}-\cot\frac{2\pi}n=\frac1{\sin(2\pi/n)}\ge1 .
+\]
+Therefore on the line $M_{3n/4}$ the rightmost intersection point is the one with the old line $L_{n-2}$.
+
+Thus the rightmost intersection point on $M_i$ is the one with the line $M_{3n/2-i}$ for $i\notin\{3n/4,n\}$, with $L_{n-2}$ for $i=3n/4$, and with $Y_0$ for $i=n$.
+Accordingly, the right wedges are the pairs \eqref{eq:wedges-high} and the two pairs \eqref{eq:wedges-old}.
+For the pairs \eqref{eq:wedges-high}, the argument above suffices: both lines have indices greater than $n/2$, and the common point of the pair is the rightmost on each of them.
+The pair $(Y_0,M_n)$ has also been checked on both lines.
+
+We check that the common point of the pair $(L_{n-2},M_{3n/4})$ is the rightmost on $L_{n-2}$ as well.
+By the hypothesis of the lemma,
+\[
+L_{n-2}:y=\ell(x-a_{n-2}),
+\qquad \ell<0.
+\]
+The new lines are almost horizontal compared with $L_{n-2}$: $|\mu_j|<2m_{\min}/n^{10}<|\ell|$ by~\cite[(3)]{bbl}, since the minimum in $m_{\min}(\mathcal A)$ is also taken over $\ell$.
+Hence $L_{n-2}$ lies above each line $M_j$ to the left of their common point and below it to the right.
+Let $U=L_{n-2}\cap M_{3n/4}$. The line $L_{n-2}$ meets $M_k$ to the right of $U$ only if $M_k$ passes below $M_{3n/4}$ at $x=x(U)$.
+So it suffices to show that at $x=x(U)$ the line $M_{3n/4}$ is the lowest of the new lines.
+
+By \eqref{eq:new-lines}, the line $M_j$ passes at height
+\begin{equation}\label{eq:M-height}
+\mu_j(a_{n-2}-b_j)=-\frac{m_{\min}}{n^{10}}F_j,
+\quad\!\!
+F_j=\Bigl(\sin(2\beta_j)+\frac1{n^6\tan\beta_j}\Bigr)\left(a_{n-2}-\tan\beta_j\right),
+\end{equation}
+at $x=a_{n-2}$.
+By \eqref{eq:L-M-coord}, $|x(U)-a_{n-2}|<3/n^9$, so between $a_{n-2}$ and $x(U)$ the height of each new line changes by less than $|\mu_j|\cdot3/n^9<6m_{\min}/n^{19}$.
+Therefore $M_{3n/4}$ is the lowest at $x=x(U)$ if at $x=a_{n-2}$ it lies below every other new line by more than $12m_{\min}/n^{19}$, that is, by \eqref{eq:M-height}, if
+\begin{equation}\label{eq:F-gap}
+F_{3n/4}-F_k>\frac{12}{n^9}
+\qquad\text{for all }k\neq\frac{3n}4.
+\end{equation}
+
+We split $F_j=G_j+H_j$ according to the two terms in parentheses:
+\[
+G_j=\sin(2\beta_j)\left(a_{n-2}-\tan\beta_j\right),
+\qquad
+H_j=\frac{a_{n-2}-\tan\beta_j}{n^{6}\tan\beta_j}.
+\]
+For $G_j$ we use the identity
+\begin{equation}\label{eq:tan-id}
+\sin(2\beta)(a_{n-2}-\tan\beta)
+=\frac{\sin(2\beta+\pi/n)}{\sin(\pi/n)}-1 .
+\end{equation}
+By \eqref{eq:new-lines}, $2\beta_j+\pi/n=2\pi j/n-\pi$, so
+\begin{equation}\label{eq:G-j}
+G_j=-\frac{\sin(2\pi j/n)}{\sin(\pi/n)}-1 ,
+\end{equation}
+and the maximum over $j$ corresponds to the minimum of $\sin(2\pi j/n)$, that is, to $2\pi j/n=3\pi/2$:
+\[
+j=\frac{3n}{4},
+\qquad
+\beta_j=\frac\pi4-\frac\pi{2n},
+\]
+and the maximum equals $1/\sin(\pi/n)-1$.
+For $j=3n/4\pm1$ we have $\sin(2\pi j/n)=\sin(3\pi/2\pm2\pi/n)=-\cos(2\pi/n)$, so
+the maximum exceeds the values at these indices by
+\[
+\frac1{\sin(\pi/n)}-1-\frac{\cos(2\pi/n)}{\sin(\pi/n)}+1=
+\frac{1-\cos(2\pi/n)}{\sin(\pi/n)}
+=\frac{2\sin^2(\pi/n)}{\sin(\pi/n)}
+=2\sin\frac\pi n\ \ge\ \frac4n .
+\]
+Since $|a_{n-2}-\tan\beta_j|<3n/\pi<n$~\cite[Prop.~3.1, item~2]{bbl} and
+$\lvert\tan\beta_j\rvert=|b_j|>\pi/2n$ by~\cite[(3)]{bbl},
+\[
+|H_j|=\frac{|a_{n-2}-\tan\beta_j|}{n^6\,|\tan\beta_j|}<\frac n{n^6}\cdot\frac{2n}\pi<\frac1{n^4}.
+\]
+Therefore, for $k\ne3n/4$,
+\[
+F_{3n/4}-F_k>\frac4n-\frac2{n^4}>\frac{12}{n^9},
+\]
+which proves \eqref{eq:F-gap}. Hence $U$ is the rightmost point on $L_{n-2}$ among the intersection points with the new lines.
+
+The old intersection points on $L_{n-2}$ lie to the left of $U$.
+Indeed, $F_{3n/4}>0$, since both factors in \eqref{eq:M-height} are positive for $\beta_{3n/4}=\pi/4-\pi/2n$. So $M_{3n/4}$ passes below the point $(a_{n-2},0)$ of $L_{n-2}$, and $U$ lies to the right of $a_{n-2}$. By (W1), there are no old intersection points of $\mathcal A$ on $L_{n-2}$ to the right of $a_{n-2}$.
+Hence $U$ is the rightmost intersection point of $\mathcal B$ on $L_{n-2}$, and the pair $(L_{n-2},M_{3n/4})$ is indeed a right wedge.
+
+Thus the rightmost intersection point is found for each new line, and the indices in \eqref{eq:wedges-low}--\eqref{eq:wedges-old} cover $1,\ldots,n$ exactly once: \eqref{eq:wedges-low} gives $1,\ldots,n/2$, \eqref{eq:wedges-high} gives $n/2+1,\ldots,3n/4-1$ and $3n/4+1,\ldots,n-1$, and \eqref{eq:wedges-old} gives the remaining $3n/4$ and $n$.
+By \cref{lem:doubling}, the new lines have no multiple points. Hence each of them has a single rightmost intersection point and belongs to at most one wedge.
+Therefore \eqref{eq:wedges-low}--\eqref{eq:wedges-old} are all the right wedges that involve at least one new line, and there are exactly $n/2+1$ of them.
+
+By \eqref{eq:b-n}, in \textup{(W1)} the role of $L_{n-2}$ with $a_{n-2}=\cot(\pi/n)$ passes to $M_n$ with $b_n=\cot(\pi/2n)$ (\cref{fig:double-zoom}).
+\end{proof}
+
+\begin{lemma}\label{lem:r-triangle}
+Let $n\ge6$, with either $n\equiv0\pmod4$ or $n=6$, let the arrangement $\mathcal A$ satisfy \textup{(D1)--(D3)}, \textup{(W1)}, \textup{(W2)}, and let $\mathcal B=\mathcal A\cup\{M_1,\ldots,M_n\}$.
+Suppose also that the slope of the line $L_{n-2}$ is at most $1/2$ in absolute value, negative for $n\equiv0\pmod4$ and positive for $n=6$, and that the line $R$ has the form $y=x-\delta$ with $\delta\ge2n^6$.
+Then $\Delta_n$ is a face of $\mathcal A\cup\{R\}$, and in $\mathcal B\cup\{R\}$ it is replaced by exactly $n/2+1$ new $R$-triangles, while all other $R$-triangles of $\mathcal A\cup\{R\}$ remain faces.
+Consequently,
+\[
+r(\mathcal B\cup\{R\})
+=r(\mathcal A\cup\{R\})+\frac n2.
+\]
+Moreover, $\mathcal B$ satisfies \textup{(W2)} with $2n$ in place of $n$ and $M_n$ in the role of $L_{2n-2}$.
+\end{lemma}
+
+\begin{proof}
+By \cref{lem:right-wedges} for $n\equiv0\pmod4$ and by \cref{lem:first-step} for $n=6$, the right wedges of $\mathcal B$ that involve at least one new line are the $n/2+1$ pairs \eqref{eq:wedges-low}--\eqref{eq:wedges-old} and \eqref{eq:wedges-first-step}, respectively, and each new line belongs to exactly one of them.
+Other right wedges, formed only by old lines $L_i$, give no new $R$-triangles, and we do not consider them.
+
+\emph{Step 1. The new $R$-triangles are exactly the triangles that $R$ cuts off from these wedges.} For each line $D$ that belongs to a right wedge,
+$x(R\cap D)>n^6$.
+Indeed, by hypothesis $R:y=x-\delta$ with $\delta\ge 2n^6$, and the slopes of all lines in the wedges are at most $1/2$ in absolute value: $Y_0$ has slope zero, the slope of $L_{n-2}$ is bounded by the hypothesis of the lemma, and the new lines have $|\mu_j|<2m_{\min}(\mathcal A)/n^{10}\le 1/n^{10}$ by~\cite[(3)]{bbl}, since $m_{\min}(\mathcal A)\le|m_{n-2}|\le1/2$.
+The $x$-intercepts $a$ in the equations of these lines are less than $n$ in absolute value (they are $b_j$ or $a_{n-2}$), so
+\[
+x(R\cap D)=\frac{\delta-ma}{1-m}\ge\frac{\delta-n/2}{3/2}\ge\frac43n^6-\frac n3>n^6 .
+\]
+
+The apexes of the wedges in $\mathcal{B}$ have $x$-coordinates at most $n^6$. For a pair of new lines, the apex is a point $M_i\cap M_j$, which satisfies \eqref{eq:x-far}. For the two pairs with an old line, the apex has $x$-coordinate less than $n$.
+For the pair with the line $L_{n-2}$, the apex is a point $L_{n-2}\cap M_j$, and by \eqref{eq:L-M-coord} and~\cite[(4)]{bbl}
+\[
+x(L_{n-2}\cap M_j)<a_{n-2}+\frac3{n^9}=\cot\frac\pi n+\frac3{n^9}<\frac n\pi+1 .
+\]
+For the pair $(Y_0,M_n)$, the apex is the point $Y_0\cap M_n$, and by~\cite[(3)]{bbl}
+\[
+x(Y_0\cap M_n)=b_n=\cot\frac\pi{2n}<\frac{2n}\pi .
+\]
+Both expressions are less than $n$ for $n\ge6$. Therefore $R$ intersects the lines of the wedge $(D,D')$ on the rays to the right of the apex, and the three lines bound a nondegenerate triangle $T$.
+
+This triangle is a face of the arrangement $\mathcal{B}\cup \{R\}$.
+Indeed, the rays forming the wedge extend to the right from its apex $Z=D\cap D'$ without crossing the other lines.
+Therefore a line $D''$ of the arrangement can cross the sides of $T$ on $D$ and $D'$ only at the apex $Z$ itself.
+But only two lines pass through $Z$, since each of these wedges involves at least one new line $M_j$, and by \cref{lem:doubling} the new lines have no multiple points.
+Hence $D''$ crosses the boundary of $T$ at most once (possibly on the line $R$) and cannot cut off any part of $T$.
+
+Thus $R$ closes each of the $n/2+1$ right wedges into a triangular face of $\mathcal B\cup\{R\}$.
+The same argument applies to the wedge $(Y_0,L_{n-2})$ of $\mathcal A$: its apex is simple, since all intersection points on $Y_0$ are distinct by \eqref{eq:x-grid}, and the slopes $0$ and $m_{n-2}$ are at most $1/2$ in absolute value.
+Hence $\Delta_n$ is also a face of $\mathcal A\cup\{R\}$, which proves the first claim of the lemma.
+
+There are no other new $R$-triangles. Indeed, a face of $\mathcal B\cup\{R\}$ bounded by three lines of $\mathcal A\cup\{R\}$ is also a face of $\mathcal A\cup\{R\}$, since adding lines only subdivides faces. Hence every new $R$-triangle has a side on some new line $M_j$.
+This side goes from the intersection point with some line $D$ to the point $M_j\cap R$, which lies to the right of all other intersection points on $M_j$. The side has no intersection points in its interior only if $M_j\cap D$ is the rightmost intersection point on $M_j$.
+This point is simple by \cref{lem:doubling} and is the apex of the wedge containing $M_j$, so $(D,M_j)$ is one of these wedges.
+Hence there are exactly $n/2+1$ new $R$-triangles. They replace the single face $\Delta_n$ (its side on $Y_0$ is crossed by $M_n$ at the point $b_n>a_{n-2}$), which gives an increase of $n/2$.
+
+\emph{Step 2. The old $R$-triangles other than $\Delta_n$ remain faces.} Let $F$ be an $R$-triangle of $\mathcal A\cup\{R\}$ other than $\Delta_n$, and suppose that a new line $M_j$ enters the interior of $F$.
+The face $F$ is convex and bounded, so $M_j$ crosses its boundary at exactly two points.
+The side of $F$ on $R$ contains at most one of them, since $M_j$ and $R$ intersect once.
+Hence at least one of these two points lies on a side belonging to some line $L$ of $\mathcal A$. This point is the intersection point $M_j\cap L$, and by \eqref{eq:strip} it lies in the strip $|y|<m_{\min}(\mathcal A)/n$.
+But this point belongs to $F$, and by \textup{(W2)} $F$ does not meet this strip, a contradiction.
+Thus no new line enters the interior of $F$, and $F$ remains a face of $\mathcal B\cup\{R\}$.
+
+\emph{Step 3. The new $R$-triangles other than $\Delta_{2n}$ avoid the next strip, so \textup{(W2)} is inherited.} Let $m'=m_{\min}(\mathcal B)$, and let $S$ be the strip $|y|<m'/2n$, that is, the strip \eqref{eq:strip} for $\mathcal B$ at the next step.
+For the old $R$-triangles the required condition already holds: by \eqref{eq:m-min}, $m'<m_{\min}(\mathcal A)$, so $S$ is contained in the strip $|y|<m_{\min}(\mathcal A)/n$, which they do not meet by \textup{(W2)}.
+
+Now let $T$ be a new $R$-triangle corresponding to a wedge $(D,D')$ other than $(Y_0,M_n)$. Its vertices are $Z=D\cap D'$, $R\cap D$, and $R\cap D'$.
+Neither $D$ nor $D'$ coincides with $Y_0$, so the point $D\cap Y_0=(a_D,0)$ is one of the intersection points on $D$, and $Z$ is the rightmost of them. The vertex $Z$ is simple, so $Z\neq D\cap Y_0$ and $x(Z)>a_D$.
+Similarly, $x(Z)>a_{D'}$.
+Therefore both factors in parentheses in the equality
+\[
+y(Z)=m_D\,\bigl(x(Z)-a_D\bigr)=m_{D'}\bigl(x(Z)-a_{D'}\bigr)
+\]
+are positive, so the slopes $m_D$ and $m_{D'}$ have the same sign.
+Denote this sign by $\tau$, so that $\tau\,y(Z)>0$.
+Further, $x(R\cap D)>n^6>n>|a_D|$ by the estimate of Step 1, so $\tau\,y(R\cap D)>0$, and the same holds for $D'$.
+Thus all three vertices of $T$ lie on the same side of $Y_0$.
+
+We estimate their distance from $Y_0$.
+The slopes of both lines of the wedge are at least $m'$ in absolute value (both lines differ from $Y_0$) and at most $1/2$ by the estimate of Step 1, so $1-m_D\in[1/2,3/2]$ and
+\[
+\bigl|y(R\cap D)\bigr|=\frac{|m_D|\,(\delta-a_D)}{1-m_D}
+\ \ge\ \frac{2\,m'\,(2n^6-n)}3\ >\ m'n^6 ,
+\]
+and the same holds for $D'$.
+For the vertex $Z$, we take the line of the wedge that is new: each of the $n/2+1$ wedges except $(Y_0,M_n)$ involves a line $M_j$ with $j\le n-1$.
+The point $M_j\cap L_{n-2}$ lies on $M_j$, and $Z$ is the rightmost intersection point on $M_j$, so by \eqref{eq:L-M-coord}
+\[
+x(Z)\ \ge\ x(M_j\cap L_{n-2})\ >\ a_{n-2}-\frac3{n^9} .
+\]
+The values $b_j=\tan\beta_j$ increase with $j$, so $b_j\le b_{n-1}=\cot\frac{3\pi}{2n}$ and
+\[
+x(Z)-b_j\ >\ \cot\frac\pi n-\cot\frac{3\pi}{2n}-\frac3{n^9}
+=\frac{\sin\frac\pi{2n}}{\sin\frac\pi n\,\sin\frac{3\pi}{2n}}-\frac3{n^9}
+\ >\ \frac{2n}{3\pi^2}-\frac3{n^9}\ >\ \frac n{16} ,
+\]
+where we used $\sin x>2x/\pi$ on $(0,\pi/2)$ for the numerator and $\sin x<x$ for the denominator.
+Hence
+\[
+|y(Z)|=|\mu_j|\,\bigl(x(Z)-b_j\bigr)>\frac{m'n}{16} .
+\]
+Both bounds, $m'n^6$ and $m'n/16$, exceed $m'/2n$ for $n\ge6$, so all three vertices of $T$ lie in the half-plane $\tau y\ge m'/2n$. This half-plane is convex, so the whole triangle $T$ lies in it and does not meet the strip $S$.
+
+The triangle $\Delta_{2n}=RY_0M_n$, by contrast, meets the strip $S$: two of its vertices, $R\cap Y_0=(\delta,0)$ and $Y_0\cap M_n=(b_n,0)$, lie on the line $Y_0$ itself.
+\end{proof}
+
+We need to count the triangular faces of the arrangement $\mathcal A_s\cup\{R\}$.
+\Cref{lem:r-avoids} below shows that the line $R$ cuts no triangular face of $\mathcal A_s$.
+Then the numbers of triangular faces of $\mathcal A_s$ and of $R$-triangles can simply be added.
+
+\begin{lemma}\label{lem:r-avoids}
+For each $0\le s\le t$, the line $R$ passes through no intersection point of $\mathcal A_s$ and has no common points with the interior of any triangular face of $\mathcal A_s$.
+Consequently, adding $R$ preserves the multiplicities of all points, all triangular faces of $\mathcal A_s$ remain faces of $\mathcal A_s\cup\{R\}$, and
+\begin{equation}\label{eq:a3-with-R}
+a_3(\mathcal A_s\cup\{R\})
+=a_3(\mathcal A_s)+r(\mathcal A_s\cup\{R\}).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Denote by $V=L_2\cap L_3$ the intersection point of the starting arrangement on the two lines with large slopes $\mp\eta$. The point $V$ is simple in $\mathcal A_0$ by \cref{lem:seed}, and hence in all $\mathcal A_s$ by \cref{lem:doubling}. Set
+\[
+\Pi=\left\{(x,y):|x|\le\frac{n_t^6}{64},\ |y|\le\frac{n_t^6}{64}\right\}.
+\]
+
+\emph{All intersection points of $\mathcal A_s$ except $V$ lie in $\Pi$.}
+For the intersection points of the starting arrangement, this is \cref{lem:seed-box}: all points except $V$ have both coordinates less than 14 in absolute value, and $n_t^6/64\ge6^6/64=729$.
+An intersection point added at the step with $n=n_{s'}$, $s'<s$, lies on at least one new line $M_j$. Therefore by \eqref{eq:strip} its $y$-coordinate is less than $m_{\min}(\mathcal A_{s'})/n_{s'}<1$ in absolute value, and its $x$-coordinate does not exceed $n_{s'}^6\le(n_t/2)^6=n_t^6/64$ in absolute value.
+Indeed, for points of the form $M_i\cap M_j$, the $x$-coordinate is bounded by \eqref{eq:x-far}. The point $M_j\cap Y_0$ has $x$-coordinate $b_j$ with $|b_j|<2n_{s'}/\pi$ by~\cite[(3)]{bbl}, and the $x$-coordinate of the point $M_j\cap L_i$ differs from $a_i$ by less than $3/n_{s'}^9$ by \eqref{eq:L-M-coord}, where $|a_i|\le\cot(\pi/n_{s'})<n_{s'}/\pi$ by \eqref{eq:x-grid}. So in the last two cases the $x$-coordinate is less than $n_{s'}$ in absolute value.
+
+\emph{$R$ does not enter $\Pi$ and contains no intersection points of $\mathcal A_s$.}
+In $\Pi$ we have
+\[
+x-y\le \frac{n_t^6}{32}<2n_t^6=\delta,
+\]
+whereas $x-y=\delta$ everywhere on $R$. For the point $V$, the difference $x-y$ equals $3n_t^6\neq\delta$. Hence $R$ contains no intersection points of $\mathcal A_s$: adding $R$ preserves the multiplicities, and all points on $R$ in $\mathcal A_s\cup\{R\}$ are simple.
+
+\emph{Faces without the vertex $V$.} A bounded face of a line arrangement is a convex polygon, hence the convex hull of its vertices, and each of its vertices is an intersection point of lines of the arrangement.
+The set $\Pi$ is also convex. Hence a face all of whose vertices lie in $\Pi$ lies entirely in $\Pi$ and does not meet $R$.
+
+\emph{No triangular face has the vertex $V$, for any $s$.}
+Here the lines $L_1,\ldots,L_6$ keep their labels from the starting arrangement.
+On the line $L_2$ the slope is $-\eta<0$, so $x=-1/\sqrt3-y/\eta$, and the order of the intersection points by $x$-coordinate is opposite to their order by $y$-coordinate.
+By \cref{cor:rightmost-L2}, the point $V$ is the rightmost intersection point of $\mathcal A_0$ on $L_2$, and its neighbor is $L_2\cap L_6$. Hence $y(L_2\cap L_6)$ is the smallest $y$-coordinate among the intersection points of $\mathcal A_0$ on $L_2$ other than $V$, and $y(L_2\cap L_6)<-1$ by \cref{lem:seed-box}.
+Every new intersection point on $L_2$, at whatever step it appears, lies in the strip \eqref{eq:strip} of its step.
+These strips shrink: at step $s'$ the strip is $|y|<m_{\min}(\mathcal A_{s'})/n_{s'}$, where the denominator grows with $s'$ and the numerator decreases by \eqref{eq:m-min}.
+The widest strip corresponds to the step $s'=0$, where $m_{\min}(\mathcal A_0)=2/5$ by \cref{lem:uv} and $n_0=6$, and gives $|y|<1/15$.
+Therefore the new intersection points lie above $L_2\cap L_6$, that is, to the left of it, and the neighbor of $V$ on $L_2$ is the same point $L_2\cap L_6$ in all $\mathcal A_s$.
+Similarly, on $L_3$ the slope is $\eta>0$, and the order by $x$-coordinate coincides with the order by $y$-coordinate. Here $V$ is the leftmost intersection point, and its neighbor is the triple point $Q=L_1\cap L_3\cap L_5$ with $y(Q)<-1$. The new intersection points have $|y|<1/15$, so they lie above $Q$, that is, to the right of it.
+A triangular face with the vertex $V$ would be bounded by $L_2$, $L_3$, and a line $D$ whose intersection points with both of them are neighbors of $V$. But then $D=L_6$ and at the same time $D\in\{L_1,L_5\}$, a contradiction.
+
+\emph{Conclusion.} No triangular face of $\mathcal A_s$ meets $R$, so all of them remain faces of $\mathcal A_s\cup\{R\}$.
+Conversely, let $F$ be a triangular face of $\mathcal A_s\cup\{R\}$ without a side on $R$.
+It is contained in a unique face $G$ of $\mathcal A_s$. If $R$ cut $G$, then $F$ would be one of the pieces and would have a side on $R$. Hence $R$ does not cut $G$, and $F=G$.
+Thus the triangular faces of $\mathcal A_s\cup\{R\}$ are exactly the triangular faces of $\mathcal A_s$ and the $R$-triangles, which gives \eqref{eq:a3-with-R}.
+\end{proof}
+
+\subsection{\texorpdfstring{Proof of Theorem~\ref{thm:series}}{Proof of the theorem}}
+
+We check that \cref{lem:doubling,lem:r-triangle} apply to each $\mathcal A_s$, $0\le s<t$.
+For $\mathcal A_0$, where $n=6$, we check (D1) on the lines \eqref{eq:base-lines}. The $x$-intercepts of $L_1,\ldots,L_4$ are $-\sqrt3,-1/\sqrt3,1/\sqrt3,\sqrt3$, that is, $\tan(k\pi/6)$ with $1\le|k|\le2$, and for the special pair they are $-\varepsilon<0<\varepsilon$, where $\varepsilon\le1/24<1/6$ by \eqref{eq:A-num}.
+Condition (D2) holds: $L_{n-1}=L_5$ (with $x$-intercept $-\varepsilon<0$) and $L_n=L_6$ have slopes $u<0<v$ by \cref{lem:uv}.
+Finally, we check (D3). By \cref{lem:seed-orders}, the lines cross $Y_0$ in the order $L_1,L_2,L_5,L_6,L_3,L_4$, and by \cref{app:seed-faces} the triangular faces of $\mathcal A_0$ with a side on $Y_0$ are
+\[
+Y_0L_1L_2,\quad Y_0L_2L_5,\quad Y_0L_5L_6,\quad Y_0L_3L_6,\quad Y_0L_3L_4,
+\]
+exactly one on each bounded segment.
+They alternate between the two sides of $Y_0$: by the argument at the end of the proof of \cref{lem:doubling}, two consecutive triangles on the same side would require three consecutive lines among $L_1,L_2,L_5,L_6,L_3,L_4$ to pass through one point, while the only multiple points $P=L_1\cap L_4\cap L_6$ and $Q=L_1\cap L_3\cap L_5$ are not of this form.
+The transition from $\mathcal A_s$ to $\mathcal A_{s+1}$ is provided by \cref{lem:doubling}: under condition \eqref{eq:special-slopes}, the arrangement $\mathcal B$ satisfies (D1)--(D3) with $2n$ in place of $n$. At step $s$, condition \eqref{eq:special-slopes} means $\varepsilon<1/2n_s$, which holds since $\varepsilon=1/4n_t\le1/4n_s<1/2n_s$.
+Therefore the original pair $L_5,L_6$ remains the special pair in all $\mathcal A_s$, so the signs $u<0<v$ and $\sigma=-1$ carry over as well.
+
+The other hypotheses of \cref{lem:r-triangle} also hold.
+First, $\delta=2n_t^6\ge2n_s^6$, since $n_s\le n_t$.
+Second, the slope of the line $L_{n_s-2}$ is at most $1/2$ in absolute value and has the required sign.
+For $s=0$, this line is $L_4$ with positive slope $2/5$, as required for $n=6$.
+For $s\ge1$, it is the line $M_j$ of step $s-1$ with $j=n_{s-1}$ and slope $|\mu_j|<2m_{\min}(\mathcal A_{s-1})/n_{s-1}^{10}<1/2$, since $m_{\min}(\mathcal A_{s-1})\le m_{\min}(\mathcal A_0)=2/5$ by \eqref{eq:m-min} and \cref{lem:uv}.
+Its parameter $\beta_j=\pi/2-\pi/2n_{s-1}$ lies in $(0,\pi/2)$, so $\sin(2\beta_j)>0$ and $b_j>0$, and by \eqref{eq:new-lines}, $\mu_j<0$.
+Third, condition (W1) for $s=0$ is \cref{cor:rightmost-L4}, and the transition from $s$ to $s+1$ is provided by \cref{lem:first-step,lem:right-wedges}.
+Fourth, condition (W2): for $s=0$ the strip \eqref{eq:strip} is $|y|<m_{\min}(\mathcal A_0)/n_0=1/15$ by \cref{lem:uv}. By \cref{lem:r-triangles-below}, the four $R$-triangles other than $\Delta_6=RY_0L_4$ lie in the half-plane $y\le-1$ and therefore do not meet the strip, whereas $\Delta_6$ contains the point $(\delta,0)$ and meets it. The transition from $s$ to $s+1$ is provided by \cref{lem:r-triangle}.
+
+The arrangement $\mathcal A_0$ has exactly two triple points $P$, $Q$ and no other multiple points (\cref{lem:seed}). By \cref{lem:doubling}, each doubling step preserves the multiple points together with their multiplicities and creates no new ones, and adding $R$ does not change multiplicities (\cref{lem:r-avoids}). Hence $\mathcal C_t$ has exactly two triple points.
+
+For $0\le s\le t$, let $A_s=a_3(\mathcal A_s)$ and $r_s=r(\mathcal A_s\cup\{R\})$. By \cref{lem:seed},
+\[
+A_0=10,
+\qquad
+r_0=5.
+\]
+For $0\le s<t$, \cref{lem:doubling,lem:r-triangle} give
+\[
+A_{s+1}=A_s+n_s^2,
+\qquad
+r_{s+1}=r_s+\frac{n_s}{2}.
+\]
+Summing the geometric progressions
+\[
+\sum_{s=0}^{t-1}n_s^2=36\sum_{s=0}^{t-1}4^s=12\left(4^t-1\right),
+\qquad
+\sum_{s=0}^{t-1}\frac{n_s}2=3\sum_{s=0}^{t-1}2^s=3\left(2^t-1\right),
+\]
+and substituting $n_t^2=36\cdot4^t$, $n_t=6\cdot2^t$, we obtain
+\[
+A_t=10+12\left(4^t-1\right)=\frac{n_t^2}{3}-2,
+\qquad
+r_t=5+3\left(2^t-1\right)=\frac{n_t}{2}+2,
+\]
+and therefore, by \cref{lem:r-avoids},
+\[
+a_3(\mathcal C_t)=A_t+r_t
+=\frac{n_t^2}{3}+\frac{n_t}{2}.
+\]
+Since $N_t=n_t+2$,
+\[
+a_3(\mathcal C_t)=
+\frac{N_t(N_t-\frac52)+1}{3},
+\]
+which is \eqref{eq:a3-series}. \qed

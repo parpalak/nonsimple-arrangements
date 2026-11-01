@@ -1,0 +1,276 @@
+\section{Arrangements attaining the conjectured bound}\label{app:figures}
+
+This appendix collects the arrangements referred to in the main text, in increasing order of $n$.
+The optimal arrangements for $n=6,10,12$ (\cref{fig:n6-all,fig:n10,fig:n10-all,fig:n12-all}) give the lower bounds of \cref{thm:small-n}; the two non-stretchable optima for $n=10$ are drawn with pseudolines (\cref{fig:n10-nonstretchable}).
+\Cref{fig:n26} shows the member $\mathcal C_2$ of the series of \cref{thm:series}.
+Augmentation (\cref{sec:augment}) gives the arrangements of 20, 32 and 44 pseudolines in \cref{fig:n20,fig:n20-collapse,fig:n32,fig:n44}.
+Doubling the arrangement of \cref{fig:n20-collapse} gives the pseudoline series $18\cdot2^t+2$ discussed in \cref{sec:discussion}, whose members with $n=38,74$ are stretchable (\cref{fig:n38,tab:n74-lines}), and doubling that of \cref{fig:n32} gives the series $30\cdot2^t+2$.
+\Cref{tab:n20-collapse-lines,tab:n32-lines,tab:n38-lines,tab:n74-lines} give the equations of the stretched arrangements.
+
+Different shades correspond to different phases of the local coloring (\cref{fig:phase-seam}); unbounded triangles are lighter.
+The boundaries between the phases are thus the unused and double segments, that is, the part of the phase seam (\cref{def:seam}) visible in the affine chart.
+\Cref{fig:n44} is not colored.
+
+The coefficients $m_i,b_i$ in the tables are exact.
+We checked in rational arithmetic that for these values the triple points are exact, the order of the crossings on every line agrees with the word of the arrangement, and the number of triangles is as stated.
+
+For brevity, letters in the words are written as their initial slot followed by $m-2$ asterisks: a simple crossing $(g,2)\mapsto g$, a triple point $(g,3)\mapsto g*$, a crossing of multiplicity 4 $(g,4)\mapsto g**$, and so on.
+
+
+\newcommand\ngap{\hspace{0.01\linewidth}}
+% Grid cell for n=6: 3 pictures of 0.326 and 2 gaps of 0.01 of the line width
+% (the sum must not exceed 1, otherwise the last picture wraps to the next line).
+\newcommand\nsix[1]{\begin{minipage}{0.326\linewidth}\input{figures/n6/6-#1}\end{minipage}}
+
+\begin{figure}[t]
+\centering
+\nsix{1330sgdjqf8p8}\ngap\nsix{1nevwww2r41us}\ngap\nsix{3asa5zegavnkz}\par\vspace{1mm}
+\nsix{3pkh1zclcef98}\ngap\nsix{2d5kqooycn0g3}\ngap\nsix{3aiagxuwsbcdh}
+\caption{All 6 optimal arrangements for $n=6$ ($a_3=7$), with $t_3=0,0,1$ in the first row and $t_3=2,3,3$ in the second.}
+\label{fig:n6-all}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+% Both figures have the same picture height, 0.685 of the line width (the largest that fits
+% the page together with the caption); the gap between pictures is as in the grids.
+\begin{minipage}{0.685\linewidth}\input{figures/n10/27}\end{minipage}\par\vspace{1mm}
+\begin{minipage}{0.685\linewidth}\input{figures/n10/65}\end{minipage}
+\caption{Optimal arrangements for $n=10$ with 10 triple points. Top: \texttt{0 2 4 6 5 4 3 1* 3* 6 5 8 6* 4* 2* 0* 8 6* 4* 2* 1 4 3 5* 7}. Bottom: \texttt{0 2 4 6 8 7 6 5 3* 1* 0 5* 3* 1* 8 7 5* 3* 2 1 7* 5* 3* 5 7}.}
+\label{fig:n10}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+% Width 0.685/0.87221 of the line width: the same picture height as in fig:n10.
+\begin{minipage}{0.785\linewidth}\input{figures/n10/non-stretchable-1}\end{minipage}\par\vspace{1mm}
+\begin{minipage}{0.785\linewidth}\input{figures/n10/non-stretchable-2}\end{minipage}
+\caption{Non-stretchable optimal arrangements for $n=10$ with 10 triple points, drawn with pseudolines. Top: \texttt{0 1 3 6 7 5* 4 2* 0* 4* 2* 6* 4* 8 6* 5 3* 1* 0 3 4 6 5 4 6}. Bottom: \texttt{0 1 4 3 6 8 7 6 4* 2* 0* 6 4* 2* 1 8 6* 4* 2* 1 8 6* 4* 3 6}.
+  Non-stretchability was verified by the method of biquadratic final polynomials~\cite{br90}; the certificates are in the repository~\cite{nonsimple-arrangements}.}
+\label{fig:n10-nonstretchable}
+\end{figure}
+
+% Grid cell: 5 pictures of 0.192 and 4 gaps of 0.01 of the line width.
+\newcommand\nten[1]{\begin{minipage}{0.192\linewidth}\input{figures/n10/#1}\end{minipage}}
+
+\begin{figure}[p]
+\noindent\nten{10}\ngap\nten{14}\ngap\nten{15}\ngap\nten{16}\ngap\nten{24}\par\vspace{1mm}
+\noindent\nten{25}\ngap\nten{26}\ngap\nten{33}\ngap\nten{37}\ngap\nten{38}\par\vspace{1mm}
+\noindent\nten{40}\ngap\nten{41}\ngap\nten{42}\ngap\nten{44}\ngap\nten{45}\par\vspace{1mm}
+\noindent\nten{47}\ngap\nten{48}\ngap\nten{49}\ngap\nten{50}\ngap\nten{51}\par\vspace{1mm}
+\noindent\nten{52}\ngap\nten{54}\ngap\nten{56}\ngap\nten{57}\ngap\nten{58}\par\vspace{1mm}
+\noindent\nten{59}\ngap\nten{60}\ngap\nten{61}\ngap\nten{62}\ngap\nten{63}\par\vspace{1mm}
+\noindent\nten{64}\ngap\nten{66}\ngap\nten{67}\ngap\nten{68}\ngap\nten{69}
+\caption{Optimal arrangements for $n=10$ ($a_3=25$): the stretchable arrangements other than those in \cref{fig:n10}, in increasing order of the number $t_3$ of triple points. Here $t_3=0$.}
+\label{fig:n10-all}
+\end{figure}
+
+\begin{figure}[p]
+\ContinuedFloat
+\noindent\nten{70}\ngap\nten{07}\ngap\nten{17}\ngap\nten{18}\ngap\nten{21}\par\vspace{1mm}
+\noindent\nten{23}\ngap\nten{30}\ngap\nten{39}\ngap\nten{55}\ngap\nten{04}\par\vspace{1mm}
+\noindent\nten{13}\ngap\nten{22}\ngap\nten{03}\ngap\nten{05}\ngap\nten{12}\par\vspace{1mm}
+\noindent\nten{28}\ngap\nten{29}\ngap\nten{02}\ngap\nten{11}\ngap\nten{35}\par\vspace{1mm}
+\noindent\nten{01}\ngap\nten{06}\ngap\nten{19}\ngap\nten{53}\ngap\nten{09}\par\vspace{1mm}
+\noindent\nten{20}\ngap\nten{34}\ngap\nten{43}\ngap\nten{08}\ngap\nten{36}\par\vspace{1mm}
+\noindent\nten{46}\ngap\nten{31}\ngap\nten{32}
+\caption[]{(continued) The first picture is the last one with $t_3=0$. It is followed, row by row, by $t_3=1$ (8 arrangements), $2$ (3), $3$ (5), $4$ (3), $5$ (3), $6$ (1), $7$ (4), $8$ (3), $9$ (2).}
+\end{figure}
+
+% Grid cell for n=12: 4 pictures of 0.2425 and 3 gaps of 0.01 of the line width.
+\newcommand\ntw[1]{\begin{minipage}{0.2425\linewidth}\input{figures/n12/#1}\end{minipage}}
+
+\begin{figure}[p]
+\noindent\ntw{05}\ngap\ntw{06}\ngap\ntw{09}\ngap\ntw{13}\par\vspace{1mm}
+\noindent\ntw{14}\ngap\ntw{15}\ngap\ntw{17}\ngap\ntw{18}\par\vspace{1mm}
+\noindent\ntw{02}\ngap\ntw{08}\ngap\ntw{16}\ngap\ntw{19}\par\vspace{1mm}
+\noindent\ntw{01}\ngap\ntw{03}\ngap\ntw{04}\ngap\ntw{11}\par\vspace{1mm}
+\noindent\ntw{12}\ngap\ntw{10}\ngap\ntw{07}
+\caption{All 19 optimal arrangements for $n=12$ ($a_3=38$) in increasing order of the number of triple points: $t_3=2$ (the first two rows), $3$ (the third row), $4$ (the fourth row and the first picture of the fifth), $5$ and $6$.}
+\label{fig:n12-all}
+\end{figure}
+
+\begin{figure}[p]
+\noindent\input{figures/n20/20-2dlmjzueiap0b}
+\caption{An arrangement of 20 lines with $a_3=117$ triangles and 6 triple points, obtained by direct augmentation (\cref{sec:augment}).}
+\label{fig:n20}
+\end{figure}
+
+\begin{figure}[p]
+\noindent\input{figures/n20/20-amf7ix7zqi9a}
+\caption{An arrangement of 20 lines with $a_3=117$ triangles and 3 triple points, obtained by collapse augmentation (\cref{sec:augment}).}
+\label{fig:n20-collapse}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Equations $y=m_ix+b_i$ of the lines of the arrangement in \cref{fig:n20-collapse}. The triple points lie on line 13 together with the pairs of lines $\{5,7\}$, $\{6,10\}$, $\{8,11\}$.}
+\label{tab:n20-collapse-lines}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{rrr@{\qquad}rrr}
+\toprule
+$i$ & $m_i$ & $b_i$ & $i$ & $m_i$ & $b_i$ \\
+\midrule
+0 & $-0.034$ & $-0.8668$ & 10 & $12.4722$ & $-49.01273808$ \\
+1 & $-0.1424$ & $0.7687$ & 11 & $5.3816$ & $-8.8336011$ \\
+2 & $-0.3026$ & $-3.2348$ & 12 & $3.3902$ & $-9.8084$ \\
+3 & $-0.4915$ & $1.1772$ & 13 & $2.4386$ & $-0.9237$ \\
+4 & $-0.639$ & $0.6319$ & 14 & $1.2157$ & $-3.5408$ \\
+5 & $-0.7707$ & $4.87422138$ & 15 & $0.833$ & $-1.7987$ \\
+6 & $-1.1086$ & $16.07732016$ & 16 & $0.6615$ & $-2.1437$ \\
+7 & $-4.1366$ & $10.95505632$ & 17 & $0.4958$ & $-0.5564$ \\
+8 & $-6.343$ & $22.67860632$ & 18 & $0.3773$ & $-2.1232$ \\
+9 & $-13.0923$ & $24.1398$ & 19 & $0.034$ & $0.8634$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[p]
+\noindent\input{figures/n26/26-3ib8pjphuw1a0}
+\caption{An arrangement of 26 lines with $a_3=204$ triangles and 2 triple points, combinatorially equivalent to $\mathcal C_2$ of \cref{thm:series}. The positions of the lines are changed for readability.}
+\label{fig:n26}
+\end{figure}
+
+\begin{figure}[p]
+% Inset: close-up of the center in the upper right corner, 0.5665 x 0.618 of the line width,
+% raised by 1.5 - 0.618 = 0.882 of the line width to the top edge of the overall view.
+\noindent\input{figures/n32/32-31imvjadxi50t}\unskip\llap{\raisebox{0.882\linewidth}{\begin{minipage}[b]{0.5665\linewidth}\input{figures/n32/32-31imvjadxi50t-zoom}\end{minipage}}}
+\caption{An arrangement of 32 lines with $a_3=315$ triangles and 4 triple points, obtained by direct augmentation (\cref{sec:augment}). Upper right: the framed region, enlarged.}
+\label{fig:n32}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Equations $y=m_ix+b_i$ of the lines of the arrangement in \cref{fig:n32}. The triple points lie on line 5 together with the pairs of lines $\{0,2\}$, $\{1,31\}$, $\{25,27\}$, $\{28,30\}$.}
+\label{tab:n32-lines}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{rrr@{\qquad}rrr}
+\toprule
+$i$ & $m_i$ & $b_i$ & $i$ & $m_i$ & $b_i$ \\
+\midrule
+0 & $-0.06476$ & $-0.7560626464$ & 16 & $4.11657$ & $12.85756$ \\
+1 & $-0.1772$ & $4.0055813476$ & 17 & $2.86853$ & $15.03237$ \\
+2 & $-0.19072$ & $1.096562072$ & 18 & $2.80636$ & $9.09436$ \\
+3 & $-0.62491$ & $0.88298$ & 19 & $2.33795$ & $10.55365$ \\
+4 & $-1.61302$ & $-8.02093$ & 20 & $2.12481$ & $7.49822$ \\
+5 & $-1.74892$ & $24.01463$ & 21 & $1.85599$ & $7.50283$ \\
+6 & $-1.82634$ & $6.28754$ & 22 & $1.16509$ & $-2.18024$ \\
+7 & $-1.91825$ & $-10.33657$ & 23 & $0.59231$ & $0.48538$ \\
+8 & $-2.06335$ & $-8.8103$ & 24 & $0.54137$ & $-2.54997$ \\
+9 & $-2.09887$ & $-12.3846$ & 25 & $0.41874$ & $-1.8998753596$ \\
+10 & $-3.7305$ & $-13.36831$ & 26 & $0.39469$ & $-10.62239$ \\
+11 & $-5.84564$ & $-35.30939$ & 27 & $0.26104$ & $-0.0145623976$ \\
+12 & $-7.7291$ & $-25.79848$ & 28 & $0.19652$ & $-1.9637835856$ \\
+13 & $-22.151$ & $-144.70811$ & 29 & $0.18978$ & $0.89411$ \\
+14 & $13.67108$ & $42.57195$ & 30 & $0.11893$ & $-0.9276862965$ \\
+15 & $5.69142$ & $32.4434$ & 31 & $0.06777$ & $0.8869491177$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[p]
+% Inset: close-up of the center in the lower left corner, 0.726 of the line width. It
+% is typeset after the overall view so that it lies on top of it. \unskip removes the space
+% left by the end of the overall-view file: with it the line is wider than \linewidth, and
+% the inset moves to the next line.
+\noindent\input{figures/n38/38-1l8x1qx7on4je}\unskip\llap{\begin{minipage}[b]{0.726\linewidth}\input{figures/n38/38-1l8x1qx7on4je-zoom}\end{minipage}\hspace{0.274\linewidth}}
+\caption{An arrangement of 38 lines with $a_3=450$ triangles and 3 triple points: the doubling of \cref{fig:n20-collapse} in pseudolines, stretched. Lower left: the framed region, enlarged.}
+\label{fig:n38}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Equations $y=m_ix+b_i$ of the lines of the arrangement in \cref{fig:n38}. The triple points lie on line 20 together with the pairs of lines $\{12,14\}$, $\{13,17\}$, $\{15,18\}$.}
+\label{tab:n38-lines}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{rrr@{\qquad}rrr}
+\toprule
+$i$ & $m_i$ & $b_i$ & $i$ & $m_i$ & $b_i$ \\
+\midrule
+0 & $-0.04793$ & $0.6523$ & 19 & $39.45675$ & $-3.68082$ \\
+1 & $-0.0852$ & $-1.02173$ & 20 & $30.00493$ & $32.33556$ \\
+2 & $-0.17455$ & $0.54753$ & 21 & $7.85177$ & $6.5065$ \\
+3 & $-0.21998$ & $-0.99642$ & 22 & $4.83331$ & $9.25869$ \\
+4 & $-0.29208$ & $0.36745$ & 23 & $4.55319$ & $7.42156$ \\
+5 & $-0.32849$ & $-0.87598$ & 24 & $3.07899$ & $10.56713$ \\
+6 & $-0.38084$ & $0.14532$ & 25 & $2.65403$ & $6.21769$ \\
+7 & $-0.4004$ & $-0.69737$ & 26 & $1.39238$ & $10.9832$ \\
+8 & $-0.42956$ & $-0.12128$ & 27 & $1.32243$ & $7.00528$ \\
+9 & $-0.43625$ & $-0.4151$ & 28 & $0.45188$ & $10.11089$ \\
+10 & $-0.90749$ & $9.22924$ & 29 & $0.34272$ & $0.05092$ \\
+11 & $-2.40272$ & $7.63847$ & 30 & $0.3251$ & $0.28583$ \\
+12 & $-2.59757$ & $15.581461275$ & 31 & $0.31861$ & $-0.22649$ \\
+13 & $-2.99387$ & $52.766107044$ & 32 & $0.27275$ & $0.46675$ \\
+14 & $-9.7393$ & $11.9113976453$ & 33 & $0.26314$ & $-0.5276$ \\
+15 & $-10.3901$ & $17.0924954295$ & 34 & $0.18314$ & $0.59326$ \\
+16 & $-12.70956$ & $5.44985$ & 35 & $0.17127$ & $-0.76651$ \\
+17 & $-170.97458$ & $156.7680040263$ & 36 & $0.07339$ & $0.66667$ \\
+18 & $1406.69858$ & $551.8309088275$ & 37 & $0.05342$ & $-0.93754$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[p]
+\centering
+\small
+\caption{Equations $y=m_ix+b_i$ of an arrangement of 74 lines with $a_3=1764$ triangles and 3 triple points. It is obtained from the arrangement in \cref{fig:n20-collapse} by two steps of combinatorial doubling in pseudolines, analogous to \cref{sec:series}, and then stretched. This is the third member of the series $18\cdot2^t+2$. The triple points lie on line 40 together with the pairs of lines $\{32,34\}$, $\{33,37\}$, $\{35,38\}$.}
+\label{tab:n74-lines}
+\begin{tabular}{rrr@{\qquad}rrr}
+\toprule
+$i$ & $m_i$ & $b_i$ & $i$ & $m_i$ & $b_i$ \\
+\midrule
+0 & $-6.65426468$ & $-1091.43745452$ & 37 & $0.14421861$ & $55.116043480362134$ \\
+1 & $-6.64810537$ & $-1090.3864598$ & 38 & $0.14432907$ & $55.1143550503036888$ \\
+2 & $-6.13520075$ & $-1003.89886196$ & 39 & $0.14480079$ & $55.20455821$ \\
+3 & $-6.13374755$ & $-1003.64270684$ & 40 & $0.14497591$ & $55.21414649$ \\
+4 & $-5.70667318$ & $-931.62880038$ & 41 & $0.14739226$ & $55.63755173$ \\
+5 & $-5.70571304$ & $-931.45708301$ & 42 & $0.14962877$ & $56.00380269$ \\
+6 & $-5.35498219$ & $-872.31688205$ & 43 & $0.15029264$ & $56.12302765$ \\
+7 & $-5.35409169$ & $-872.15825542$ & 44 & $0.15480384$ & $56.85487027$ \\
+8 & $-5.0732397$ & $-824.80147333$ & 45 & $0.15584749$ & $57.07155497$ \\
+9 & $-5.07157073$ & $-824.51294547$ & 46 & $0.40556958$ & $98.28282147$ \\
+10 & $-4.85294201$ & $-787.64847296$ & 47 & $0.4076748$ & $99.52353415$ \\
+11 & $-4.85223516$ & $-787.52360093$ & 48 & $0.40962048$ & $99.85523857$ \\
+12 & $-4.68721255$ & $-759.69817544$ & 49 & $0.42701422$ & $102.7788107$ \\
+13 & $-4.68657182$ & $-759.58585996$ & 50 & $0.44390213$ & $105.63945342$ \\
+14 & $-4.57304306$ & $-740.44325058$ & 51 & $0.48516687$ & $112.57837511$ \\
+15 & $-4.57239659$ & $-740.33138239$ & 52 & $0.54937296$ & $123.42912769$ \\
+16 & $-4.5057611$ & $-729.09571234$ & 53 & $0.66546018$ & $142.9647525$ \\
+17 & $-4.50513696$ & $-728.98903225$ & 54 & $0.86891663$ & $177.32112487$ \\
+18 & $-4.48337368$ & $-725.31945462$ & 55 & $1.47866731$ & $280.03295081$ \\
+19 & $-1.5910024$ & $-237.37186659$ & 56 & $-13.67391141$ & $-2275.26702125$ \\
+20 & $-0.41986925$ & $-40.02412869$ & 57 & $-13.66831944$ & $-2274.3218405$ \\
+21 & $-0.41815525$ & $-39.68721726$ & 58 & $-13.29563964$ & $-2211.47504171$ \\
+22 & $-0.21753219$ & $-5.89835333$ & 59 & $-13.28440237$ & $-2209.57379786$ \\
+23 & $-0.20294042$ & $-3.41383947$ & 60 & $-12.60118553$ & $-2094.35988763$ \\
+24 & $-0.1330755$ & $8.34706968$ & 61 & $-12.59582406$ & $-2093.44621711$ \\
+25 & $-0.13299121$ & $8.37372571$ & 62 & $-11.69989116$ & $-1942.36153415$ \\
+26 & $-0.10862691$ & $12.47316892$ & 63 & $-11.69402363$ & $-1941.36001817$ \\
+27 & $-0.10854949$ & $12.49109486$ & 64 & $-10.71044458$ & $-1775.49620678$ \\
+28 & $0.12516097$ & $51.93883116$ & 65 & $-10.70593721$ & $-1774.72250631$ \\
+29 & $0.13048166$ & $52.71558026$ & 66 & $-9.72673613$ & $-1609.59816906$ \\
+30 & $0.13483437$ & $53.53791167$ & 67 & $-9.72381877$ & $-1609.09187701$ \\
+31 & $0.13954354$ & $54.3160826$ & 68 & $-8.80670122$ & $-1454.43810158$ \\
+32 & $0.14060184$ & $54.5227052048622872$ & 69 & $-8.80451216$ & $-1454.05453181$ \\
+33 & $0.14086713$ & $54.6818822830280324$ & 70 & $-7.98207725$ & $-1315.36845915$ \\
+34 & $0.14291553$ & $54.8884471310340848$ & 71 & $-7.97990258$ & $-1314.98770823$ \\
+35 & $0.1430402$ & $54.9155142351386022$ & 72 & $-7.26432733$ & $-1194.32251028$ \\
+36 & $0.14305875$ & $54.90438146$ & 73 & $-7.26218807$ & $-1193.9484859$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[p]
+\noindent\resizebox{\linewidth}{!}{\input{figures/n44/44}}
+
+\smallskip
+{\noindent\fontsize{5}{5.5}\selectfont\ttfamily 1 3 5 7 9 11 13 12 11 10 9 8 7 6 5 4 3 2 1 3 5 7 9 11 13 15 14 13 12 11 10 9 8 7 6 5 4 3 5 7 9 11 13 15 14 13 12 11 10 9 8 7 6 5 7 9 11 13 15 17 19 21 23 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 9 11 13 15 17 16 15 14 13 12 11 10 9 11 13 15 17 19 18 17 16 15 14 13 12 11 13 15 17 19 18 17 16 15 14 13 15 17 19 21 23 22 21 20 19 18 17 16 15 17 19 21 20 19 18 17 19 21 23 25 24 23 22 21 20 19 21 23 25 27 26 25 24 23 22 21 23 25 27 29 28 27 29 31 33 32 31 33 34 36 38 37 36 35 33* 36 38 40 39 38 37 36 35 34 32* 31 30 29 31* 34 36 38 40 42 41 40 39 38 37 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 1 3 5 7 9 11 13 15 17 19 21 23 25 27 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 3 5 7 9 11 13 15 17 19 21 23 25 27 29 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 5 7 9 11 13 15 17 19 21 23 25 27 29 31 34 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 7 9 11 13 15 17 19 21 23 25 27 29 31 33* 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 9 11 13 15 14 13 15 17 19 21 23 25 27 29 31 33 32 34 36 35 34 36 38 37 36 35 34 33 31* 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 17 19 21 23 25 27 29 31 30 32 34 36 38 40 39 38 37 36 35 34 33 32 31 29* 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 11 13 15 14 13 12 11 13 15 17 19 21 23 25 27 29 28 30 32 34 36 38 40 42 41 40 39 38 37 36 35 34 33 32 31 30 29 27* 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 3 5 7 9 8 7 6 5 4 3 5 7 9 11 10 9 8 7 6 5 7 9 11 13 15 17 16 15 17 19 18 17 19 21 20 19 18 17 19 21 23 22 21 23 25 27 26 24* 23 22 20* 19 18 16* 15 14 12* 11 10 12 14 16 15 14 13 12 14 16 18 20 22 24 23 22 24 26 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 16 18 20 22 24 26 28 30 29 28 27 26 25 24 23 22 21 20 22 24 26 28 30 32 31 30 29 28 27 26 25 24 26 28 30 32 34 33 32 31 30 29 28 27 26 25 24 23 22 24 26 28 30 32 34 36 35 34 33 32 31 30 29 28 27 26 28 30 32 34 36 38 37 36 35 34 33 32 31 30 29 28 27 26 28 30 32 34 36 38 40 39 38 37 36 35 34 33 32 31 30 29 28 30 32 34 36 38 40 42 41 40 39 38 37 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 9* 8 7 9 10 12 11 10 12 14 13 12 14 16 18 20 22 21 20 19 18 17 16 15 14 13 12 11 10 12 14 16 18 20 22 24 23 22 21 20 19 18 17 16 15 14 16 18 20 19 18 17 16 18 20 22 24 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 12 14 16 18 20 22 24 23 22 21 20 22 24 26 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 14 16 18 20 22 24 26 28 27 26 25 24 26 28 30 32 34 36 38 40 42\par}
+\caption{An arrangement of 44 pseudolines with $a_3=609$ triangles and 12 triple points, obtained by collapse augmentation (\cref{sec:augment}). Its word is printed below the picture.}
+\label{fig:n44}
+\end{figure}
+
+% All figures of the appendix go before the next one starts.
+\clearpage

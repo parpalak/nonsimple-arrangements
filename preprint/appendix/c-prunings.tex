@@ -1,0 +1,409 @@
+\section{Counting segments and the state table}\label{app:prunings}
+
+This appendix justifies the two prunings announced in \cref{sec:segment-count}.
+\emph{Segment pruning} (P4) discards a partial word if every completion of it has more unused segments than the balance \eqref{eq:non-simple-segm} allows for $a_3\ge K$.
+\emph{State table pruning} (P5) skips a subtree if a subtree with the same state and no tighter budget constraints has already been traversed without giving words (\cref{lem:state-table}).
+Along the way, \cref{app:doomed} extends the early non-triangle count (P2) to all doomed faces, which gives the doomed-face count (P6).
+All three prunings are \emph{safe}: they discard only empty subtrees, so the output of the program does not change.
+
+We keep the notation of \cref{sec:enum}: $u$ is the number of unused segments, $d$ the number of double segments (sides of two triangles at once), $t_m$ the number of vertices of multiplicity $m$, $B=\binom{n-1}2-K$ the budget of the target $K$, $S(W)$ the spending of a partial word $W$, and $a[i]$ the label of the wire in slot $i$ after $W$.
+The waste $w$ \eqref{eq:waste} counts the segment units that do not go into triangles, and the target $a_3\ge K$ bounds it by the \emph{waste limit} $b$:
+\begin{equation}\label{eq:waste-limit}
+w(\mathcal A)\le b\overset{\mathrm{def}}{=}n(n-2)-3K .
+\end{equation}
+
+\subsection{Segment balance for arbitrary multiplicities}
+
+In \cref{sec:enum} we already wrote down the segment balance \eqref{eq:non-simple-segm}. We now prove it in a rewritten form that uses the definition \eqref{eq:waste} of the waste $w(\mathcal{A})$.
+
+\begin{lemma}\label{lem:segment-balance}
+For every arrangement $\mathcal A$ of $n\ge3$ pseudolines,
+\begin{equation}\label{eq:segm-balance}
+w(\mathcal A)\overset{\mathrm{def}}{=}n(n-2)-3a_3(\mathcal A)
+=u(\mathcal A)-d(\mathcal A)+\sum_v m(v)\bigl(m(v)-2\bigr).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Each edge of the arrangement borders exactly two faces, which lie on opposite sides of its pseudoline, so a bounded segment is a side of at most two triangles.
+The sides of a bounded face are bounded edges (a face bordering a ray is itself unbounded), and a side of a triangle is a whole edge.
+Hence, if we count for each bounded segment the triangles of which it is a side, the total is $3a_3$.
+Unused segments contribute 0 to this sum, double segments 2, and the others 1, so by \eqref{eq:edges}
+\[
+3a_3=E_b-u+d=\sum_v m(v)-n-u+d.
+\]
+By \eqref{eq:pair-cross}, $n(n-1)=\sum_v m(v)\bigl(m(v)-1\bigr)$, hence
+\[
+n(n-2)-3a_3=n(n-1)-\sum_v m(v)+u-d=u-d+\sum_v m(v)\bigl(m(v)-2\bigr).
+\]
+\end{proof}
+
+We bound the right-hand side of \eqref{eq:segm-balance} by a discharging argument~\cite{cw17}.
+Assign to a vertex $v$ the \emph{charge} $\mathrm{ch}(v)=m(v)\bigl(m(v)-2\bigr)$, to an unused segment the charge $+1$, to a double segment $-1$, and to the other segments~0.
+By \cref{lem:segment-balance}, the charges sum to $w$.
+The charge of a vertex has a direct meaning in terms of waste: each of the $m$ pseudolines through it meets $m-1$ others there at once and loses $m-2$ segments.
+
+The search can use an upper bound on $u$ as a pruning.
+For $a_3\ge K$ the waste satisfies $w\le b$ by \eqref{eq:waste-limit}, so such a bound requires only a lower bound on the total charge of vertices and double segments.
+We transfer the charge of each double segment to its endpoints and bound the \emph{final charge} $\mathrm{ch}^*(v)$ of every vertex.
+The transfer is possible because a double segment always has a multiple endpoint (\cref{lem:double-segment}).
+A vertex of multiplicity $\ge4$ has a nonnegative final charge (\cref{lem:charge-ge4}), and a triple point has a final charge of at least $-3/2$ (\cref{cor:charge-triple}).
+As a result we obtain $u\le w+\tfrac32t_3$ (\cref{cor:unused-bound}).
+
+\subsection{Final charges of vertices}
+
+\begin{lemma}\label{lem:double-segment}
+If a bounded segment $e=PQ$ is a side of two triangles, then at least one of its endpoints has multiplicity $\ge3$.
+\end{lemma}
+
+\begin{proof}
+The argument is already given in~\cite[Subsection~2.3]{pu26b} for simple arrangements, but it actually uses only the simplicity of the endpoints of $e$.
+Let $e\subset\ell$, and suppose that, besides $\ell$, only the pseudolines $\ell_P$ and $\ell_Q$ pass through $P$ and $Q$, respectively.
+Then a triangle with side $e$ has its sides at $P$ and $Q$ on $\ell_P$ and $\ell_Q$, and its third vertex is their common point.
+Two triangles on opposite sides of $\ell$ would give two distinct common points of $\ell_P$ and $\ell_Q$.
+\end{proof}
+
+We split the double segments into two classes: $d_{\ge4}$ consists of those with at least one endpoint of multiplicity $\ge4$, and $d_3$ of all the others (by \cref{lem:double-segment}, such a segment has an endpoint of multiplicity exactly 3, and its other endpoint has multiplicity 2 or 3).
+Then $d=d_3+d_{\ge4}$.
+
+\begin{lemma}[vertices of multiplicity $\ge4$]\label{lem:charge-ge4}
+Let each segment of class $d_{\ge4}$ transfer its charge $-1$ to one of its endpoints of multiplicity $\ge4$.
+Then a vertex $v$ of multiplicity $m\ge4$ receives a charge of at least $-2m$, and its final charge is $\mathrm{ch}^*(v)\ge m(m-2)-2m\ge0$.
+\end{lemma}
+\begin{proof}
+Exactly $2m$ rays and bounded edges meet at a vertex of multiplicity $m$ (two on each of the $m$ pseudolines).
+The segments transferring charge to it are bounded edges, so there are at most $2m$ of them.
+The inequality $2m\le m(m-2)$ holds for $m\ge4$.
+\end{proof}
+
+This does not work for a triple point: its charge is 3, while up to six double segments can be incident to it.
+We therefore distribute the charge of the segments of class $d_3$, taking their other endpoints into account.
+
+Let $P$ be a triple point.
+A double segment of class $d_3$ incident to $P$ is a \emph{simple leg} of $P$ if its other endpoint is simple, and a \emph{triple leg} if its other endpoint has multiplicity 3.
+Denote the number of simple legs by $\lambda_2(P)$ and the number of triple legs by $\lambda_3(P)$.
+Each segment of class $d_3$ has one or two endpoints of multiplicity 3 (\cref{lem:double-segment}).
+In the first case it transfers its charge $-1$ entirely to the triple endpoint, and in the second it splits the charge equally, $-\tfrac12$ to each.
+The final charge of a triple point is then
+\begin{equation}\label{eq:triple-charge}
+\mathrm{ch}^*(P)=3-\lambda_2(P)-\tfrac12\lambda_3(P).
+\end{equation}
+
+\begin{lemma}[simple legs]\label{lem:simple-legs}
+Let $h_1,\dots,h_6$ be the edges of a triple point $P$, numbered in cyclic order. No two consecutive edges are both simple legs. In particular, $\lambda_2(P)\le3$.
+\end{lemma}
+
+\begin{proof}
+Indices are taken modulo 6.
+Suppose, to the contrary, that $h_r$ and $h_{r+1}$ are simple legs.
+Each of them is a double segment, so the three consecutive sectors (\cref{def:reduced}) adjacent to them are all triangles: the sectors between $h_{r-1}$ and $h_r$, between $h_r$ and $h_{r+1}$, and between $h_{r+1}$ and $h_{r+2}$.
+The sides at $P$ of the triangular sector between $h_j$ and $h_{j+1}$ are the edges $h_j$ and $h_{j+1}$ themselves.
+Let $Q_j$ be the other endpoint of $h_j$. Then the triangular sectors are $PQ_jQ_{j+1}$ ($j=r-1,r,r+1$).
+Let the side $Q_rQ_{r+1}$ lie on a pseudoline $\ell$.
+Besides the pseudoline containing $h_r$, only $\ell$ passes through the simple vertex $Q_r$, so the side $Q_{r-1}Q_r$ also lies on $\ell$, that is, $Q_{r-1}\in\ell$.
+Similarly, $Q_{r+2}\in\ell$.
+But $Q_{r-1}$ and $Q_{r+2}$ also lie on the pseudoline $\ell'$ containing the edges $h_{r-1}$ and $h_{r+2}$, which lie on opposite sides of $P$, so $\ell$ and $\ell'$ have two common points.
+Moreover, $\ell\ne\ell'$: the pseudoline containing $h_r$ meets $\ell$ at $Q_r$ and $\ell'$ at $P$. This is a contradiction.
+The set of simple legs contains no two consecutive elements of the 6-cycle, so it has at most three elements.
+\end{proof}
+
+\begin{corollary}\label{cor:charge-triple}
+Every triple point satisfies $\mathrm{ch}^*(P)\ge-\tfrac32$.
+\end{corollary}
+
+\begin{proof}
+The point $P$ is incident to six edges, so $\lambda_2(P)+\lambda_3(P)\le6$, and
+\[
+\mathrm{ch}^*(P)=3-\lambda_2-\tfrac12\lambda_3\ge3-\lambda_2-\tfrac12(6-\lambda_2)=-\tfrac{\lambda_2}2\ge-\tfrac32
+\]
+by \cref{lem:simple-legs}.
+\end{proof}
+
+The bound of this corollary is sharp. In a triangle with its three medians (six lines, four triple points), the common point of the medians has $\lambda_2=\lambda_3=3$ and a final charge of exactly $-3/2$.
+
+\subsection{Bounding the number of unused segments}
+
+\begin{corollary}\label{cor:unused-bound}
+For every arrangement of $n\ge3$ pseudolines,
+\begin{equation}\label{eq:segm-bound}
+u\le w+\tfrac32 t_3 ,
+\end{equation}
+where $t_3$ is the number of vertices of multiplicity exactly 3.
+In particular, if $a_3\ge K$, then $u\le b+\tfrac32t_3$ with the waste limit $b$ of \eqref{eq:waste-limit}.
+\end{corollary}
+
+\begin{proof}
+By \cref{lem:segment-balance}, the initial charges sum to $w$.
+The transfer does not change the sum, and after it the total charge of the segments equals $u$, so
+\[
+w=u+\sum_v\mathrm{ch}^*(v)\ \ge\ u+\sum_{P:\,m(P)=3}\mathrm{ch}^*(P)\ \ge\ u-\tfrac32t_3 ,
+\]
+since the final charges of vertices of multiplicity $\ge4$ are nonnegative (\cref{lem:charge-ge4}) and those of triple points are at least $-\tfrac32$ (\cref{cor:charge-triple}).
+The second part follows from \eqref{eq:waste-limit}.
+\end{proof}
+
+\subsection{Doomed faces}\label{app:doomed}
+
+\Cref{cor:unused-bound} bounds $u$ in terms of $t_3$ for a finished arrangement $\mathcal{A}$.
+To use it for pruning at a partial word $W$, we need two bounds that hold for all completions of $W$: a lower bound on $u$ and an upper bound on $t_3$.
+The first comes from segments each of whose two faces has closed as a non-triangle or is already doomed (\cref{lem:early-count}).
+The second comes from the budget $B$ of \cref{sec:search}, strengthened by a similar argument about doomed faces (\cref{lem:triple-ceiling}).
+Comparing the two bounds is the segment pruning.
+Its final version also bounds the final charges of the vertices of $W$ by what is known about their edges (\cref{lem:placed-charges}).
+In this subsection we describe the criteria for a face to be doomed.
+
+In the terminology of \cref{sec:enum}, a bounded triangle is a face $i$ that was opened, received exactly one intermediate vertex and closed.
+
+A continuation of a partial word $W$ that does not close face $i$ does not change the sets of labels in slots $0,\ldots,i$ and in slots $i+1,\ldots,n-1$ (see the proof of \cref{lem:bounded-face}).
+The labels $a[i]$ and $a[i+1]$ can then change only under letters that give face $i$ intermediate vertices.
+A letter with $g+m-1=i$ reverses an increasing block and puts its minimum, one of the labels in slots $0,\ldots,i$, into slot $i$. A letter with $g=i+1$ puts the maximum of its block, one of the labels in slots $i+1,\ldots,n-1$, into slot $i+1$.
+
+\begin{lemma}\label{lem:doomed}
+Suppose that in some completion of a partial word, face $i$ closes after receiving $k$ more intermediate vertices.
+(a) If $a[i]>a[i+1]$, then $k\ge1$.
+(b) If $a[i]>\max(a[i+1],\ldots,a[n-1])$ and $a[i+1]<\min(a[0],\ldots,a[i])$, then $k\ge2$.
+\end{lemma}
+
+\begin{proof}
+At the moment of closing, the labels in the block of the closing letter increase, in particular $a[i]<a[i+1]$.
+(a) Before closing, the pair $a[i],a[i+1]$ is changed only by letters that give face $i$ intermediate vertices, so there is at least one such letter.
+(b) By (a), $k\ge1$, and it remains to exclude $k=1$.
+If the only intermediate vertex is produced by a letter with $g=i+1$, then $a[i]$ does not change, and slot $i+1$ receives one of the labels to the right of slot $i$. By hypothesis this label is smaller than $a[i]$, and closing is impossible.
+If the only intermediate vertex is produced by a letter with $g+m-1=i$, then $a[i+1]$ does not change, and slot $i$ receives one of the labels to the left of slot $i+1$. By hypothesis this label is larger than $a[i+1]$, and closing is again impossible.
+\end{proof}
+
+A face that has not closed yet is \emph{doomed} if it becomes a bounded triangle in no completion. Each of the following five criteria makes a face doomed:
+
+\begin{enumerate}
+\item face $i$ has not been opened by any letter (it is unbounded on the left);
+\item the face already has $\ge2$ intermediate vertices, so it will have $\ge4$ sides if it closes, and it is unbounded if it does not;
+\item the labels in slots $0,\ldots,i$ are already final, so the face will not close, that is, it is unbounded (\cref{lem:bounded-face});
+\item the face has exactly one intermediate vertex and $a[i]>a[i+1]$: at least one more appears before closing (\cref{lem:doomed}(a)), so there will be $\ge2$ when it closes;
+\item the face has no intermediate vertices, but $a[i]$ exceeds all labels to the right of slot $i$ and $a[i+1]$ is less than all labels to the left of slot $i+1$: by \cref{lem:doomed}(b), at least two appear before closing.
+\end{enumerate}
+
+The first three criteria are checked against the status of the face and the labels to its left, the fourth against the pair of wires in slots $i$ and $i+1$, and the fifth against this pair and all labels.
+Being doomed is defined over all completions, so a face stays doomed until it closes, even if the criterion that established it stops holding (for example, criterion 5 may hold for $W$, criterion 4 for an extension of $W$, and criterion 2 for a further extension).
+
+The early non-triangle count (P2) already counts, through the term $\delta S(W)$, the faces that have at least two intermediate vertices.
+This argument uses only the fact that such a face will close and will not become a triangle, so it extends to every doomed bounded face.
+Let $\delta^+S(W)\ge\delta S(W)$ be the number of bounded faces doomed by criteria 2, 4 and 5 of the list above (criteria 1 and 3 mean that the face is unbounded).
+In modes II--IV (\cref{tab:modes}) the search discards a branch as soon as $S(W)+\delta^+S(W)>B$. This is the doomed-face count (P6).
+
+\subsection{Segment pruning}
+
+\begin{lemma}[early counting of unused segments]\label{lem:early-count}
+In each of the following two cases, a segment $e$ of a partial word $W$ is, in every completion of $W$, bounded and used by no triangle.
+(a) The segment $e$ is already formed (both its endpoints are crossings produced by letters of $W$), and each of the two faces bordering it is doomed or has closed as a non-triangle.
+(b) The segment $e$ is the \emph{current segment} of the wire in slot $p$ (the part of this wire after its last crossing in $W$), faces $p-1$ and $p$ are doomed (for $p=0$ or $p=n-1$, one of them is the outer unbounded region, which never becomes a bounded triangle), and the wire already has a crossing in $W$ and still has an uncrossed pair, that is, some slot to the left of $p$ holds a smaller label or some slot to the right of $p$ holds a larger one.
+\end{lemma}
+
+\begin{proof}
+(a) Neither of the two faces of a formed segment becomes a bounded triangle, and both its endpoints are crossings of $W$.
+(b) The segment of the wire in slot $p$ borders the current faces $p-1$ and $p$, and they do not change until the next crossing on this wire: every letter that closes face $p-1$ or $p$ contains slot $p$ in its block.
+Both faces are doomed, so neither becomes a bounded triangle, and $e$ is a side of no triangle.
+Every pair of wires crosses exactly once, so in every completion the wire has one more crossing, and the current segment is bounded.
+\end{proof}
+
+Let $u_{\mathrm{lb}}(W)$ be the number of segments that \cref{lem:early-count} shows to be unused. Every completion of $W$ satisfies $u\ge u_{\mathrm{lb}}(W)$.
+
+\begin{lemma}[triple-point ceiling]\label{lem:triple-ceiling}
+Let $P(W)$ be the number of wire pairs already crossed in a partial word $W$.
+Then every completion with $a_3\ge K$ has at most $t_3(W)+f$ triple points, where $t_3(W)$ is the number of triple points of $W$ and
+\[
+f=\min\left\{\left\lfloor\frac{\binom n2-P(W)}3\right\rfloor,\
+B-S(W)-\delta^+S(W)\right\}.
+\]
+\end{lemma}
+
+\begin{proof}
+Each future triple point uses exactly three of the pairs of wires that have not crossed yet.
+Vertices of higher multiplicity use more pairs.
+This gives the first bound.
+Further, each future triple point adds $\binom{3-1}2=1$ to $S$, and the closing of the faces counted in $\delta^+S(W)$ adds another $\delta^+S(W)$ to $S$.
+A word with $a_3\ge K$ has $S\le B$, which gives the second bound.
+\end{proof}
+
+\Cref{cor:unused-bound} together with \cref{lem:early-count,lem:triple-ceiling} already allows pruning at a partial word $W$: every completion of $W$ with $a_3\ge K$ satisfies $u_{\mathrm{lb}}(W)\le u\le b+\tfrac32\bigl(t_3(W)+f\bigr)$, and every search branch that violates this inequality can be discarded.
+However, this bound assumes a final charge of $-3/2$ at every triple point and $0$ at every vertex of multiplicity $\ge4$, including the vertices of $W$.
+A charge of $-3/2$ occurs only with six double segments, and in a partial word many edges are already known not to be double. We therefore bound the final charges of the vertices of $W$ by what is known about their edges and leave the pessimistic case to future vertices.
+
+A segment is \emph{decided} as non-double as soon as one of its two faces has closed as a non-triangle or is doomed by any of the five criteria, including a face doomed by the current letter itself, and as double when both faces have closed as triangles.
+Both decisions are final.
+
+Let $v$ be a vertex of multiplicity $m\ge3$ in a partial word $W$, and let $\mathrm{und}(v)$ be the number of undecided segments incident to it.
+For a triple point, let $\bar\lambda_2(v)$ and $\bar\lambda_3(v)$ be the numbers of incident segments decided as double whose other endpoint is simple or has multiplicity 3, respectively. In every completion the former are simple legs and the latter triple legs of $v$.
+Number the six edges of $v$ cyclically as in \cref{lem:simple-legs}. Consecutive positions bound one sector.
+A set of positions is \emph{independent} if it contains no two consecutive ones. By \cref{lem:simple-legs}, the simple legs form an independent set.
+Let $D$ be the positions of the segments counted in $\bar\lambda_2(v)$ as future simple legs, $U$ the positions of the undecided segments, and let
+\[
+\xi(v)=\max\bigl\{|I|:\ I\subseteq U,\ D\cup I\ \text{is independent}\bigr\}
+\]
+be the largest number of undecided segments that can still become simple legs.
+For a vertex of multiplicity $m\ge4$, let $\bar\lambda(v)$ be the number of segments decided as double that transfer their charge to $v$ under the rule of \cref{lem:charge-ge4}.
+A segment whose endpoints both have multiplicity $\ge4$ transfers its charge to the endpoint that occurs earlier in the word.
+Let
+\begin{equation}\label{eq:charge-lb}
+\mathrm{ch}^*_{\mathrm{lb}}(v)=\begin{cases}
+3-\bar\lambda_2-\tfrac12\bigl(\bar\lambda_3+\mathrm{und}+\xi\bigr), & m=3,\\[2pt]
+m(m-2)-\bar\lambda-\mathrm{und}, & m\ge4.
+\end{cases}
+\end{equation}
+
+\begin{lemma}[charges of the vertices of $W$]\label{lem:placed-charges}
+In every completion of a partial word $W$, each vertex $v$ of $W$ of multiplicity $\ge3$ has $\mathrm{ch}^*(v)\ge\mathrm{ch}^*_{\mathrm{lb}}(v)$, and $\mathrm{ch}^*_{\mathrm{lb}}(v)\ge-\tfrac32$ if $m(v)=3$.
+Hence every completion of $W$ with $a_3\ge K$ satisfies
+\begin{equation}\label{eq:charge-cut}
+2u\ \le\ 2b-\sum_{\substack{v\in W\\ m(v)\ge3}}
+2\,\mathrm{ch}^*_{\mathrm{lb}}(v)+3f .
+\end{equation}
+\end{lemma}
+\begin{proof}
+Decided segments transfer to $v$ the same charge as in the completion: 0 if non-double, and their final share if double.
+Let $m(v)=3$. An undecided segment decreases $2\,\mathrm{ch}^*(v)$ by 2 if it becomes a simple leg and by 1 if it becomes a triple leg, and it does not change $2\,\mathrm{ch}^*(v)$ otherwise (then it is not double, or it transfers its charge to its other endpoint of multiplicity $\ge4$).
+By \cref{lem:simple-legs}, the simple legs of the completion form an independent set containing $D$, so at most $\xi$ undecided segments become simple legs.
+Hence $2\,\mathrm{ch}^*(v)\ge6-\bigl(2\bar\lambda_2+\bar\lambda_3+\mathrm{und}+\xi\bigr)=2\,\mathrm{ch}^*_{\mathrm{lb}}(v)$.
+Since $\bar\lambda_2+\bar\lambda_3+\mathrm{und}\le6$ and $\bar\lambda_2+\xi=|D\cup I|\le3$ for a set $I$ attaining the maximum, the subtracted sum is at most 9, that is, $\mathrm{ch}^*_{\mathrm{lb}}(v)\ge-\tfrac32$.
+Let $m(v)\ge4$. Charge is transferred to $v$ by the segments counted in $\bar\lambda(v)$ and by some of the undecided segments, so $\mathrm{ch}^*(v)\ge m(m-2)-\bar\lambda-\mathrm{und}$.
+
+As in the proof of \cref{cor:unused-bound}, $u=w-\sum_v\mathrm{ch}^*(v)$, where the sum runs over the vertices of multiplicity $\ge3$ in the completion.
+The charges of the vertices of $W$ are bounded by the first part of the lemma.
+There are at most $f$ future triple points (\cref{lem:triple-ceiling}), and the final charge of each is at least $-\tfrac32$ (\cref{cor:charge-triple}). The final charges of future vertices of multiplicity $\ge4$ are nonnegative (\cref{lem:charge-ge4}).
+Together with $w\le b$, this proves the lemma.
+\end{proof}
+
+\emph{Segment pruning} discards a partial word $W$ if $2u_{\mathrm{lb}}(W)$ exceeds the right-hand side of \eqref{eq:charge-cut}. It is safe: a completion with $a_3\ge K$ would have $u\ge u_{\mathrm{lb}}(W)$, contrary to \eqref{eq:charge-cut}.
+
+\subsection{The state table}
+
+During the traversal of the tree, different partial words $W$ and $W'$ may share continuations. Which continuations can follow and how many triangles they give depends not on the whole partial word but on the state accumulated by applying its letters.
+If the search found no completion of a partial word $W$ with $a_3\ge K$, then no other partial word $W'$ with the same state, or with a state that differs only by larger spending, has one either. The fact that a state has no completion is stored in a special hash table and used to skip empty subtrees.
+
+The \emph{state} of a partial word $W$ is the tuple
+\[
+\sigma(W)=\bigl(\mathbf a,\ \widehat g,\ \mathbf c,\ S\bigr),
+\]
+where $\mathbf a=(a[0],\ldots,a[n-1])$ is the permutation of wire labels over the slots, $\widehat g$ is the initial slot of the last letter, $\mathbf c=(c[0],\ldots,c[n-2])$ is the vector of codes of the current faces, and $S=S(W)$ is the spending.
+
+The possible continuations of a partial word, that is, those satisfying conditions (i) and (iii) of \cref{sec:search} and the forced descent (\cref{lem:forced-descent}), are determined by the pair $(\mathbf a,\widehat g)$: the increase of labels in the block of a letter is checked against $\mathbf a$, condition (iii) against $\widehat g$, and the forced descent against both.
+Hence partial words with the same pair $(\mathbf a,\widehat g)$ have the same possible continuations, and it remains to compare them by face codes and spending.
+
+The code of face $i$ records its status, and its \emph{cost} is the contribution of its closing to $S$ if the face receives exactly $k$ more intermediate vertices before closing (the indicator $\mathbf 1$ equals 1 if the condition in its subscript holds and 0 otherwise):
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{>{\raggedright\arraybackslash}p{6.5cm}cc}
+\toprule
+status of face $i$ & code $c[i]$ & cost \\
+\midrule
+face not opened (initial unbounded face) & 0 & 0 \\
+face opened, no intermediate vertices & 1 & $\mathbf 1_{k\ne1}$ \\
+one intermediate vertex & 2 & $\mathbf 1_{k\ne0}$ \\
+$\ge2$ intermediate vertices & 3 & 1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A closed bounded face adds one to $S$ if its number of intermediate vertices differs from one, and zero otherwise. A face with code 0 is unbounded and does not contribute to $S$.
+If the face will not close, its cost is zero for every code.
+A letter that closes the current face $i$ opens a new face $i$.
+The new face has no intermediate vertices regardless of $W$, so the contributions of the later faces $i$ to $S$ depend only on the continuation, not on $W$ itself.
+
+We need two properties of the codes.
+(a) Code 0 is determined by $\mathbf a$ alone: it means that the initial face $i$ has not closed yet, that is, slots $0,\ldots,i$ hold the labels $0,\ldots,i$.
+Indeed, before face $i$ first closes, the set of labels in these slots does not change (see the proof of \cref{lem:bounded-face}), and the closing letter crosses the wires in slots $i$ and $i+1$, with labels $w_1\le i<w_2$. They cannot cross a second time, so the wire $w_2$ stays to the left of $w_1$, and the labels $0,\ldots,i$ never again occupy slots $0,\ldots,i$.
+Hence partial words with the same permutation $\mathbf a$ have code 0 at the same faces, and only codes 1--3 can differ.
+(b) Code 1 implies $a[i]>a[i+1]$: the letter that opened face $i$ reversed an increasing block, after which the pair $a[i],a[i+1]$ is decreasing. Only an intermediate vertex could change this, and with code 1 there was none.
+
+\emph{Cost of a discrepancy.} Let partial words $X$ and $Y$ with the same permutation $\mathbf a$ have different codes of face $i$, $x=c_X[i]\ne y=c_Y[i]$, both at least 1.
+They have the same number $k$ of new intermediate vertices, since the intermediate vertices of face $i$ before its closing are produced by letters of the common continuation.
+Let $\Delta S(x,y,k)$ be the difference between the cost of face $i$ for $X$ and for $Y$.
+For $x>y$ the cost table gives
+\[
+\begin{gathered}
+\Delta S(2,1,k)=\mathbf 1_{k\ne 0}-\mathbf 1_{k\ne 1}=\mathbf 1_{k=1}-\mathbf 1_{k=0},\\
+\Delta S(3,1,k)=1-\mathbf 1_{k\ne 1}=\mathbf 1_{k=1},\qquad
+\Delta S(3,2,k)=1-\mathbf 1_{k\ne 0}=\mathbf 1_{k=0}.
+\end{gathered}
+\]
+The exact number $k$ of new intermediate vertices is not known in advance, but \cref{lem:doomed} bounds it in terms of the permutation $\mathbf a$: $k\ge2$ under the hypothesis of its part (b), and $k\ge1$ if $a[i]>a[i+1]$.
+For $k\ge2$ all values of $\Delta S$ vanish, and for $k\ge1$ the value $\Delta S(3,2,k)$ vanishes.
+The properties of indicators also show that all three values of $\Delta S$ are at most one.
+
+Hence for $x>y$ we have $\Delta S(x,y,k)\le\rho_i$ for every continuation, where
+\begin{equation}\label{eq:face-price}
+\rho_i=\begin{cases}
+0,&\text{if }a[i]>\max(a[i+1],\ldots,a[n-1])\text{ and }a[i+1]<\min(a[0],\ldots,a[i]),\\
+0,&\text{if }(x,y)=(3,2)\text{ and }a[i]>a[i+1],\\
+1&\text{otherwise.}
+\end{cases}
+\end{equation}
+The conditions in \eqref{eq:face-price} are determined by the common permutation $\mathbf a$ and the pair of codes $(x,y)$, so $\rho_i$ is the same quantity for $X$ and $Y$.
+
+For $x<y$ the difference is nonpositive for every continuation: $\Delta S(1,3,k)=\mathbf 1_{k\ne1}-1$, $\Delta S(2,3,k)=\mathbf 1_{k\ne0}-1$, and $\Delta S(1,2,k)=\mathbf 1_{k\ne1}-\mathbf 1_{k\ne0}$, where $\mathbf 1_{k\ne0}=1$, since code 1 for $X$ implies $a[i]>a[i+1]$ (property (b)) and hence $k\ge1$ (\cref{lem:doomed}(a)).
+
+\begin{lemma}[dominance]\label{lem:dominance}
+Let partial words $X$ and $Y$ have the same $\mathbf a$ and $\widehat g$, and let
+\[
+h(X,Y)=\sum_{i:\ c_X[i]>c_Y[i]}\rho_i ,
+\]
+where the sum runs over the faces $i$ that will still close (by \cref{lem:bounded-face}, this is determined by $\mathbf a$).
+If $S(X)+h(X,Y)\le S(Y)$, then for every completion $YV$ of $Y$, the word $XV$ is a completion of $X$, and $a_3(XV)\ge a_3(YV)$.
+\end{lemma}
+
+\begin{proof}
+A sequence $V$ is a possible continuation of $X$ if and only if it is a possible continuation of $Y$, since $X$ and $Y$ share the pair $(\mathbf a,\widehat g)$.
+By \cref{cor:budget}, $a_3=\binom{n-1}2-S$, so it suffices to check that $S(XV)-S(YV)\le0$.
+The future contributions of multiple points to $S$ are the same, since they come from the letters of $V$.
+The contributions of non-triangular faces differ only in the closing of the current faces $i$, and a face that will not close (criterion 3) contributes zero for both words.
+For a face $i$ that will close, the difference of contributions is zero for equal codes and otherwise equals $\Delta S(c_X[i],c_Y[i],k)$, which is nonpositive for $c_X[i]<c_Y[i]$ and at most $\rho_i$ for $c_X[i]>c_Y[i]$.
+Summing over $i$, we obtain $S(XV)-S(YV)\le S(X)-S(Y)+h(X,Y)\le0$.
+\end{proof}
+
+During the traversal of the tree, the state table is filled on backtracking: the state of a partial word $X$ is recorded when all its possible continuations have been traversed completely and none of them gave a word with $a_3\ge K$.
+A node $Y$ is skipped if the table has an entry $X$ with the same $(\mathbf a,\widehat g)$ such that $X$ and $Y$ satisfy the condition of \cref{lem:dominance}; we say that $X$ \emph{dominates} $Y$.
+The key $(\mathbf a,\widehat g)$ is compared in full. Eviction of entries from the hash table reduces the efficiency of the pruning but does not lose words.
+
+\begin{lemma}[the state table loses no words]\label{lem:state-table}
+The subtree of any partial word recorded in the state table contains no words with $a_3\ge K$.
+Hence skipping by the state table loses no words.
+\end{lemma}
+
+\begin{proof}
+We argue by induction on the order of entries. Suppose the lemma holds for all entries made before the entry of a partial word $X$; we prove it for the entry of $X$.
+Suppose, to the contrary, that $X$ is recorded in the state table although its subtree contains a word $XV$ with $a_3(XV)\ge K$.
+By the filling rule, $X$ is recorded only when the traversal of its subtree has found no such words, so the traversal did not reach $XV$: some partial word $Z$ on the path from $X$ to $XV$ was discarded.
+Let $XV=ZV'$.
+No other pruning could have discarded $Z$: all of them are safe, and $ZV'$ is a word with $a_3\ge K$.
+Hence $Z$ was skipped by the entry of some $X'$ in the state table.
+This entry was made before the entry of $X$, because $Z$ was processed during the traversal of the subtree of $X$, and $X$ is recorded after this traversal ends (if $X$ is the first entry, this case cannot occur at all).
+By \cref{lem:dominance}, $X'V'$ is a completion of $X'$ and $a_3(X'V')\ge a_3(ZV')\ge K$, which contradicts the induction hypothesis for $X'$.
+\end{proof}
+
+\begin{remark}\label{rem:shared-table}
+The proof of \cref{lem:state-table} does not use the particular order of tree traversal, only the order in which the entries appear in time. The lemma therefore also holds for a state table shared by several concurrently running processes (provided the implementation guarantees that writes are atomic), and for a state table accumulated by an interrupted run with the same $n$, $K$ and set of prunings when this run is restarted.
+\end{remark}
+
+Segment pruning and the counting of $\delta^+S$ are not part of the table key: in the proof of \cref{lem:state-table} they, like all safe prunings, discard only subtrees without words with $a_3\ge K$.
+
+\subsection{The state table for reduced arrangements}
+
+With the pruning of non-reduced arrangements (P7, \cref{sec:segment-count}), \cref{lem:state-table} does not apply. An entry $X$ then only means that the subtree of $X$ contains no words of reduced arrangements with $a_3\ge K$, while a continuation $V$ that gives a non-reduced arrangement after $X$ may give a reduced one after a partial word $Y$ dominated by $X$.
+\Cref{cor:reduced} guarantees reducedness only for arrangements with the largest number of vertices, so skipping by the table has to compare the number of vertices as well.
+Let $\ell(W)$ be the number of letters (vertices) of a partial word $W$, and let $\ell_{\max}$ be the largest number of vertices of an arrangement with $a_3\ge K$.
+
+\begin{lemma}[the state table for reduced arrangements]\label{lem:state-table-reduced}
+Suppose that $\ell(X)$ is recorded in the table together with the state of a partial word $X$, and a node $Y$ is skipped by the entry of $X$ only if both the condition of \cref{lem:dominance} and $\ell(X)\ge\ell(Y)$ hold.
+Then the subtree of any recorded partial word contains no words with $a_3\ge K$ and $\ell_{\max}$ letters.
+Hence the search with the pruning of non-reduced arrangements emits all words of the tree with $a_3\ge K$ and $\ell_{\max}$ letters, and if an arrangement with $a_3\ge K$ exists, the output is nonempty.
+\end{lemma}
+
+\begin{proof}
+We repeat the proof of \cref{lem:state-table} for words $XV$ with $a_3(XV)\ge K$ and $\ell(XV)=\ell_{\max}$. It changes in two places.
+Besides the safe prunings, the partial word $Z$ could also have been discarded by the pruning of non-reduced arrangements. But the arrangement represented by $ZV'$ has the largest number of vertices among arrangements with $a_3\ge K$, so by \cref{cor:reduced} it is reduced, and this pruning discards none of its words.
+For the entry $X'$ we need $\ell(X'V')=\ell_{\max}$ in addition to $a_3(X'V')\ge K$. It follows from $\ell(X')\ge\ell(Z)$, since then $\ell(X'V')\ge\ell(ZV')=\ell_{\max}$.
+The same arguments show that the search reaches every word of the tree with $a_3\ge K$ and $\ell_{\max}$ letters and emits it, and by \cref{cor:reduced} such a word with first letter $(0,2)$ exists if an arrangement with $a_3\ge K$ exists.
+\end{proof}
+
+\Cref{rem:shared-table} on concurrent processes and restarts carries over to \cref{lem:state-table-reduced} without change.

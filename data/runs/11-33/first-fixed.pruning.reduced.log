@@ -1,0 +1,2 @@
+multenum n=11 K>=33 zone=all flags=pruning=4G,first-fixed,reduced table=268435456 entries
+DONE n=11 K>=33 zone=all flags=pruning=4G,first-fixed,reduced: nodes=51840705 words=0 time=12s doom-cuts=93663 reduced-cuts=23917085 segment-cuts=21937084 table-probes=29809958 table-hits=60492227 table-cuts=2920614 lemma-violations=0/0/0

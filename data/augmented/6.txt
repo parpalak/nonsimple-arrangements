@@ -1,0 +1,79 @@
+#1 K=7 *int=0 *ext=0 par=0 chart=4 src=direct did=D6-f40m8vnf7934 eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 1 3 2 1 0 1 3 2 1 3 4 3 2 1 0
+#1 K=7 *int=0 *ext=0 par=0 chart=4 src=direct did=D6-1nevwww2r41us eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 0 2 4 3 2 1 0 2 4 3 2 1 2 4 3
+#1 K=7 *int=1 *ext=0 par=0 chart=0 src=direct did=D6-3kso78ez8jc0i eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 2 4 3 2 1 0 1* 4 3 2 1 4 3
+#1 K=7 *int=0 *ext=0 par=0 chart=4 src=direct did=D6-wdagrkbdg1gk eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 1 0 2 4 3 2 1 0 2 4 3 2 1 2 4
+#1 K=7 *int=1 *ext=0 par=0 chart=0 src=direct did=D6-29yekzrsnpe6s eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 2 4 3 2 1 0 2 1 4 2* 1 4 3
+#1 K=7 *int=0 *ext=0 par=0 chart=4 src=direct did=D6-2qx226l2rc498 eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 2 1 0 2 4 3 2 1 0 2 4 3 2 1 4
+#1 K=7 *int=1 *ext=0 par=0 chart=3 src=direct did=D6-19dy2gy9yowiu eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 0 2 4 3 1* 0 1 3 4 3 2 1 3
+#1 K=7 *int=0 *ext=0 par=0 chart=3 src=direct did=D6-vy63xd5n0dxs eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 1 0 2 3 2 1 0 2 4 3 2 1 0 2 4
+#1 K=7 *int=0 *ext=0 par=0 chart=3 src=direct did=D6-6ff367a0h5rg eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 4 3 2 1 0 1 3 2 1 3 4 3 2 1 3
+#1 K=7 *int=1 *ext=0 par=0 chart=0 src=direct did=D6-1jeq6mwunj8ri eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 1 2 4 3 2 1 0 1* 4 3 2 1 4
+#1 K=7 *int=0 *ext=0 par=0 chart=3 src=direct did=D6-3w0qqcubnar7s eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 0 2 3 2 1 0 2 4 3 2 1 0 2 4 3
+#1 K=7 *int=1 *ext=0 par=0 chart=2 src=direct did=D6-2iuuzvvvqymic eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 1 4 3 2 1 0 1 3 4 2* 1 2 4
+#1 K=7 *int=0 *ext=0 par=0 chart=3 src=direct did=D6-139wojt1m9geo eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 0 3 2 1 0 2 4 3 2 1 0 2 4 3 2
+#1 K=7 *int=1 *ext=0 par=0 chart=4 src=direct did=D6-16jtfewwfhhs0 eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 1 3 2 1 0 1 3 4 2* 1 0 2 4
+#1 K=7 *int=0 *ext=0 par=0 chart=3 src=direct did=D6-2vyd9y0sat65g eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 0 2 1 0 2 4 3 2 1 0 2 4 3 2 1
+#1 K=7 *int=0 *ext=0 par=0 chart=5 src=direct did=D6-3ae9cfzhzzy2c eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 1 4 3 2 1 0 1 3 2 1 3 4 3 2 1
+#1 K=7 *int=0 *ext=0 par=0 chart=5 src=direct did=D6-kldgxlre3dds eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 3 2 1 0 2 4 3 2 1 0 2 4 3 2 4
+#1 K=7 *int=1 *ext=0 par=0 chart=1 src=direct did=D6-ylsj6cyebkea eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 0 1 3 2 0* 3 4 3 2 1 0 3 2
+#1 K=7 *int=2 *ext=0 par=0 chart=3 src=direct did=D6-2ranckeeg84ki eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 0 2 1 4 2* 0* 4 3 2 1 3
+#1 K=7 *int=1 *ext=1 par=1 chart=0 src=direct did=D6-2524cen5o2a57 eid=E6-7d48qw1qlkzn pid=P6-3scmsrrdu62py ) 2 4 3 2 1 0 1* 4 3 2 1 4
+#1 K=7 *int=2 *ext=0 par=0 chart=5 src=direct did=D6-1pkxd1crsvxbw eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 1 3 4 2* 1 0 1* 4 3 2 4
+#1 K=7 *int=2 *ext=0 par=0 chart=5 src=direct did=D6-qz4eyjgyidg4 eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 1 4 3 2 1 0 3* 1* 3 2 4
+#1 K=7 *int=1 *ext=0 par=0 chart=1 src=direct did=D6-qrzj7aulh1he eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 0 3 2 1 0 2* 4 3 2 1 0 2 3
+#1 K=7 *int=2 *ext=0 par=0 chart=4 src=direct did=D6-ftxgkgnvlpm6 eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 1 3 2 1 0 3* 1* 0 3 2 4
+#1 K=7 *int=0 *ext=0 par=0 chart=3 src=direct did=D6-2w0wbk1gksnu8 eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 0 1 3 2 1 3 4 3 2 1 0 1 3 2 3
+#1 K=7 *int=0 *ext=0 par=0 chart=3 src=direct did=D6-3ouy3ej343558 eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 0 2 1 0 2 3 2 1 0 2 4 3 2 1 0
+#1 K=7 *int=0 *ext=0 par=0 chart=3 src=direct did=D6-19r8vjw7olt1c eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 1 0 1 3 2 1 3 4 3 2 1 0 1 3 2
+#1 K=7 *int=0 *ext=0 par=0 chart=5 src=direct did=D6-1auog6h4ua8bs eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 1 3 4 3 2 1 0 1 3 2 1 3 4 3 2
+#1 K=7 *int=0 *ext=0 par=0 chart=3 src=direct did=D6-2kg9cg5sdeg70 eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 2 1 0 1 3 2 1 3 4 3 2 1 0 1 3
+#1 K=7 *int=0 *ext=1 par=1 chart=3 src=direct did=D6-161cwjfs5bd45 eid=E6-14tazhfdau05 pid=P6-164lhjrepo3s6 ) 1 0 1 3 2 1 3 4 3 2 1 0 1 3
+#1 K=7 *int=2 *ext=0 par=0 chart=5 src=direct did=D6-18evmowdq2jsk eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 1 4 2* 1 0 1 4 2* 1 2 4
+#1 K=7 *int=0 *ext=0 par=0 chart=2 src=direct did=D6-12jzph4z2wxik eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 2 1 3 4 3 2 1 0 1 3 2 1 3 4 3
+#1 K=7 *int=0 *ext=0 par=0 chart=2 src=direct did=D6-1emusj0g540ug eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 4 3 2 1 0 2 4 3 2 1 2 4 3 2 4
+#1 K=7 *int=0 *ext=0 par=0 chart=2 src=direct did=D6-1mmm5ibimkjvo eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 1 2 1 3 4 3 2 1 0 1 3 2 1 3 4
+#1 K=7 *int=1 *ext=0 par=0 chart=0 src=direct did=D6-2kptq4udfn0xq eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 2 1 4 3 2 1 0 1 3* 2 1 3 4
+#1 K=7 *int=1 *ext=0 par=0 chart=3 src=direct did=D6-15wptvi772oto eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 0 2 3 1* 0 1 3 4 3 2 1 0 3
+#1 K=7 *int=0 *ext=0 par=0 chart=3 src=direct did=D6-3kxqcwr9wpxxk eid=E6-u8db16zbxt1g pid=P6-u8db16zbxt1g ) 3 2 1 0 1 3 2 1 3 4 3 2 1 0 3
+#1 K=7 *int=2 *ext=0 par=0 chart=3 src=direct did=D6-1onr6xvrtfbt5 eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 0 2 1 2* 0* 4 3 2 1 0 3
+#1 K=7 *int=1 *ext=0 par=0 chart=1 src=direct did=D6-19px5r6br0vb0 eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 1 0 3 1* 0 3 2 4 3 2 1 0 2
+#1 K=7 *int=2 *ext=0 par=0 chart=5 src=direct did=D6-16zvynxlkdi0e eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 1 4 2* 1 0 1* 4 3 2 1 4
+#1 K=7 *int=1 *ext=0 par=0 chart=1 src=direct did=D6-365n6rci6ryq4 eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 1 0 3 2 1 0 2* 4 3 2 1 0 2
+#1 K=7 *int=1 *ext=1 par=1 chart=1 src=direct did=D6-sc091g864ez3 eid=E6-7d48qw1qlkzn pid=P6-3scmsrrdu62py ) 0 3 2 1 0 2* 4 3 2 1 0 2
+#1 K=7 *int=1 *ext=0 par=0 chart=0 src=direct did=D6-hzhafosxkriu eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 1 4 3 2 1 0 1 3* 2 1 3 2 4
+#1 K=7 *int=0 *ext=1 par=1 chart=2 src=direct did=D6-10bqpca0h8ik5 eid=E6-14tazhfdau05 pid=P6-164lhjrepo3s6 ) 0 2 4 3 2 1 0 2 4 3 2 1 2 4
+#1 K=7 *int=1 *ext=1 par=1 chart=0 src=direct did=D6-2tk1k77cx5m6b eid=E6-7d48qw1qlkzn pid=P6-3scmsrrdu62py ) 1 4 3 2 1 0 1 3* 2 1 3 4
+#1 K=7 *int=2 *ext=0 par=0 chart=5 src=direct did=D6-1qtter3043t2q eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 2 1 4 2* 1 0 1 4 2* 1 4
+#1 K=7 *int=2 *ext=0 par=0 chart=5 src=direct did=D6-6vmxcrimxk1a eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 1 2 4 3 1* 0 1 4 2* 1 4
+#1 K=7 *int=1 *ext=0 par=0 chart=1 src=direct did=D6-2o14bibfnnl2q eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 0 2 1 4 2* 1 0 1 4 3 2 1 3
+#1 K=7 *int=0 *ext=1 par=1 chart=1 src=direct did=D6-14tazhfdau05 eid=E6-14tazhfdau05 pid=P6-164lhjrepo3s6 ) 0 2 1 0 2 4 3 2 1 0 2 4 3 2
+#1 K=7 *int=2 *ext=0 par=0 chart=5 src=direct did=D6-gm0iobcy7ka6 eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 2 4 3 1* 0 1 3* 2 1 3 4
+#1 K=7 *int=0 *ext=1 par=1 chart=0 src=direct did=D6-r4d7xwrjao3t eid=E6-14tazhfdau05 pid=P6-164lhjrepo3s6 ) 1 2 1 3 4 3 2 1 0 1 3 2 1 3
+#1 K=7 *int=0 *ext=1 par=1 chart=0 src=direct did=D6-3j959xtqzs0bx eid=E6-14tazhfdau05 pid=P6-164lhjrepo3s6 ) 1 3 4 3 2 1 0 1 3 2 1 3 4 3
+#1 K=7 *int=2 *ext=0 par=0 chart=5 src=direct did=D6-3ldjxku5ww9p8 eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 2 4 3 1* 0 1 4 2* 1 4 3
+#1 K=7 *int=1 *ext=0 par=0 chart=0 src=direct did=D6-3p0ms809bj50e eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 1 3 2 1 0 3 4 3 1* 0 3 2 4
+#1 K=7 *int=2 *ext=0 par=0 chart=5 src=direct did=D6-3e54tfknjssp2 eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 1 3 2 3* 1* 0 1 2 3 2 4
+#1 K=7 *int=0 *ext=1 par=1 chart=0 src=direct did=D6-3n8zr6dmikfcd eid=E6-14tazhfdau05 pid=P6-164lhjrepo3s6 ) 2 1 0 2 4 3 2 1 0 2 4 3 2 4
+#1 K=7 *int=1 *ext=0 par=0 chart=1 src=direct did=D6-b74vd0hffyow eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 0 2 1 3 2 0* 3 4 3 2 1 0 3
+#1 K=7 *int=1 *ext=1 par=1 chart=1 src=direct did=D6-7d48qw1qlkzn eid=E6-7d48qw1qlkzn pid=P6-3scmsrrdu62py ) 0 1 3 2 0* 3 4 3 2 1 0 3
+#1 K=7 *int=1 *ext=0 par=0 chart=1 src=direct did=D6-xvx4lyy12gz8 eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 0 1 3 2 1 0 3 4 3 1* 0 3 2
+#1 K=7 *int=1 *ext=1 par=1 chart=4 src=direct did=D6-15282qyqzxaqx eid=E6-7d48qw1qlkzn pid=P6-3scmsrrdu62py ) 1 3 2 1 0 1 3 4 2* 1 2 4
+#1 K=7 *int=1 *ext=0 par=0 chart=1 src=direct did=D6-1qpcm3whn28xg eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 0 2 1 0 2 3 2 4 3 1* 0 1 3
+#1 K=7 *int=2 *ext=0 par=0 chart=1 src=direct did=D6-17bis34g4yihd eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 0 3 1* 0 3 4 3 1* 0 3 2
+#1 K=7 *int=2 *ext=0 par=0 chart=1 src=direct did=D6-1u18oherzicoc eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 0 2 3 1* 0 3 4 3 1* 0 3
+#1 K=7 *int=2 *ext=0 par=0 chart=1 src=direct did=D6-wwrrr3gnpl6i eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 0 3 2 1 0 2* 4 3 1* 0 3
+#1 K=7 *int=2 *ext=0 par=0 chart=1 src=direct did=D6-29op78uxhb3z9 eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 0 2 1 0 2* 4 3 1* 0 1 3
+#1 K=7 *int=1 *ext=1 par=1 chart=1 src=direct did=D6-2z9kzy4frmwab eid=E6-7d48qw1qlkzn pid=P6-3scmsrrdu62py ) 1 3 2 1 0 3 4 3 1* 0 3 2
+#1 K=7 *int=1 *ext=0 par=0 chart=0 src=direct did=D6-pseqrtrw5fj2 eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 1 2 4 3 1* 0 1 2 4 3 2 1 4
+#1 K=7 *int=1 *ext=0 par=0 chart=0 src=direct did=D6-o0i0r3knslsu eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 1 3 2 4 3 1* 0 1 2 4 3 2 4
+#1 K=7 *int=1 *ext=1 par=1 chart=0 src=direct did=D6-2xfi280nu0o5f eid=E6-7d48qw1qlkzn pid=P6-3scmsrrdu62py ) 1 2 4 3 1* 0 1 2 4 3 2 4
+#1 K=7 *int=1 *ext=1 par=1 chart=3 src=direct did=D6-2xp3oqv4vr06t eid=E6-7d48qw1qlkzn pid=P6-3scmsrrdu62py ) 0 2 3 1* 0 1 3 4 3 2 1 3
+#1 K=7 *int=2 *ext=0 par=0 chart=1 src=direct did=D6-lvy25gd9h8ry eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 0 2 1 2 3 4 2* 0* 2 1 3
+#1 K=7 *int=2 *ext=0 par=0 chart=1 src=direct did=D6-1itqincypyqcy eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 0 1 3 2 0* 3 4 2* 1 0 2
+#1 K=7 *int=2 *ext=0 par=0 chart=1 src=direct did=D6-32mg0p4fbqevx eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 0 3 1* 0 3 4 2* 1 0 2 3
+#1 K=7 *int=2 *ext=0 par=0 chart=1 src=direct did=D6-3vxygz6aviu8s eid=E6-1itqincypyqcy pid=P6-2zjhn3p51nmp ) 1 0 3 1* 0 3 4 2* 1 0 2
+#1 K=7 *int=1 *ext=0 par=0 chart=0 src=direct did=D6-11zliuj0y85eu eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 1 3 4 2* 1 0 2 1 2 4 3 2 4
+#1 K=7 *int=1 *ext=0 par=0 chart=0 src=direct did=D6-1l68zpodzsbde eid=E6-ylsj6cyebkea pid=P6-164lhjrepo3s6 ) 2 1 4 2* 1 0 1 4 3 2 1 3 4
+#1 K=7 *int=1 *ext=1 par=1 chart=0 src=direct did=D6-1mom0ame7rit7 eid=E6-7d48qw1qlkzn pid=P6-3scmsrrdu62py ) 2 1 4 2* 1 0 1 4 3 2 1 3
+#1 K=7 *int=0 *ext=1 par=1 chart=1 src=direct did=D6-21eboipllo0v1 eid=E6-14tazhfdau05 pid=P6-164lhjrepo3s6 ) 3 2 1 0 1 3 2 1 3 4 3 2 1 3
+#1 K=7 *int=0 *ext=1 par=1 chart=0 src=direct did=D6-3lgazbetd3cl1 eid=E6-14tazhfdau05 pid=P6-164lhjrepo3s6 ) 1 3 2 1 0 1 3 2 1 3 4 3 2 1
