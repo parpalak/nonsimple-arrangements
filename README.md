@@ -2,7 +2,7 @@
 
 Code and data for the paper.
 
-Preprint: arXiv:TODO ·
+Preprint: [arXiv:2611.03096](https://arxiv.org/abs/2611.03096) ·
 [Gallery of stretched arrangements](https://ud1.github.io/kobon-solutions/gallery/)
 
 ## Repository layout
